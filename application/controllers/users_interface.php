@@ -47,7 +47,34 @@ class Users_interface extends CI_Controller{
 					'estate'		=> $this->estatetypemodel->read_records(),
 					'liveinteriors'	=> $this->interiorsmodel->read_records(1),
 			);
-		
+		if($this->input->post('isubmit')):
+			$_POST['isubmit'] = NULL;
+			$this->form_validation->set_rules('title',' ','required|trim');
+			$this->form_validation->set_rules('pranslit',' ','trim');
+			if($this->form_validation->run()):
+				if(!empty($_POST['pranslit'])):
+					$translit = preg_replace("/\ +/","-",$_POST['pranslit']);
+				else:
+					$translit = $this->translite($_POST['title']);
+				endif;
+				$this->interiorstypemodel->insert_record($_POST['title'],$translit);
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
+		if($this->input->post('osubmit')):
+			$_POST['osubmit'] = NULL;
+			$this->form_validation->set_rules('title',' ','required|trim');
+			$this->form_validation->set_rules('pranslit',' ','trim');
+			if($this->form_validation->run()):
+				if(!empty($_POST['pranslit'])):
+					$translit = preg_replace("/\ +/","-",$_POST['pranslit']);
+				else:
+					$translit = $this->translite($_POST['title']);
+				endif;
+				$this->estatetypemodel->insert_record($_POST['title'],$translit);
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
 		$this->load->view("users_interface/index",$pagevar);
 	}
 	
@@ -168,45 +195,47 @@ class Users_interface extends CI_Controller{
 		$pagevar = array(
 					'description'	=> '',
 					'author'		=> '',
-					'title'			=> 'РосЦентр ДПО - Панель администрирования',
+					'title'			=> 'Cтроительная компания в Ростове-на-Дону :: ООО СК Стройковъ',
 					'baseurl' 		=> base_url(),
 					'loginstatus'	=> $this->loginstatus['status'],
 					'userinfo'		=> $this->user,
-					'form_title'	=> 'Введите логин и пароль для входа в панель администрирования',
 					'msg'			=> $this->session->userdata('msg')
 			);
 		$this->session->unset_userdata('msg');
 		if($this->input->post('submit')):
 			$_POST['submit'] == NULL;
-			$userinfo = $this->adminmodel->auth_user($this->input->post('login'),$this->input->post('password'));
+			$userinfo = $this->adminmodel->auth_user($_POST['login'],$_POST['password']);
 			if(!$userinfo):
 				$this->session->set_userdata('msg','Имя пользователя и пароль не совпадают');
 				redirect($this->uri->uri_string());
 			else:
-				$session_data = array('logon'=>md5($userinfo['login']),'userid'=>$userinfo['id'],'utype'=>'adm');
-				$this->adminmodel->active_user($userinfo['id']);
+				$session_data = array('logon'=>md5($userinfo['login']),'userid'=>$userinfo['id']);
                 $this->session->set_userdata($session_data);
-                redirect("admin-panel/actions/control");
+                redirect('');
 			endif;
 		endif;
 		if($this->loginstatus['status']):
-			if($this->loginstatus['adm']):
-				redirect('admin-panel/actions/control');
-			elseif($this->loginstatus['cus']):
-				redirect('');
-			elseif($this->loginstatus['aud']):
-				redirect('');
-			endif;
+			redirect('');
 		endif;
 		$this->load->view("users_interface/admin-login",$pagevar);
 	}
 	
 	public function logoff(){
 		
-		$model = $this->definition_model($this->session->userdata('utype'));
-		$this->$model->deactive_user($this->session->userdata('userid'));
 		$this->session->sess_destroy();
         redirect('');
+	}
+	
+	public function translite($string){
+	
+		$rus = array("ё","й","ю","ь","ч","щ","ц","у","к","е","н","г","ш","з","х","ъ","ф","ы","в","а","п","р","о","л","д","ж","э","я","с","м","и","т","б","Ё","Й","Ю","Ч","Ь","Щ","Ц","У","К","Е","Н","Г","Ш","З","Х","Ъ","Ф","Ы","В","А","П","Р","О","Л","Д","Ж","Э","Я","С","М","И","Т","Б"," ");
+		$eng = array("yo","iy","yu","'","ch","sh","c","u","k","e","n","g","sh","z","h","'","f","y","v","a","p","r","o","l","d","j","е","ya","s","m","i","t","b","Yo","Iy","Yu","CH","'","SH","C","U","K","E","N","G","SH","Z","H","'","F","Y","V","A","P","R","O","L","D","J","E","YA","S","M","I","T","B","-");
+		$string = str_replace($rus,$eng,$string);
+		if(!empty($string)):
+			return strtolower($string);
+		else:
+			return FALSE;
+		endif;
 	}
 	
 	public function randomPassword($length,$allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRSTUVWXYZ0123456789"){

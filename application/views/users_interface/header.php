@@ -1,8 +1,6 @@
 <header>
 	<div class="grid_11">
-		<a href="/">
-			<div id="logo">Строительная компания Стройковъ</div>
-		</a>
+		<?=anchor('','<div id="logo">Строительная компания Стройковъ</div>');?>
 	</div>
 	<div class="grid_9">
 		<div class="contacts">т.: <strong>(863)</strong> 295 51 10 <?=anchor('kontaktnaya-informacia','контактная информация');?></div>

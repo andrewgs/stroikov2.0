@@ -15,9 +15,9 @@ $route['o-kompanii'] 				= "users_interface/o_kompanii";
 $route['kontaktnaya-informacia'] 	= "users_interface/kontaktnaya_informacia";
 
 
-$route['admin'] 						= "users_interface/admin_login";
-$route['logoff'] 						= "users_interface/logoff";
-$route['contacts'] 						= "users_interface/contacts";
+$route['admin'] 					= "users_interface/admin_login";
+$route['logoff'] 					= "users_interface/logoff";
+$route['contacts'] 					= "users_interface/contacts";
 
 /***************************************************	ADMIN INTRERFACE	***********************************************/
 $route['admin-panel/logoff'] 				= "admin_interface/admin_logoff";

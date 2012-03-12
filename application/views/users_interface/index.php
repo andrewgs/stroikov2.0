@@ -28,10 +28,13 @@
 					<h3>Смотреть интерьеры</h3>
 					<ul>
 					<?php for($i=0;$i<count($interiors);$i++):?>
-						<li><?=anchor('design-interierov/'.$interiors[$i]['pranslit'],$interiors[$i]['title']);?></li>
+						<li><?=anchor('design-interierov/'.$interiors[$i]['translit'],$interiors[$i]['title']);?></li>
 					<?php endfor;?>
 					</ul>
-					<a href="#" class="details">Подробнее &gt;</a>
+				<?php if($loginstatus['status']):?>
+					<a class="btn details" style="right:160px;" data-toggle="modal" href="#addInteriorStype"><i class="icon-plus"></i> Добавить вид</a>
+				<?php endif;?>
+					<?=anchor('design-interierov','Подробнее &gt;',array('class'=>'details'));?>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -85,14 +88,21 @@
 					<h3>Объекты недвидижимости</h3>
 					<ul>
 					<?php for($i=0;$i<count($estate);$i++):?>
-						<li><?=anchor('obektu-stroitelstva/'.$estate[$i]['pranslit'],$estate[$i]['title']);?></li>
+						<li><?=anchor('obektu-stroitelstva/'.$estate[$i]['translit'],$estate[$i]['title']);?></li>
 					<?php endfor;?>
 					</ul>
+				<?php if($loginstatus['status']):?>
+					<a class="btn details" style="right:140px;" data-toggle="modal" href="#addEstateType"><i class="icon-plus"></i> Добавить объект</a>
+				<?php endif;?>
 					<?=anchor('obektu-stroitelstva','Подробнее &gt;',array('class'=>'details'));?>
 				</div>
 			</div>
 			<div class="clearfix"></div>
 		</section>
+		<?php if($loginstatus['status']):?>
+			<?php $this->load->view('modal/admin-add-interiortype');?>
+			<?php $this->load->view('modal/admin-add-estatetype');?>
+		<?php endif;?>
 		<?=$this->load->view('users_interface/footer');?>
 	</div>
 	<?=$this->load->view('users_interface/scripts');?>

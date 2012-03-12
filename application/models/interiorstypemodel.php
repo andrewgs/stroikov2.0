@@ -11,10 +11,10 @@ class Interiorstypemodel extends CI_Model{
 	    parent::__construct();
     }
 	
-	function insert_record($data){
+	function insert_record($title,$translit){
 			
-		$this->title 	= $data['title'];
-		$this->translit	= $data['translit'];
+		$this->title 	= htmlspecialchars($title);
+		$this->translit	= htmlspecialchars($translit);
 		
 		$this->db->insert('interiorstype',$this);
 		return $this->db->insert_id();

@@ -7,7 +7,6 @@ class Adminmodel extends CI_Model {
     var $password    	= '';
     var $cryptpassword 	= '';
     var $email  		= '';
-    var $online    		= '';
 
     function __construct(){
         parent::__construct();
@@ -19,7 +18,6 @@ class Adminmodel extends CI_Model {
 		$this->password			= md5($data['password']);
 		$this->cryptpassword	= $this->encrypt->encode($data['password']);
 		$this->email 			= $data['email'];
-		$this->online 			= 0;
 		
 		$this->db->insert('admins',$this);
 		return $this->db->insert_id();
@@ -32,20 +30,6 @@ class Adminmodel extends CI_Model {
 		$data = $query->result_array();
 		if(isset($data[0])) return $data[0];
 		return NULL;
-	}
-	
-	function active_user($id){
-		
-		$this->db->set('online',1);
-		$this->db->where('id',$id);
-		$this->db->update('admins');
-	}
-	
-	function deactive_user($id){
-		
-		$this->db->set('online',0);
-		$this->db->where('id',$id);
-		$this->db->update('admins');
 	}
 	
 	function auth_user($login,$password){
