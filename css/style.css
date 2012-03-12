@@ -1,0 +1,149 @@
+/* ==|== primary styles =====================================================
+   Author: RealityGroup Agency
+   ========================================================================== */
+
+html, body {
+	background: url('../img/wood_background.jpg') repeat #e4e5d7;
+	color: #808a70;
+	font-family: 'PT Sans', "Times New Roman", Times, serif;
+	font-size: 14px;
+	height: 100%;
+	width: 100%;
+}
+   
+a, a:hover, a:visited { color: #c7c7c7; }
+   
+
+/* ==|== header ====================================================== */
+header { height: 80px; background: #fff; }
+#logo { background: url("../img/logo.png"); height: 52px; margin: 12px 0 0 10px; text-indent: -9999px; width: 297px; }
+
+.contacts { font-size: 18px; line-height: 80px; }
+.contacts strong { color: #89b838; font-weight: normal; }
+.contacts a { color: #89b838; font-style: italic; text-decoration: underline; font-size: 14px; margin: 0 0 0 10px; }
+
+ul.social { list-style: none; margin: 34px 0 0; padding: 0; }
+	ul.social li { float: left; }
+	ul.social li a { background: url('../img/sprites.png'); display: block; height: 22px; text-indent: -9999px; }
+		ul.social li.tw a { background-position: 0 0; width: 65px; }
+		ul.social li.lj a { background-position: -65px 0; width: 27px; }
+		ul.social li.vk a { background-position: -92px 0; width: 25px; }
+		
+nav { background: #92b555; height: 30px; margin: 0 0 30px; }
+#main-nav { list-style: none; margin: 0 0 0 5px; } 
+#main-nav li { float: left; }
+#main-nav li a { line-height: 25px; color: #523511; font-weight: bold; font-size: 14px; text-transform: uppercase; display: block; margin: 0 15px 0 0; letter-spacing: 1px; }
+
+/* ==|== main block ====================================================== */
+.promo-block { margin: 0 0 30px; }
+.reviews { height: 205px; background: #92b555; color: #523511; position: relative; }
+	.reviews .text { line-height: 28px; font-size: 24px; width: 315px; position: absolute; top: 30px; left: 40px; }
+	.reviews .author { line-height: 16px; font-size: 13px; position: absolute; top: 170px; left: 40px; }
+	.reviews .author i { display: inline-block; margin-left: 5px; }
+	.reviews .quote { font-size: 64px; position: absolute; }
+	.reviews .quote.left { left: 7px; top: 27px; }
+	.reviews .quote.right { left: 295px; top: 112px; }
+	.reviews .client { position: absolute; top: 0; right: 0; }
+	a#read-reviews { background: #523511; bottom: 0; color: #89B838; font-style: italic; padding: 0 6px 4px; position: absolute; right: 0; text-decoration: underline; }
+		a#read-reviews:hover { text-decoration: none; }
+
+.promo-action { /*background: url('../img/promo-design.png') no-repeat;*/ width: 275px; height: 205px; display: block; }
+.promo-action:hover { text-decoration: none; }
+	.promo-action p { color: #523511; display: block; font: 26px/33px 'PT Sans',"Times New Roman",Times,serif; padding: 35px 45px; text-transform: uppercase; width: 150px; }
+
+
+.carousel { background: #fff; height: 440px; }
+.info { background: #fff; height: 440px; padding: 25px 40px 40px !important; }
+	.carousel.list, .info.list { height: auto; padding-bottom: 20px; margin-bottom: 18px; }
+	.carousel h2, .info h1 { color: #808A70; font-size: 16px; font-weight: normal; letter-spacing: 1px; line-height: 22px; padding: 20px 10px 0; text-transform: uppercase; margin: 0 0 30px 0; }
+	.carousel h2 .details { display: block; font-size: 13px; line-height: 23px; color: #523511; text-transform: none; opacity: 0.5; }
+	.info h1 { padding: 20px 0 0; color: #523511; }
+	.info h2 { padding: 20px 0 0; color: #523511; font-size: 16px; padding: 10px 0 0; font-weight: normal; }
+
+.design-sample img { border: 1px solid #808a70; padding: 3px;}
+.design-sample p { color: #808a70; font: 11px/14px 'PT Sans',"Times New Roman",Times,serif; }
+.design-sample a { color: #523511; font-size: 13px; text-transform: uppercase; text-decoration: underline; display: block; margin: 40px 0 22px 0; }
+.design-sample a.details { color: #89b838; font-size: 14px; text-decoration: underline; display: block; font-style: italic; text-transform: none; margin: 10px 0; text-align: right; }
+
+
+.aside-block { height: 205px; margin: 0 0 30px 0; background: #fff;  position: relative; }
+	.aside-block.list { height: auto; padding-bottom: 50px; }
+	.aside-block.green { background: #92b555; color: #523511; }
+	.aside-block h3 { color: #523511; font-size: 24px; font-weight: normal; padding: 10px 15px; }
+	.aside-block ul { list-style: none outside none; margin: 5px 0 0 48px; }
+	.aside-block li { line-height: 24px; }
+	.aside-block li a { color: #89B838; font-style: italic; text-decoration: underline; padding-right: 10px; }
+	.aside-block a.details { background: #89B838; bottom: 0; color: #fff; font-style: italic; padding: 0 6px 4px; position: absolute; right: 0; text-decoration: underline; }
+		.aside-block a.details:hover { text-decoration: none; }
+
+.slider-arrow { background: url('../img/sprites.png'); width: 25px; height: 40px; text-indent: -9999px; margin: 40px 0 0; }
+.slider-arrow.left { background-position: -118px 0; }
+.slider-arrow.right { background-position: -140px 0; }
+
+/* ==|== footer ====================================================== */
+footer { height: 80px; background: #89B838; color: #fff; line-height: 80px; }
+footer .contacts { font-size: 16px; }
+footer .contacts strong { color: #523511; font-weight: bold; }
+footer .copy { padding-left: 15px; }
+
+/* ==|== general ====================================================== */
+.no-margin { margin: 0 !important; }
+
+/* ==|== media queries ======================================================
+   EXAMPLE Media Query for Responsive Design.
+   This example overrides the primary ('mobile first') styles
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+  /* Style adjustments for viewports that meet the condition */
+}
+
+
+
+/* ==|== non-semantic helper classes ========================================
+   Please define your styles before this section.
+   ========================================================================== */
+
+/* For image replacement */
+.ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; *line-height: 0; }
+.ir br { display: none; }
+
+/* Hide from both screenreaders and browsers: h5bp.com/u */
+.hidden { display: none !important; visibility: hidden; }
+
+/* Hide only visually, but have it available for screenreaders: h5bp.com/v */
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+
+/* Contain floats: h5bp.com/q */
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { *zoom: 1; }
+
+
+
+/* ==|== print styles =======================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+  * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
+  a, a:visited { text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links */
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; } /* h5bp.com/t */
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
