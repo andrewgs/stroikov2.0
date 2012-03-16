@@ -9,36 +9,35 @@
 	<div class="container_24">
 		<?=$this->load->view('users_interface/header');?>
 		<?=$this->load->view('users_interface/navigation');?>
+		
 		<section class="proposals">
 			<div class="grid_16 carousel list">
-			<?php if(count($interior)>0):?>
-				<h2><?=$interior[0]['rooms'].'-к квартира'.'<br/>'.$interior[0]['address'];?> <span class="details">Площадь <?=$interior[0]['area'];?>м<sup>2</sup></span></h2>
+				<?php $this->load->view('alert_messages/alert-error');?>
+				<?php $this->load->view('alert_messages/alert-success');?>
+				<h2><?=$estate['rooms'].'-к квартира'.'<br/>'.$estate['address'];?> <span class="details">Площадь <?=$estate['area'];?>м<sup>2</sup></span></h2>
 				<div class="grid_1">
 					<div class="slider-arrow left">Пред.</div>
 				</div>
 				<div class="slider">
 					<div class="grid_14 alpha omega">
 						<div class="design-sample">
-						<?php for($i=0;$i<count($interior[0]['images']);$i++):?>
-							<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$interior[0]['images'][$i]['id'];?>" alt=""/>
+						<?php for($i=0;$i<count($estate['images']);$i++):?>
+							<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$estate['images'][$i]['id'];?>" alt=""/>
+								<button class="btn btn-success dlImage" img="<?=$estate['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"><i class="icon-trash"></i> Удалить фотографию</button>
 						<?php endfor;?>
-							<?=anchor('design-interierov/'.$objects[0]['translit'].'/'.$interior[0]['translit'],$interior[0]['title']);?>
+							<?=anchor($this->uri->uri_string(),$estate['title']);?>
 							<p>
-								<?=$interior[0]['note'];?>
+								<?=$estate['note'];?>
 							</p>
 						</div>
+						<?php if($loginstatus['status']):?>
+							<button class="btn btn-success" data-toggle="modal" href="#addImage"><i class="icon-download-alt"></i> Загрузить фотографию</button>
+						<?php endif;?>
 					</div>
 				</div>
 				<div class="grid_1">
 					<div class="slider-arrow right">След.</div>
 				</div>
-			<?php else:?>
-				<?php if(isset($objects[0])):?>
-					<?php if($loginstatus['status']):?>
-						<a class="btn btn-success" data-toggle="modal" href="#addInterior"><i class="icon-plus"></i> Добавить первый интерьер</a>
-					<?php endif;?>
-				<?php endif;?>
-			<?php endif;?>
 			</div>
 			<div class="grid_7 prefix_1">
 				<!--
@@ -49,30 +48,35 @@
 				</div>
 				-->
 				<div class="aside-block list">
-					<h3>Смотреть интерьеры</h3>
+					<h3>Смотреть объекты</h3>
 					<ul>
 					<?php for($i=0;$i<count($objects);$i++):?>
 						<li><h4><?=$objects[$i]['title'];?></h4></li>
-						<?php for($j=0;$j<count($objects[$i]['interiors']);$j++):?>
-							<li><?=anchor('design-interierov/'.$objects[$i]['translit'].'/'.$objects[$i]['interiors'][$j]['translit'],$objects[$i]['interiors'][$j]['title']);?></li>
+						<?php for($j=0;$j<count($objects[$i]['estate']);$j++):?>
+							<li><?=anchor('agentstvo-nedvijimosti/'.$objects[$i]['translit'].'/'.$objects[$i]['estate'][$j]['translit'],$objects[$i]['estate'][$j]['title']);?></li>
 						<?php endfor;?>
 					<?php endfor;?>
 					</ul>
+					<?php if($loginstatus['status']):?>
+						<a class="details" style="right:120px;" data-toggle="modal" href="#addEstate"><i class="icon-plus"></i> Добавить объект</a>
+					<?php endif;?>
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<?php if(isset($objects[0]) && !count($interior)):?>
-				<?php if($loginstatus['status']):?>
-					<?php $this->load->view('modal/admin-add-interior');?>
-				<?php endif;?>
+			<?php if($loginstatus['status']):?>
+				<?php $this->load->view('modal/admin-add-estate');?>
+				<?php $this->load->view('modal/admin-add-image');?>
+				<?php $this->load->view('modal/admin-delete-image');?>
 			<?php endif;?>
 		</section>
 		<?=$this->load->view('users_interface/footer');?>
 	</div>
 	<?=$this->load->view('users_interface/scripts');?>
 	<?=$this->load->view('users_interface/google');?>
+<?php if($loginstatus['status']):?>
 	<script type="text/javascript">
 		$(document).ready(function(){
+			var image = 0;
 			$("#send").click(function(event){
 				var err = false;
 				$(".control-group").removeClass('error');
@@ -87,7 +91,25 @@
 				if(err){event.preventDefault();}
 			});
 			$("#addInterior").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
+			$("#imgsend").click(function(event){
+				var err = false;
+				$(".control-group").removeClass('error');
+				$(".help-inline").hide();
+				$(".imginput").each(function(i,element){
+					if($(this).val()==''){
+						$(this).parents(".control-group").addClass('error');
+						$(this).siblings(".help-inline").html("Поле не может быть пустым").show();
+						err = true;
+					}
+				});
+				if(err){event.preventDefault();}
+			});
+		
+			$(".dlImage").click(function(){image = $(this).attr('img');});
+			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/agentstvo-nedvijimosti/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
+			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
 		});
 	</script>
+<?php endif;?>
 </body>
 </html>

@@ -27,12 +27,19 @@
 				<div class="aside-block no-margin">
 					<h3>Смотреть интерьеры</h3>
 					<ul>
-					<?php for($i=0;$i<count($interiors);$i++):?>
-						<li><?=anchor('design-interierov/'.$interiors[$i]['translit'],$interiors[$i]['title']);?></li>
+				<?php if(count($objects) > 1):?>
+					<?php for($i=0;$i<count($objects);$i++):?>
+						<li><?=anchor('design-interierov/'.$objects[$i]['translit'],$objects[$i]['title']);?></li>
 					<?php endfor;?>
+				<?php else:?>
+						<h4><?=$objects[0]['title'];?></h4>
+					<?php for($i=0;$i<count($interiors);$i++):?>
+						<li><?=anchor('design-interierov/'.$objects[0]['translit'].'/'.$interiors[$i]['translit'],$interiors[$i]['title']);?></li>
+					<?php endfor;?>
+				<?php endif;?>
 					</ul>
 				<?php if($loginstatus['status']):?>
-					<a class="btn details" style="right:160px;" data-toggle="modal" href="#addInteriorStype"><i class="icon-plus"></i> Добавить вид</a>
+					<a class="details" style="right:152px;" data-toggle="modal" href="#addObjectType"><i class="icon-plus"></i> Добавить тип</a>
 				<?php endif;?>
 					<?=anchor('design-interierov','Подробнее &gt;',array('class'=>'details'));?>
 				</div>
@@ -48,30 +55,38 @@
 						<div class="slider-arrow left">Пред.</div>
 					</div>
 					<div class="slider">
+					<?php for($i=0;$i<count($slideshow);$i+=3):?>
+						<?php if(isset($slideshow[$i]['images']['id'])):?>
 						<div class="grid_4 alpha">
 							<div class="design-sample">
-								<img src="img/design-1.png" alt="" />
-								<a href="#">Розовая гостинная</a>
-								<p>Решая проектные задачи, специалисты студии Стройковъ создают неповторимый дизайн различного уровня сложности.</p>
+								<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i]['images']['id'];?>" alt=""/>
+								<?=anchor('design-interierov/'.$slideshow[$i]['object'].'/'.$slideshow[$i]['translit'],$slideshow[$i]['title']);?>
+								<p><?=$slideshow[$i]['note'];?></p>
 								<a href="#" class="details">Подробнее &gt;</a>
 							</div>
 						</div>
+						<?php endif;?>
+						<?php if(isset($slideshow[$i+1]['images']['id'])):?>
 						<div class="grid_4 prefix_1">
 							<div class="design-sample">
-								<img src="img/design-2.png" alt="" />
-								<a href="#">Спальня «Барокко»</a>
-								<p>Мы специализируемся на ремонтно-отделочных работах любой сложности и категории, начиная от эконом–класса и заканчивая элитным ремонтом квартир по эксклюзивному заказу.</p>
+								<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i+1]['images']['id'];?>" alt=""/>
+								<?=anchor('design-interierov/'.$slideshow[$i+1]['object'].'/'.$slideshow[$i+1]['translit'],$slideshow[$i+1]['title']);?>
+								<p><?=$slideshow[$i+1]['note'];?></p>
 								<a href="#" class="details">Подробнее &gt;</a>
 							</div>
 						</div>
+						<?php endif;?>
+						<?php if(isset($slideshow[$i+2]['images']['id'])):?>
 						<div class="grid_4 prefix_1 omega">
 							<div class="design-sample">
-								<img src="img/design-3.png" alt="" />
-								<a href="#">Солнечная детская</a>
-								<p>Решая проектные задачи, специалисты студии Стройковъ создают неповторимый дизайн различного уровня сложности.</p>
+								<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i+2]['images']['id'];?>" alt=""/>
+								<?=anchor('design-interierov/'.$slideshow[$i+2]['object'].'/'.$slideshow[$i+2]['translit'],$slideshow[$i+2]['title']);?>
+								<p><?=$slideshow[$i+2]['note'];?></p>
 								<a href="#" class="details">Подробнее &gt;</a>
 							</div>
 						</div>
+						<?php endif;?>
+					<?php endfor; ?>
 					</div>
 					<div class="grid_1">
 						<div class="slider-arrow right">След.</div>
@@ -87,25 +102,49 @@
 				<div class="aside-block">
 					<h3>Объекты недвидижимости</h3>
 					<ul>
-					<?php for($i=0;$i<count($estate);$i++):?>
-						<li><?=anchor('obektu-stroitelstva/'.$estate[$i]['translit'],$estate[$i]['title']);?></li>
+				<?php if(count($objects) > 1):?>
+					<?php for($i=0;$i<count($objects);$i++):?>
+						<li><?=anchor('obektu-stroitelstva/'.$objects[$i]['translit'],$objects[$i]['title']);?></li>
 					<?php endfor;?>
+				<?php else:?>
+						<h4><?=$objects[0]['title'];?></h4>
+					<?php for($i=0;$i<count($estate);$i++):?>
+						<li><?=anchor('agentstvo-nedvijimosti/'.$objects[0]['translit'].'/'.$estate[$i]['translit'],$estate[$i]['title']);?></li>
+					<?php endfor;?>
+				<?php endif;?>
 					</ul>
 				<?php if($loginstatus['status']):?>
-					<a class="btn details" style="right:140px;" data-toggle="modal" href="#addEstateType"><i class="icon-plus"></i> Добавить объект</a>
+					<a class="details" style="right:152px;" data-toggle="modal" href="#addObjectType"><i class="icon-plus"></i> Добавить тип</a>
 				<?php endif;?>
-					<?=anchor('obektu-stroitelstva','Подробнее &gt;',array('class'=>'details'));?>
+					<?=anchor('agentstvo-nedvijimosti','Подробнее &gt;',array('class'=>'details'));?>
 				</div>
 			</div>
 			<div class="clearfix"></div>
 		</section>
 		<?php if($loginstatus['status']):?>
-			<?php $this->load->view('modal/admin-add-interiortype');?>
-			<?php $this->load->view('modal/admin-add-estatetype');?>
+			<?php $this->load->view('modal/admin-add-objectstype');?>
 		<?php endif;?>
 		<?=$this->load->view('users_interface/footer');?>
 	</div>
 	<?=$this->load->view('users_interface/scripts');?>
 	<?=$this->load->view('users_interface/google');?>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#send").click(function(event){
+				var err = false;
+				$(".control-group").removeClass('error');
+				$(".help-inline").hide();
+				$(".linput").each(function(i,element){
+					if($(this).val()==''){
+						$(this).parents(".control-group").addClass('error');
+						$(this).siblings(".help-inline").html("Поле не может быть пустым").show();
+						err = true;
+					}
+				});
+				if(err){event.preventDefault();}
+			});
+			$("#addObjectType").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
+		});
+	</script>
 </body>
 </html>

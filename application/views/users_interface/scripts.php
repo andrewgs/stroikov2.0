@@ -3,3 +3,7 @@
 <script src="<?=$baseurl;?>js/libs/bootstrap.min.js"></script>
 <script src="<?=$baseurl;?>js/plugins.js"></script>
 <script src="<?=$baseurl;?>js/script.js"></script>
+<script type="text/javascript">
+	$("#msgeclose").click(function(){$("#msgdealert").fadeOut(1000,function(){$(this).remove();});});
+	$("#msgsclose").click(function(){$("#msgdsalert").fadeOut(1000,function(){$(this).remove();});});
+</script>
