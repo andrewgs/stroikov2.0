@@ -23,6 +23,8 @@ $route['stroitelstvo/viewsmallimage/:num'] 					= "users_interface/viewsmallimag
 $route['stroitelstvo/object/:any/viewimage/:num'] 			= "users_interface/viewimage";
 $route['stroitelstvo/object/:any'] 							= "users_interface/object_stroitelstva";
 
+$route['konkurs-dlya-desainerov-architektorov-stroika1']	= "users_interface/konkurs_dlya_desainerov";
+
 $route['remont'] 					= "users_interface/remont";
 $route['injenernue-seti'] 			= "users_interface/injenernue_seti";
 $route['o-kompanii'] 				= "users_interface/o_kompanii";

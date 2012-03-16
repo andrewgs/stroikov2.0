@@ -182,8 +182,10 @@ class Users_interface extends CI_Controller{
 			$this->form_validation->set_rules('userfile',' ','callback_userfile_check');
 			if($this->form_validation->run()):
 				if($_FILES['userfile']['error'] != 4):
-					$_POST['image'] = $this->resize_img($_FILES['userfile']['tmp_name'],540,320,FALSE);
-					$_POST['small'] = $this->resize_img($_FILES['userfile']['tmp_name'],141,104,TRUE);
+//					$_POST['image'] = $this->resize_img($_FILES['userfile']['tmp_name'],540,320,FALSE);
+					$_POST['image'] = $this->resize_image($_FILES['userfile']['tmp_name'],540,320,TRUE);
+//					$_POST['small'] = $this->resize_img($_FILES['userfile']['tmp_name'],141,104,TRUE);
+					$_POST['small'] = $this->resize_image($_FILES['userfile']['tmp_name'],141,104,TRUE);
 				endif;
 				$type = $this->objectstypemodel->read_field_translit($this->uri->segment(2),'id');
 				if($this->interiorsmodel->exist_translit($this->uri->segment(3)) && $type):
@@ -412,8 +414,10 @@ class Users_interface extends CI_Controller{
 			$this->form_validation->set_rules('userfile',' ','callback_userfile_check');
 			if($this->form_validation->run()):
 				if($_FILES['userfile']['error'] != 4):
-					$_POST['image'] = $this->resize_img($_FILES['userfile']['tmp_name'],540,320,FALSE);
-					$_POST['small'] = $this->resize_img($_FILES['userfile']['tmp_name'],141,104,TRUE);
+//					$_POST['image'] = $this->resize_img($_FILES['userfile']['tmp_name'],540,320,FALSE);
+					$_POST['image'] = $this->resize_image($_FILES['userfile']['tmp_name'],540,320,TRUE);
+//					$_POST['small'] = $this->resize_img($_FILES['userfile']['tmp_name'],141,104,TRUE);
+					$_POST['small'] = $this->resize_image($_FILES['userfile']['tmp_name'],141,104,TRUE);
 				endif;
 				$type = $this->objectstypemodel->read_field_translit($this->uri->segment(2),'id');
 				if($this->estatemodel->exist_translit($this->uri->segment(3)) && $type):
@@ -483,8 +487,10 @@ class Users_interface extends CI_Controller{
 			$this->form_validation->set_rules('userfile',' ','callback_userfile_check');
 			if($this->form_validation->run()):
 				if($_FILES['userfile']['error'] != 4):
-					$_POST['image'] = $this->resize_img($_FILES['userfile']['tmp_name'],540,320,FALSE);
-					$_POST['small'] = $this->resize_img($_FILES['userfile']['tmp_name'],141,104,TRUE);
+//					$_POST['image'] = $this->resize_img($_FILES['userfile']['tmp_name'],540,320,FALSE);
+					$_POST['image'] = $this->resize_image($_FILES['userfile']['tmp_name'],540,320,TRUE);
+//					$_POST['small'] = $this->resize_img($_FILES['userfile']['tmp_name'],141,104,TRUE);
+					$_POST['small'] = $this->resize_image($_FILES['userfile']['tmp_name'],141,104,TRUE);
 				endif;
 				if($this->constructionmodel->exist_translit($this->uri->segment(3))):
 					$object = $this->constructionmodel->read_field_translit($this->uri->segment(3),'id');
@@ -496,6 +502,80 @@ class Users_interface extends CI_Controller{
 		endif;
 		
 		$this->load->view("users_interface/object-stroitelstva",$pagevar);
+	}
+	
+	public function konkurs_dlya_desainerov(){
+		
+		$pagevar = array(
+					'description'	=> '',
+					'author'		=> '',
+					'title'			=> 'Cтроительная компания в Ростове-на-Дону :: ООО СК Стройковъ',
+					'baseurl' 		=> base_url(),
+					'loginstatus'	=> $this->loginstatus,
+					'userinfo'		=> $this->user,
+					'msgs'			=> $this->session->userdata('msgs'),
+					'msgr'			=> $this->session->userdata('msgr')
+			);
+		$this->session->unset_userdata('msgs');
+		$this->session->unset_userdata('msgr');
+		
+		if($this->input->post('submit')):
+			$this->form_validation->set_rules('name',' ','required|trim');
+			$this->form_validation->set_rules('phone',' ','required|trim');
+			$this->form_validation->set_rules('email',' ','required|valid_email|trim');
+			$this->form_validation->set_rules('education',' ','trim');
+			$this->form_validation->set_rules('userfile',' ','callback_userfile_check');
+			$this->form_validation->set_rules('userarhiv',' ','callback_userarhiv_check');
+			$this->form_validation->set_rules('note',' ','required|trim');
+			if($this->form_validation->run()):
+				
+				$_FILES['userfile']['name'] = preg_replace('/.+(.)(\.)+/',date("Ymdhis")."\$2", $_FILES['userfile']['name']);
+				$_FILES['userarhiv']['name'] = preg_replace('/.+(.)(\.)+/',date("Ymdhis")."\$2", $_FILES['userarhiv']['name']);
+				if(!$this->fileupload('userfile',FALSE,'photo')):
+					$this->session->set_userdata('msgr','Ошибка при загрузке фотографии.');
+					redirect($this->uri->uri_string());
+				endif;
+				print_r($_FILES);exit;
+				if(!$this->fileupload('userarhiv',FALSE,'arhive')):
+					$this->session->set_userdata('msgr','Ошибка при загрузке архива.');
+					redirect($this->uri->uri_string());
+				endif;
+				
+				ob_start();
+				?>
+				
+				<strong>Получено письмо от <?=$_POST['name'];?></strong>
+				Контактный номер <?=$_POST['phone'];?>
+				E-mail <?=$_POST['email'];?>
+				Образование <?=$_POST['education'];?>
+				Просмотреть фотографию <?=$baseurl.'/documents/photo/'.$_FILES['userfile']['name'];?>
+				Скачать архив <?=$baseurl.'/documents/arhive/'.$_FILES['userarhiv']['name'];?>
+				
+				Комментарий <?=$_POST['note'];?>
+				<?
+				$mess['msg'] = ob_get_clean();
+				
+				$this->email->clear(TRUE);
+				$config['smtp_host'] = 'localhost';
+				$config['charset'] = 'utf-8';
+				$config['wordwrap'] = TRUE;
+				$this->email->initialize($config);
+				$this->email->to('admin@sk-stroikov.ru');
+				$this->email->from($_POST['phone'],$_POST['name']);
+				$this->email->bcc('');
+				$this->email->subject('Архив с материалами по промо-акции.');
+				$textmail = strip_tags($mess['msg']);
+				$this->email->message($textmail);	
+				if($this->email->send()):
+					$this->session->set_userdata('msgs','Сообщение отправлено успешно.');
+				endif;
+			else:
+				$this->session->set_userdata('msgr','Сообщение не отправлено.');
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
+		
+		$this->load->view("users_interface/konkurs-dlya-desainerov",$pagevar);
 	}
 	
 	public function o_kompanii(){
@@ -602,6 +682,20 @@ class Users_interface extends CI_Controller{
 		return TRUE;
 	}
 	
+	public function userarhiv_check($file){
+		
+		$tmpName = $_FILES['userfile']['tmp_name'];
+		if($_FILES['userfile']['error'] == 4):
+			$this->form_validation->set_message('userarhiv_check','Не указан файл');
+			return FALSE;
+		endif;
+		if($_FILES['userfile']['error'] == 1):
+			$this->form_validation->set_message('userarhiv_check','Размер более 5 Мб!');
+			return FALSE;
+		endif;
+		return TRUE;
+	}
+	
 	public function resize_img($tmpName,$wgt,$hgt,$ratio){
 			
 		chmod($tmpName,0777);
@@ -645,7 +739,7 @@ class Users_interface extends CI_Controller{
 		return $image;
 	}
 
-	public function resize_image($image,$wgt,$hgt,$ratio){
+	public function resize_image1($image,$wgt,$hgt,$ratio){
 	
 		$this->load->library('image_lib');
 		$this->image_lib->clear();
@@ -690,6 +784,40 @@ class Users_interface extends CI_Controller{
 		return TRUE;
 	}
 	
+	function resize_image($tmpName,$wgt,$hgt,$ratio){
+			
+		chmod($tmpName,0777);
+		$img = getimagesize($tmpName);
+		$this->load->library('image_lib');
+		$this->image_lib->clear();
+		$config['image_library'] 	= 'gd2';
+		$config['source_image']		= $tmpName; 
+		$config['create_thumb'] 	= FALSE;
+		$config['maintain_ratio'] 	= $ratio;
+		$config['quality'] 			= 100;
+		$config['master_dim'] 		= 'width';
+		$config['width'] 			= $wgt;
+		$config['height'] 			= $hgt;
+		$this->image_lib->initialize($config);
+		$this->image_lib->resize();
+		
+		$image = file_get_contents($tmpName);
+		return $image;
+	}
+	
+	public function fileupload($userfile,$overwrite,$catalog){
+		
+		$config['upload_path'] 		= './documents/'.$catalog.'/';
+		$config['allowed_types'] 	= 'zip|rar|7z|7zip|jpg|jpeg|gif|png';
+		$config['remove_spaces'] 	= TRUE;
+		$config['overwrite'] 		= $overwrite;
+		$this->load->library('upload',$config);
+		if(!$this->upload->do_upload($userfile)):
+			return FALSE;
+		endif;
+		return TRUE;
+	}
+
 	public function randomPassword($length,$allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRSTUVWXYZ0123456789"){
 	
 		$i = 1;

@@ -8,7 +8,7 @@
 			<li><?=anchor('agentstvo-nedvijimosti','Агентство недвижимости');?></li>
 			<li><?=anchor('o-kompanii','О компании');?></li>
 		<?php if($loginstatus['status']):?>
-			<li><?=anchor('logoff','&diams;Выход&diams;');?></li>
+			<li><?=anchor('logoff','Выход');?></li>
 		<?php endif;?>
 		</ul>
 	</div>
