@@ -60,11 +60,12 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 	.info h1 { color: #523511; font-size: 18px; line-height: 27px; margin: 0 0 20px; }
 	.info h2 { color: #523511; font-size: 17px; padding: 10px 0 0; font-weight: normal; }
 
-.design-sample img { border: 1px solid #808a70; padding: 3px;}
-.design-sample p { color: #808a70; font: 11px/14px 'PT Sans',"Times New Roman",Times,serif; }
-.design-sample a { color: #523511; font-size: 13px; text-transform: uppercase; text-decoration: underline; display: block; margin: 40px 0 22px 0; }
-.design-sample a.details { color: #89b838; font-size: 14px; text-decoration: underline; display: block; font-style: italic; text-transform: none; margin: 10px 0; text-align: right; }
-
+.slider img { border: 1px solid #808a70; padding: 3px;}
+.slider p { color: #808a70; font: 11px/14px 'PT Sans',"Times New Roman",Times,serif; }
+.slider a { color: #523511; font-size: 13px; text-transform: uppercase; text-decoration: underline; display: block; margin: 40px 0 22px 0; }
+.slider a.details { color: #89b838; font-size: 14px; text-decoration: underline; display: block; font-style: italic; text-transform: none; margin: 10px 0; text-align: right; }
+#samples { height: 410px; width: 548px; }
+.design-sample { height: 400px; width: 540px; }
 
 .aside-block { height: 205px; margin: 0 0 30px 0; background: #fff;  position: relative; }
 	.aside-block.list { height: auto; padding-bottom: 50px; }
@@ -76,7 +77,7 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 	.aside-block a.details { background: #89B838; bottom: 0; color: #fff; font-style: italic; padding: 0 6px 4px; position: absolute; right: 0; text-decoration: underline; }
 		.aside-block a.details:hover { text-decoration: none; }
 
-.slider-arrow { background: url('../img/sprites.png'); width: 25px; height: 40px; text-indent: -9999px; margin: 40px 0 0; }
+.slider-arrow { outline: 0 none !important; display: block; background: url('../img/sprites.png'); width: 25px; height: 40px; text-indent: -9999px; margin: 40px 0 0; }
 .slider-arrow.left { background-position: -118px 0; }
 .slider-arrow.right { background-position: -140px 0; }
 
