@@ -32,7 +32,9 @@ ul.social { list-style: none; margin: 34px 0 0; padding: 0; }
 nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 #main-nav { list-style: none; margin: 0 0 0 10px; } 
 #main-nav li { float: left; }
+#main-nav li.stroika { float: right; }
 #main-nav li a { line-height: 30px; color: #523511; font-weight: bold; font-size: 14px; text-transform: uppercase; display: block; margin: 0 15px 0 0; letter-spacing: 1px; }
+#main-nav li.stroika a { float: right; color: #fff; }
 
 /* ==|== main block ====================================================== */
 .promo-block { margin: 0 0 30px; }

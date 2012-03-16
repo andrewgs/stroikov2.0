@@ -14,29 +14,29 @@
 			<div class="grid_16 carousel list">
 				<?php $this->load->view('alert_messages/alert-error');?>
 				<?php $this->load->view('alert_messages/alert-success');?>
-				<h2><?=$interior['rooms'].'-к квартира'.'<br/>'.$interior['address'];?> <span class="details">Площадь <?=$interior['area'];?>м<sup>2</sup></span></h2>
+				<h2><?=$interior['title'].', '.$interior['rooms'].'-комнаты'.'<br/>'.$interior['address'];?> <span class="details">Площадь <?=$interior['area'];?>м<sup>2</sup></span></h2>
 				<div class="grid_1">
 					<div class="slider-arrow left">Пред.</div>
 				</div>
 				<div class="slider">
-					<div class="grid_14 alpha omega">
-						<div class="design-sample">
-						<?php for($i=0;$i<count($interior['images']);$i++):?>
-							<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$interior['images'][$i]['id'];?>" alt=""/>
+						<div id="samples">
+							<?php for($i=0;$i<count($interior['images']);$i++):?>
+							<div class="design-sample">
+								<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$interior['images'][$i]['id'];?>" alt=""/>
+							</div>
+							<?php endfor;?>
 							<?php if($loginstatus['status']):?>
 								<button class="btn btn-success dlImage" img="<?=$interior['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"><i class="icon-trash"></i> Удалить фотографию</button>
 							<?php endif;?>
-						<?php endfor;?>
-							<?=anchor($this->uri->uri_string(),$interior['title']);?>
+						</div>
+						<?=anchor($this->uri->uri_string(),$interior['title']);?>
 							<p>
 								<?=$interior['note'];?>
 							</p>
-						</div>
 						<?php if($loginstatus['status']):?>
 							<button class="btn btn-success" data-toggle="modal" href="#addImage"><i class="icon-download-alt"></i> Загрузить фотографию</button>
 						<?php endif;?>
 					</div>
-				</div>
 				<div class="grid_1">
 					<div class="slider-arrow right">След.</div>
 				</div>
@@ -53,9 +53,9 @@
 					<h3>Смотреть интерьеры</h3>
 					<ul>
 					<?php for($i=0;$i<count($objects);$i++):?>
-						<li><h4><?=$objects[$i]['title'];?></h4></li>
+						<li><?=$objects[$i]['title'];?></li>
 						<?php for($j=0;$j<count($objects[$i]['interiors']);$j++):?>
-							<li><?=anchor('design-interierov/'.$objects[$i]['translit'].'/'.$objects[$i]['interiors'][$j]['translit'],$objects[$i]['interiors'][$j]['title']);?></li>
+							<li><?=anchor('design-interierov/'.$objects[$i]['translit'].'/'.$objects[$i]['interiors'][$j]['translit'],$objects[$i]['interiors'][$j]['rooms'].'-к квартира');?> <?= $objects[$i]['interiors'][$j]['address']; ?></li>
 						<?php endfor;?>
 					<?php endfor;?>
 					</ul>
@@ -110,6 +110,15 @@
 			$(".dlImage").click(function(){image = $(this).attr('img');});
 			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/design-interierov/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
 			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
+			
+			$('div#samples').cycle({
+				fx:     'scrollHorz',
+				speed:  '2000',					
+				easing: 'easeInOutExpo',
+				timeout:  7000,
+				prev:    '#prev',
+				next:    '#next'
+			});  	
 		});
 	</script>
 <?php endif;?>
