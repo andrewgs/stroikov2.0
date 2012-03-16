@@ -62,7 +62,7 @@
 								<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i]['images']['id'];?>" alt=""/>
 								<?=anchor('design-interierov/'.$slideshow[$i]['object'].'/'.$slideshow[$i]['translit'],$slideshow[$i]['title']);?>
 								<p><?=$slideshow[$i]['note'];?></p>
-								<a href="#" class="details">Подробнее &gt;</a>
+								<?=anchor('design-interierov/'.$slideshow[$i]['object'].'/'.$slideshow[$i]['translit'],'Подробнее &gt;');?>
 							</div>
 						</div>
 						<?php endif;?>
@@ -72,7 +72,7 @@
 								<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i+1]['images']['id'];?>" alt=""/>
 								<?=anchor('design-interierov/'.$slideshow[$i+1]['object'].'/'.$slideshow[$i+1]['translit'],$slideshow[$i+1]['title']);?>
 								<p><?=$slideshow[$i+1]['note'];?></p>
-								<a href="#" class="details">Подробнее &gt;</a>
+								<?=anchor('design-interierov/'.$slideshow[$i+1]['object'].'/'.$slideshow[$i+1]['translit'],'Подробнее &gt;');?>
 							</div>
 						</div>
 						<?php endif;?>
@@ -82,7 +82,7 @@
 								<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i+2]['images']['id'];?>" alt=""/>
 								<?=anchor('design-interierov/'.$slideshow[$i+2]['object'].'/'.$slideshow[$i+2]['translit'],$slideshow[$i+2]['title']);?>
 								<p><?=$slideshow[$i+2]['note'];?></p>
-								<a href="#" class="details">Подробнее &gt;</a>
+								<?=anchor('design-interierov/'.$slideshow[$i+2]['object'].'/'.$slideshow[$i+2]['translit'],'Подробнее &gt;');?>
 							</div>
 						</div>
 						<?php endif;?>
@@ -98,6 +98,9 @@
 					<a href="#" class="promo-action">
 						<p><strong>Заказать</strong> дизайн интерьера <strong>сейчас!</strong></p>
 					</a>
+				</div>
+				<div class="aside-block green">
+					<?=anchor('konkurs-dlya-desainerov-architektorov-stroika1','<p><strong>Промо-акция</strong></p>',array('class'=>'promo-action'));?>
 				</div>
 				<div class="aside-block">
 					<h3>Объекты недвидижимости</h3>

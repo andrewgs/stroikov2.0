@@ -23,7 +23,9 @@
 						<div class="design-sample">
 						<?php for($i=0;$i<count($interior['images']);$i++):?>
 							<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$interior['images'][$i]['id'];?>" alt=""/>
+							<?php if($loginstatus['status']):?>
 								<button class="btn btn-success dlImage" img="<?=$interior['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"><i class="icon-trash"></i> Удалить фотографию</button>
+							<?php endif;?>
 						<?php endfor;?>
 							<?=anchor($this->uri->uri_string(),$interior['title']);?>
 							<p>
