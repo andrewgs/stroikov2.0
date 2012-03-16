@@ -18,7 +18,7 @@ a, a:hover, a:visited { color: #c7c7c7; }
 header { height: 80px; background: #fff; }
 #logo { background: url("../img/logo.png"); height: 52px; margin: 12px 0 0 10px; text-indent: -9999px; width: 297px; }
 
-.contacts { font-size: 18px; line-height: 80px; }
+.contacts { font-size: 18px; line-height: 70px; }
 .contacts strong { color: #89b838; font-weight: normal; }
 .contacts a { color: #89b838; font-style: italic; text-decoration: underline; font-size: 14px; margin: 0 0 0 10px; }
 
@@ -30,9 +30,9 @@ ul.social { list-style: none; margin: 34px 0 0; padding: 0; }
 		ul.social li.vk a { background-position: -92px 0; width: 25px; }
 		
 nav { background: #92b555; height: 30px; margin: 0 0 30px; }
-#main-nav { list-style: none; margin: 0 0 0 5px; } 
+#main-nav { list-style: none; margin: 0 0 0 10px; } 
 #main-nav li { float: left; }
-#main-nav li a { line-height: 25px; color: #523511; font-weight: bold; font-size: 14px; text-transform: uppercase; display: block; margin: 0 15px 0 0; letter-spacing: 1px; }
+#main-nav li a { line-height: 30px; color: #523511; font-weight: bold; font-size: 14px; text-transform: uppercase; display: block; margin: 0 15px 0 0; letter-spacing: 1px; }
 
 /* ==|== main block ====================================================== */
 .promo-block { margin: 0 0 30px; }
@@ -57,8 +57,8 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 	.carousel.list, .info.list { height: auto; padding-bottom: 20px; margin-bottom: 18px; }
 	.carousel h2, .info h1 { color: #808A70; font-size: 16px; font-weight: normal; letter-spacing: 1px; line-height: 22px; padding: 20px 10px 0; text-transform: uppercase; margin: 0 0 30px 0; }
 	.carousel h2 .details { display: block; font-size: 13px; line-height: 23px; color: #523511; text-transform: none; opacity: 0.5; }
-	.info h1 { padding: 20px 0 0; color: #523511; }
-	.info h2 { padding: 20px 0 0; color: #523511; font-size: 16px; padding: 10px 0 0; font-weight: normal; }
+	.info h1 { color: #523511; font-size: 18px; line-height: 27px; margin: 0 0 20px; }
+	.info h2 { color: #523511; font-size: 17px; padding: 10px 0 0; font-weight: normal; }
 
 .design-sample img { border: 1px solid #808a70; padding: 3px;}
 .design-sample p { color: #808a70; font: 11px/14px 'PT Sans',"Times New Roman",Times,serif; }
@@ -80,8 +80,10 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 .slider-arrow.left { background-position: -118px 0; }
 .slider-arrow.right { background-position: -140px 0; }
 
+p.signature { color: #523511; font: italic 16px/21px Georgia, serif; margin: 30px 0 10px; }
+
 /* ==|== footer ====================================================== */
-footer { height: 80px; background: #89B838; color: #fff; line-height: 80px; }
+footer { height: 70px; background: #89B838; color: #fff; line-height: 70px; }
 footer .contacts { font-size: 16px; }
 footer .contacts strong { color: #523511; font-weight: bold; }
 footer .copy { padding-left: 15px; }
