@@ -221,7 +221,27 @@ class Users_interface extends CI_Controller{
 					'baseurl' 		=> base_url(),
 					'loginstatus'	=> $this->loginstatus,
 					'userinfo'		=> $this->user,
+					'msgs'			=> $this->session->userdata('msgs'),
+					'msgr'			=> $this->session->userdata('msgr')
 			);
+		$this->session->unset_userdata('msgs');
+		$this->session->unset_userdata('msgr');
+		
+		if($this->input->post('submit')):
+			$this->form_validation->set_rules('name',' ','required|trim');
+			$this->form_validation->set_rules('email',' ','required|valid_email|trim');
+			$this->form_validation->set_rules('note',' ','required|trim');
+			if($this->form_validation->run()):
+				$message = "Имя: ".$_POST['name']."\nПочта: ".$_POST['email']."\nСообщение: ".$_POST['note'];
+				if($this->sendmail('admin@sk-stroikov.ru',$message,"Сообщение от ".$_POST['name'],$_POST['email'])):
+					$this->session->set_userdata('msgs','Сообщение отправлено успешно.');
+				endif;
+			else:
+				$this->session->set_userdata('msgr','Сообщение не отправлено.');
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
+		
 		$this->load->view("users_interface/kontaktnaya-informacia",$pagevar);
 	}
 	
@@ -489,27 +509,6 @@ class Users_interface extends CI_Controller{
 					'userinfo'		=> $this->user
 			);
 		
-		if($this->input->post('submit')):
-			$this->form_validation->set_rules('title',' ','required|trim');
-			$this->form_validation->set_rules('address',' ','required|trim');
-			$this->form_validation->set_rules('note',' ','required|trim');
-			$this->form_validation->set_rules('pranslit',' ','trim');
-			if($this->form_validation->run()):
-				if(!isset($_POST['over'])):
-					$_POST['over'] = 0;
-				endif;
-				if(!empty($_POST['pranslit'])):
-					$translit = preg_replace("/\ +/","-",$_POST['pranslit']);
-				else:
-					$translit = $this->translite($_POST['title']);
-				endif;
-				if(!$this->constructionmodel->exist_translit($translit)):
-					$this->constructionmodel->insert_record($_POST,$translit);
-				endif;
-			endif;
-			redirect($this->uri->uri_string());
-		endif;
-		
 		$this->load->view("users_interface/o-kompanii",$pagevar);
 	}
 	
@@ -670,6 +669,25 @@ class Users_interface extends CI_Controller{
 			case 3	: return TRUE;
 			default	: return FALSE;	
 		endswitch;
+	}
+	
+	public function sendmail($email,$msg,$subject,$from){
+		
+		$this->email->clear(TRUE);
+		$config['smtp_host'] = 'localhost';
+		$config['charset'] = 'utf-8';
+		$config['wordwrap'] = TRUE;
+		$this->email->initialize($config);
+		$this->email->from($from,$email);
+		$this->email->to('kv@sk-stroikov.ru');
+		$this->email->bcc('admin@sk-stroikov.ru');
+		$this->email->subject('Сообщение от пользователя SK-STROIKOV.RU');
+		
+		$this->email->message(strip_tags($msg));
+		if (!$this->email->send()):
+			return FALSE;
+		endif;
+		return TRUE;
 	}
 	
 	public function randomPassword($length,$allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRSTUVWXYZ0123456789"){
