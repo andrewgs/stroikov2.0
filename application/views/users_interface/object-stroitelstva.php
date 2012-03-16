@@ -23,7 +23,9 @@
 						<div class="design-sample">
 						<?php for($i=0;$i<count($object['images']);$i++):?>
 							<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$object['images'][$i]['id'];?>" alt=""/>
+							<?php if($loginstatus['status']):?>
 								<button class="btn btn-success dlImage" img="<?=$object['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"><i class="icon-trash"></i> Удалить фотографию</button>
+							<?php endif;?>
 						<?php endfor;?>
 							<?=anchor($this->uri->uri_string(),$object['title']);?>
 							<p><?=$object['note'];?></p>
@@ -116,7 +118,7 @@
 			});
 			$(".addObj").click(function(){var over = $(this).attr('over'); if(over == 1){$("#over").attr("checked","checked");}})
 			$(".dlImage").click(function(){image = $(this).attr('img');});
-			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/design-interierov/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
+			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/stroitelstvo/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
 			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
 		});
 	</script>

@@ -452,8 +452,6 @@ class Users_interface extends CI_Controller{
 		$pagevar['objects']['current'] = $this->constructionmodel->read_limit_records(0,5,0);
 		$pagevar['objects']['over'] = $this->constructionmodel->read_limit_records(1,5,0);
 		
-//		print_r($pagevar['objects']['current']);exit;
-		
 		$pagevar['object'] = $this->constructionmodel->read_record($this->uri->segment(3));
 		$pagevar['object']['images'] = $this->photosmodel->read_records(0,$pagevar['object']['id'],'construction');
 
@@ -784,7 +782,7 @@ class Users_interface extends CI_Controller{
 		return TRUE;
 	}
 	
-	function resize_image($tmpName,$wgt,$hgt,$ratio){
+	public function resize_image($tmpName,$wgt,$hgt,$ratio){
 			
 		chmod($tmpName,0777);
 		$img = getimagesize($tmpName);

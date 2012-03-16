@@ -35,6 +35,8 @@ $route['logoff'] 					= "users_interface/logoff";
 $route['contacts'] 					= "users_interface/contacts";
 
 /***************************************************	ADMIN INTRERFACE	***********************************************/
-$route['admin-panel/logoff'] 												= "admin_interface/admin_logoff";
-$route['admin-panel/design-interierov/:any/:any/delete/image/:num'] 		= "admin_interface/admin_delete_image";
+$route['admin-panel/logoff'] 											= "admin_interface/admin_logoff";
+$route['admin-panel/design-interierov/:any/:any/delete/image/:num'] 	= "admin_interface/admin_delete_image";
+$route['admin-panel/stroitelstvo/object/:any/delete/image/:num'] 		= "admin_interface/admin_delete_image";
+
 $route['admin-panel/agentstvo-nedvijimosti/:any/:any/delete/image/:num'] 	= "admin_interface/admin_delete_image";
