@@ -9,32 +9,33 @@
 	<div class="container_24">
 		<?=$this->load->view('users_interface/header');?>
 		<?=$this->load->view('users_interface/navigation');?>
+		
 		<section class="proposals">
 			<div class="grid_16 carousel list">
-			<?php if(count($objects['current'])>0):?>
-				<h2><?=$objects['current'][0]['title'];?><span class="details"><?=$objects['current'][0]['address'];?></span></h2>
+				<?php $this->load->view('alert_messages/alert-error');?>
+				<?php $this->load->view('alert_messages/alert-success');?>
+				<h2><?=$object['title'];?><span class="details"><?=$object['address'];?></span></h2>
 				<div class="grid_1">
 					<div class="slider-arrow left">Пред.</div>
 				</div>
 				<div class="slider">
 					<div class="grid_14 alpha omega">
 						<div class="design-sample">
-					<?php for($i=0;$i<count($objects['current'][0]['images']);$i++):?>
-						<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$objects['current'][0]['images'][$i]['id'];?>" alt=""/>
-					<?php endfor;?>
-							<?=anchor('stroitelstvo/object/'.$objects['current'][0]['translit'],$objects['current'][0]['title']);?>
-							<p><?=$objects['current'][0]['note'];?></p>
+						<?php for($i=0;$i<count($object['images']);$i++):?>
+							<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$object['images'][$i]['id'];?>" alt=""/>
+								<button class="btn btn-success dlImage" img="<?=$object['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"><i class="icon-trash"></i> Удалить фотографию</button>
+						<?php endfor;?>
+							<?=anchor($this->uri->uri_string(),$object['title']);?>
+							<p><?=$object['note'];?></p>
 						</div>
+						<?php if($loginstatus['status']):?>
+							<button class="btn btn-success" data-toggle="modal" href="#addImage"><i class="icon-download-alt"></i> Загрузить фотографию</button>
+						<?php endif;?>
 					</div>
 				</div>
 				<div class="grid_1">
 					<div class="slider-arrow right">След.</div>
 				</div>
-			<?php else:?>
-				<?php if($loginstatus['status']):?>
-					<a class="btn btn-success" data-toggle="modal" href="#addObject"><i class="icon-plus"></i> Добавить первый объект</a>
-				<?php endif;?>
-			<?php endif;?>
 			</div>
 			<div class="grid_7 prefix_1">
 				<!--
@@ -44,11 +45,6 @@
 					</a>
 				</div>
 				-->
-				<div class="aside-block green">
-					<a href="#" class="promo-action">
-						<p><strong><nobr>Скидка 10%</nobr></strong> ремонт помещений</p>
-					</a>
-				</div>
 				<div class="aside-block list">
 					<h3>Строящиеся объекты</h3>
 					<ul>
@@ -58,7 +54,9 @@
 					<?php endfor;?>
 				<?php endif;?>
 					</ul>
-					<a href="#" class="details">Подробнее &gt;</a>
+					<?php if($loginstatus['status']):?>
+						<a class="details addObj" style="right:132px;" over="0" data-toggle="modal" href="#addObject"><i class="icon-plus"></i> Добавить объект</a>
+					<?php endif;?>
 				</div>
 				<div class="aside-block list">
 					<h3>Сданные объекты</h3>
@@ -69,22 +67,26 @@
 					<?php endfor;?>
 				<?php endif;?>
 					</ul>
-					<a href="#" class="details">Подробнее &gt;</a>
+					<?php if($loginstatus['status']):?>
+						<a class="details addObj" style="right:132px;" over="1" data-toggle="modal" href="#addObject"><i class="icon-plus"></i> Добавить объект</a>
+					<?php endif;?>
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<?php if(!count($objects['current'])):?>
-				<?php if($loginstatus['status']):?>
-					<?php $this->load->view('modal/admin-add-stroiobjekt');?>
-				<?php endif;?>
+			<?php if($loginstatus['status']):?>
+				<?php $this->load->view('modal/admin-add-stroiobjekt');?>
+				<?php $this->load->view('modal/admin-add-image');?>
+				<?php $this->load->view('modal/admin-delete-image');?>
 			<?php endif;?>
 		</section>
 		<?=$this->load->view('users_interface/footer');?>
 	</div>
 	<?=$this->load->view('users_interface/scripts');?>
 	<?=$this->load->view('users_interface/google');?>
+<?php if($loginstatus['status']):?>
 	<script type="text/javascript">
 		$(document).ready(function(){
+			var image = 0;
 			$("#send").click(function(event){
 				var err = false;
 				$(".control-group").removeClass('error');
@@ -98,8 +100,26 @@
 				});
 				if(err){event.preventDefault();}
 			});
-			$("#addObject").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
+			$("#addObject").on("hidden",function(){$("#over").removeAttr("checked");$(".control-group").removeClass('error');$(".help-inline").hide();});
+			$("#imgsend").click(function(event){
+				var err = false;
+				$(".control-group").removeClass('error');
+				$(".help-inline").hide();
+				$(".imginput").each(function(i,element){
+					if($(this).val()==''){
+						$(this).parents(".control-group").addClass('error');
+						$(this).siblings(".help-inline").html("Поле не может быть пустым").show();
+						err = true;
+					}
+				});
+				if(err){event.preventDefault();}
+			});
+			$(".addObj").click(function(){var over = $(this).attr('over'); if(over == 1){$("#over").attr("checked","checked");}})
+			$(".dlImage").click(function(){image = $(this).attr('img');});
+			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/design-interierov/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
+			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
 		});
 	</script>
+<?php endif;?>
 </body>
 </html>
