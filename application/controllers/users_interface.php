@@ -97,14 +97,14 @@ class Users_interface extends CI_Controller{
 					'objects'		=> $this->objectstypemodel->read_records(),
 					'interior'		=> array()
 			);
+		
 		for($i=0;$i<count($pagevar['objects']);$i++):
-			$pagevar['objects'][$i]['interiors'] = $this->interiorsmodel->read_records($pagevar['objects'][0]['id']);
+			$pagevar['objects'][$i]['interiors'] = $this->interiorsmodel->read_records($pagevar['objects'][$i]['id']);
 		endfor;
-		if(count($pagevar['objects']) == 1):
-			$pagevar['interior'] = $this->interiorsmodel->read_limit_records($pagevar['objects'][0]['id'],1,0);
-			if(count($pagevar['interior'])):
-			   $pagevar['interior'][0]['images'] = $this->photosmodel->read_records($pagevar['objects'][0]['id'],$pagevar['interior'][0]['id'],'interiors');
-			endif;
+		
+		$pagevar['interior'] = $this->interiorsmodel->read_limit_records($pagevar['objects'][0]['id'],1,0);
+		if(count($pagevar['interior'])):
+		   $pagevar['interior'][0]['images'] = $this->photosmodel->read_records($pagevar['objects'][0]['id'],$pagevar['interior'][0]['id'],'interiors');
 		endif;
 		
 		if($this->input->post('submit')):
@@ -149,7 +149,7 @@ class Users_interface extends CI_Controller{
 		$this->session->unset_userdata('msgr');
 		
 		for($i=0;$i<count($pagevar['objects']);$i++):
-			$pagevar['objects'][$i]['interiors'] = $this->interiorsmodel->read_records($pagevar['objects'][0]['id']);
+			$pagevar['objects'][$i]['interiors'] = $this->interiorsmodel->read_records($pagevar['objects'][$i]['id']);
 		endfor;
 		$type = $this->objectstypemodel->read_field_translit($this->uri->segment(2),'id');
 		$pagevar['interior'] = $this->interiorsmodel->read_record($this->uri->segment(3),$type);
@@ -529,15 +529,18 @@ class Users_interface extends CI_Controller{
 				
 				$_FILES['userfile']['name'] = preg_replace('/.+(.)(\.)+/',date("Ymdhis")."\$2", $_FILES['userfile']['name']);
 				$_FILES['userarhiv']['name'] = preg_replace('/.+(.)(\.)+/',date("Ymdhis")."\$2", $_FILES['userarhiv']['name']);
-				if(!$this->fileupload('userfile',FALSE,'photo')):
-					$this->session->set_userdata('msgr','Ошибка при загрузке фотографии.');
-					redirect($this->uri->uri_string());
-				endif;
-				print_r($_FILES);exit;
+				
 				if(!$this->fileupload('userarhiv',FALSE,'arhive')):
 					$this->session->set_userdata('msgr','Ошибка при загрузке архива.');
 					redirect($this->uri->uri_string());
 				endif;
+//				print_r($_FILES);exit;
+				if(!$this->fileupload('userfile',FALSE,'photo')):
+					$this->session->set_userdata('msgr','Ошибка при загрузке фотографии.');
+					redirect($this->uri->uri_string());
+				endif;
+				
+				
 				
 				ob_start();
 				?>
@@ -805,7 +808,8 @@ class Users_interface extends CI_Controller{
 	
 	public function fileupload($userfile,$overwrite,$catalog){
 		
-		$config['upload_path'] 		= './documents/'.$catalog.'/';
+		$config['upload_path'] 		= getcwd().'/documents/'.$catalog.'/';
+		print_r($config['upload_path']);exit;
 		$config['allowed_types'] 	= 'zip|rar|7z|7zip|jpg|jpeg|gif|png';
 		$config['remove_spaces'] 	= TRUE;
 		$config['overwrite'] 		= $overwrite;
