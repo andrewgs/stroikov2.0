@@ -58,9 +58,7 @@
 			</div>
 			<div class="grid_7 prefix_1">
 				<div class="aside-block green">
-					<a href="#" class="promo-action">
-						<p><strong>Заказать</strong> установку системы вентиляции</p>
-					</a>
+					<?=anchor('kontaktnaya-informacia','<p><strong>Заказать</strong> установку системы вентиляции</p>', array('class'=>'promo-action'));?>
 				</div>
 			</div>
 			<div class="clearfix"></div>

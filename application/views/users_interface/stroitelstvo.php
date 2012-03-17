@@ -14,21 +14,23 @@
 			<?php if(count($objects['current'])>0):?>
 				<h2><?=$objects['current'][0]['title'];?><span class="details"><?=$objects['current'][0]['address'];?></span></h2>
 				<div class="grid_1">
-					<div class="slider-arrow left">Пред.</div>
+					<a href="#" id="prev" class="slider-arrow left">Пред.</a>
 				</div>
-				<div class="slider">
-					<div class="grid_14 alpha omega">
-						<div class="design-sample">
+				<div class="grid_14 alpha omega">
+					<div class="slider">
+						<div id="samples">
 					<?php for($i=0;$i<count($objects['current'][0]['images']);$i++):?>
-						<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$objects['current'][0]['images'][$i]['id'];?>" alt=""/>
-					<?php endfor;?>
-							<?=anchor('stroitelstvo/object/'.$objects['current'][0]['translit'],$objects['current'][0]['title']);?>
-							<p><?=$objects['current'][0]['note'];?></p>
+						<div class="design-sample">
+							<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$objects['current'][0]['images'][$i]['id'];?>" alt=""/>
 						</div>
+					<?php endfor;?>
+						</div>
+						<?=anchor('stroitelstvo/object/'.$objects['current'][0]['translit'],$objects['current'][0]['title']);?>
+						<p><?=$objects['current'][0]['note'];?></p>						
 					</div>
 				</div>
 				<div class="grid_1">
-					<div class="slider-arrow right">След.</div>
+					<a href="#" id="next" class="slider-arrow right">След.</a>
 				</div>
 			<?php else:?>
 				<?php if($loginstatus['status']):?>
@@ -99,6 +101,15 @@
 				if(err){event.preventDefault();}
 			});
 			$("#addObject").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
+			
+			$('div#samples').cycle({
+				fx:     'scrollHorz',
+				speed:  '2000',					
+				easing: 'easeInOutExpo',
+				timeout:  7000,
+				prev:    '#prev',
+				next:    '#next'
+			}); 
 		});
 	</script>
 </body>

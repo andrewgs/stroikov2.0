@@ -14,11 +14,12 @@
 			<div class="grid_16 carousel list">
 				<?php $this->load->view('alert_messages/alert-error');?>
 				<?php $this->load->view('alert_messages/alert-success');?>
-				<h2><?=$interior['title'].', '.$interior['rooms'].'-комнаты'.'<br/>'.$interior['address'];?> <span class="details">Площадь <?=$interior['area'];?>м<sup>2</sup></span></h2>
+				<h2><?=$interior['title'].', '.$interior['rooms'].'-комн.'.'<br/>'.$interior['address'];?> <span class="details">Площадь <?=$interior['area'];?>м<sup>2</sup></span></h2>
 				<div class="grid_1">
-					<div class="slider-arrow left">Пред.</div>
+					<a id="prev" href="#" class="slider-arrow left">Пред.</a>
 				</div>
-				<div class="slider">
+				<div class="grid_14 alpha omega">
+					<div class="slider">
 						<div id="samples">
 							<?php for($i=0;$i<count($interior['images']);$i++):?>
 							<div class="design-sample">
@@ -37,8 +38,9 @@
 							<button class="btn btn-success" data-toggle="modal" href="#addImage"><i class="icon-download-alt"></i> Загрузить фотографию</button>
 						<?php endif;?>
 					</div>
+				</div>
 				<div class="grid_1">
-					<div class="slider-arrow right">След.</div>
+					<a id="next" href="#" class="slider-arrow right">След.</a>
 				</div>
 			</div>
 			<div class="grid_7 prefix_1">
@@ -75,7 +77,6 @@
 	</div>
 	<?=$this->load->view('users_interface/scripts');?>
 	<?=$this->load->view('users_interface/google');?>
-<?php if($loginstatus['status']):?>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var image = 0;
@@ -121,6 +122,5 @@
 			});  	
 		});
 	</script>
-<?php endif;?>
 </body>
 </html>

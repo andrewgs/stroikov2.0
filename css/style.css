@@ -49,10 +49,13 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 	a#read-reviews { background: #523511; bottom: 0; color: #89B838; font-style: italic; padding: 0 6px 4px; position: absolute; right: 0; text-decoration: underline; }
 		a#read-reviews:hover { text-decoration: none; }
 
-.promo-action { /*background: url('../img/promo-design.png') no-repeat;*/ width: 275px; height: 205px; display: block; }
+.promo-action { /*background: url('../img/promo-design.png') no-repeat;*/ width: 270px; height: 205px; display: block; }
 .promo-action:hover { text-decoration: none; }
 	.promo-action p { color: #523511; display: block; font: 26px/33px 'PT Sans',"Times New Roman",Times,serif; padding: 35px 45px; text-transform: uppercase; width: 150px; }
-
+.banner { background: #523511; color: #fff; font-size: 27px; font-weight: bold; height: 50px; letter-spacing: 1px; line-height: 50px; margin-top: 2px; padding: 0 15px; text-transform: uppercase; } 
+.banner b { color: #92B555; }
+.annotation { color: #89B838; font-size: 20px; font-weight: bold; line-height: 24px; padding: 10px 15px 3px; }
+.conditions { color: #523511; font-size: 12px; line-height: 15px; padding: 2px 16px 20px; }
 
 .carousel { background: #fff; height: 440px; }
 .info { background: #fff; height: 440px; padding: 25px 40px 40px !important; }
@@ -66,8 +69,11 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 .slider p { color: #808a70; font: 11px/14px 'PT Sans',"Times New Roman",Times,serif; }
 .slider a { color: #523511; font-size: 13px; text-transform: uppercase; text-decoration: underline; display: block; margin: 40px 0 22px 0; }
 .slider a.details { color: #89b838; font-size: 14px; text-decoration: underline; display: block; font-style: italic; text-transform: none; margin: 10px 0; text-align: right; }
-#samples { height: 410px; width: 548px; }
-.design-sample { height: 400px; width: 540px; }
+
+#samples { min-height: 410px; width: 548px; }
+#samples .design-sample { min-height: 400px; width: 540px; }
+#samples-row { left: 47px; position: absolute; top: 85px; width: 570px; z-index: 1001; background: #fff; }
+#samples-row .design-sample { float: left; margin-right: 40px; width: 150px; }
 
 .aside-block { height: 205px; margin: 0 0 30px 0; background: #fff;  position: relative; }
 	.aside-block.list { height: auto; padding-bottom: 50px; }
@@ -78,12 +84,21 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 	.aside-block li a { color: #89B838; font-style: italic; text-decoration: underline; padding-right: 10px; }
 	.aside-block a.details { background: #89B838; bottom: 0; color: #fff; font-style: italic; padding: 0 6px 4px; position: absolute; right: 0; text-decoration: underline; }
 		.aside-block a.details:hover { text-decoration: none; }
+.stroika a.details { bottom: 29px; }
 
 .slider-arrow { outline: 0 none !important; display: block; background: url('../img/sprites.png'); width: 25px; height: 40px; text-indent: -9999px; margin: 40px 0 0; }
 .slider-arrow.left { background-position: -118px 0; }
 .slider-arrow.right { background-position: -140px 0; }
 
+.carousel.index .slider-arrow { position: absolute; }
+.carousel.index .left { left: 10px; top: 70px; z-index: 1002; }
+.carousel.index .right { right: 15px; top: 70px; z-index: 1003; }
+
 p.signature { color: #523511; font: italic 16px/21px Georgia, serif; margin: 30px 0 10px; }
+.contacts-data { font-size: 15px; line-height: 18px; padding: 0 15px; }
+.contacts-data p { line-height: 18px; }
+.contacts-data a { font-style: italic; text-decoration: none; color: #eee; }
+.diplom { margin: 15px 0; }
 
 /* ==|== footer ====================================================== */
 footer { height: 70px; background: #89B838; color: #fff; line-height: 70px; }

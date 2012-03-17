@@ -12,7 +12,7 @@
 		<section class="proposals">
 			<div class="grid_16 carousel list">
 			<?php if(count($interior)>0):?>
-				<h2><?=$interior[0]['title'].', '.$interior[0]['rooms'].'-комнаты'.'<br/>'.$interior[0]['address'];?> <span class="details">Площадь <?=$interior[0]['area'];?>м<sup>2</sup></span></h2>
+				<h2><?=$interior[0]['title'].', '.$interior[0]['rooms'].'-комн.'.'<br/>'.$interior[0]['address'];?> <span class="details">Площадь <?=$interior[0]['area'];?>м<sup>2</sup></span></h2>
 				<div class="grid_1">
 					<a href="#" id="prev" class="slider-arrow left">Пред.</a>
 				</div>

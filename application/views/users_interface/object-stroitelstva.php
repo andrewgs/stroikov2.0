@@ -16,27 +16,29 @@
 				<?php $this->load->view('alert_messages/alert-success');?>
 				<h2><?=$object['title'];?><span class="details"><?=$object['address'];?></span></h2>
 				<div class="grid_1">
-					<div class="slider-arrow left">Пред.</div>
+					<a href="#" id="prev" class="slider-arrow left">Пред.</a>
 				</div>
-				<div class="slider">
-					<div class="grid_14 alpha omega">
-						<div class="design-sample">
+				<div class="grid_14 alpha omega">
+					<div class="slider">
+						<div id="samples">
 						<?php for($i=0;$i<count($object['images']);$i++):?>
-							<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$object['images'][$i]['id'];?>" alt=""/>
+							<div class="design-sample">
+								<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$object['images'][$i]['id'];?>" alt=""/>
+							</div>
 							<?php if($loginstatus['status']):?>
 								<button class="btn btn-success dlImage" img="<?=$object['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"><i class="icon-trash"></i> Удалить фотографию</button>
 							<?php endif;?>
 						<?php endfor;?>
-							<?=anchor($this->uri->uri_string(),$object['title']);?>
-							<p><?=$object['note'];?></p>
 						</div>
+						<?=anchor($this->uri->uri_string(),$object['title']);?>
+						<p><?=$object['note'];?></p>
 						<?php if($loginstatus['status']):?>
 							<button class="btn btn-success" data-toggle="modal" href="#addImage"><i class="icon-download-alt"></i> Загрузить фотографию</button>
 						<?php endif;?>
 					</div>
 				</div>
 				<div class="grid_1">
-					<div class="slider-arrow right">След.</div>
+					<a href="#" id="next" class="slider-arrow right">След.</a>
 				</div>
 			</div>
 			<div class="grid_7 prefix_1">
@@ -85,7 +87,7 @@
 	</div>
 	<?=$this->load->view('users_interface/scripts');?>
 	<?=$this->load->view('users_interface/google');?>
-<?php if($loginstatus['status']):?>
+
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var image = 0;
@@ -120,8 +122,16 @@
 			$(".dlImage").click(function(){image = $(this).attr('img');});
 			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/stroitelstvo/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
 			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
+			
+			$('div#samples').cycle({
+				fx:     'scrollHorz',
+				speed:  '2000',					
+				easing: 'easeInOutExpo',
+				timeout:  7000,
+				prev:    '#prev',
+				next:    '#next'
+			}); 
 		});
 	</script>
-<?php endif;?>
 </body>
 </html>

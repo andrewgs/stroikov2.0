@@ -17,14 +17,21 @@
 					<?php $this->load->view('forms/formsendmail');?>
 				</div>
 			</div>
+			
 			<div class="grid_7 prefix_1">
 				<div class="aside-block green">
-					<p><strong>Прямые контакты</strong></p>
-					<p>344019<br/>
-					г.Ростов-на-Дону<br/>
-					ул.16-я линия, 16Б<br/><br/>
-					Тел/факс: (863) 295-51-10, (863) 295-51-11,(863) 295-51-12,8 (904) 341-11-50<br/>
-					E-mail: <?=safe_mailto('info@sk-stroikov.ru','info@sk-stroikov.ru');?></p>
+					<h3>Прямые контакты</h3>
+					<div class="contacts-data">
+						<p>
+							344019 <br>г.Ростов-на-Дону <br>ул.16-я линия, 16Б
+						</p>
+						<p>
+							Тел/факс: <br>(863) 295-51-10, <br>(863) 295-51-11
+						</p>
+						<p>
+							E-mail: <?=safe_mailto('info@sk-stroikov.ru','info@sk-stroikov.ru');?>
+						</p>
+					</div>
 				</div>
 			</div>
 			<div class="clearfix"></div>
