@@ -8,7 +8,6 @@
 			<li><?=anchor('injenernue-seti','Инженерные сети');?></li>
 			<!--li><?=anchor('agentstvo-nedvijimosti','Агентство недвижимости');?></li-->
 			<li><?=anchor('o-kompanii','О компании');?></li>
-			<li class="stroika"><?=anchor('konkurs-dlya-desainerov-architektorov-stroika1','Стройка#1');?></li>
 		<?php if($loginstatus['status']):?>
 			<li><?=anchor('logoff','Выход');?></li>
 		<?php endif;?>

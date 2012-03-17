@@ -13,4 +13,5 @@
 		</ul>
 	</div>
 	<div class="clearfix"></div>
+	<a href="<?= base_url().'konkurs-dlya-desainerov-architektorov-stroika1'?>" id="stroika-pointer">Конкурс проектных идей в области архитектуры малых форм</a>
 </header>

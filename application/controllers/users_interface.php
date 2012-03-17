@@ -507,7 +507,7 @@ class Users_interface extends CI_Controller{
 		$pagevar = array(
 					'description'	=> '',
 					'author'		=> '',
-					'title'			=> 'Cтроительная компания в Ростове-на-Дону :: ООО СК Стройковъ',
+					'title'			=> 'Конкурс проектных идей в области архитектуры малых форм | Строительная компания Стройковъ',
 					'baseurl' 		=> base_url(),
 					'loginstatus'	=> $this->loginstatus,
 					'userinfo'		=> $this->user,
@@ -522,37 +522,44 @@ class Users_interface extends CI_Controller{
 			$this->form_validation->set_rules('phone',' ','required|trim');
 			$this->form_validation->set_rules('email',' ','required|valid_email|trim');
 			$this->form_validation->set_rules('education',' ','trim');
-			$this->form_validation->set_rules('userfile',' ','callback_userfile_check');
+			// $this->form_validation->set_rules('userfile',' ','callback_userfile_check');
 			$this->form_validation->set_rules('userarhiv',' ','callback_userarhiv_check');
-			$this->form_validation->set_rules('note',' ','required|trim');
+			$this->form_validation->set_rules('note',' ','trim');
 			if($this->form_validation->run()):
 				
-				$_FILES['userfile']['name'] = preg_replace('/.+(.)(\.)+/',date("Ymdhis")."\$2", $_FILES['userfile']['name']);
-				$_FILES['userarhiv']['name'] = preg_replace('/.+(.)(\.)+/',date("Ymdhis")."\$2", $_FILES['userarhiv']['name']);
-				
-				if(!$this->fileupload('userarhiv',FALSE,'arhive')):
-					$this->session->set_userdata('msgr','Ошибка при загрузке архива.');
-					redirect($this->uri->uri_string());
+				$user = $this->translite(htmlspecialchars($_POST['name']));
+				$catalog = getcwd().'/documents/'.$user;
+				if(is_dir($catalog)):
+					$catalog .= '-'.date("Ymdhis");
 				endif;
-				// print_r($_FILES);exit;
-				if(!$this->fileupload('userfile',FALSE,'photo')):
-					$this->session->set_userdata('msgr','Ошибка при загрузке фотографии.');
-					redirect($this->uri->uri_string());
+				mkdir($catalog, 0777);
+				
+				if($_FILES['userfile']['error'] != 4):
+					$_FILES['userfile']['name'] = preg_replace('/.+(.)(\.)+/',date("Ymdhis")."\$2", $_FILES['userfile']['name']);
+					if(!$this->fileupload('userfile',FALSE,$catalog)):
+						// $this->session->set_userdata('msgr','Ошибка при загрузке фотографии.');
+						redirect($this->uri->uri_string());
+					endif;
 				endif;
 				
-				
-				
+				if($_FILES['userarhiv']['error'] != 4):
+					$_FILES['userarhiv']['name'] = preg_replace('/.+(.)(\.)+/',date("Ymdhis")."\$2", $_FILES['userarhiv']['name']);
+					if(!$this->fileupload('userarhiv',FALSE,$catalog)):
+						// $this->session->set_userdata('msgr','Ошибка при загрузке архива.');
+						redirect($this->uri->uri_string());
+					endif;
+				else:
+					$this->session->set_userdata('msgr','Сообщение не отправлено. Не указан архив с материалами.');
+				endif;
 				ob_start();
 				?>
-				
-				<strong>Получено письмо от <?=$_POST['name'];?></strong>
-				Контактный номер <?=$_POST['phone'];?>
-				E-mail <?=$_POST['email'];?>
-				Образование <?=$_POST['education'];?>
-				Просмотреть фотографию <?=$baseurl.'/documents/photo/'.$_FILES['userfile']['name'];?>
-				Скачать архив <?=$baseurl.'/documents/arhive/'.$_FILES['userarhiv']['name'];?>
-				
-				Комментарий <?=$_POST['note'];?>
+Получено письмо от <?=$_POST['name'];?> 
+Контактный номер: <?=$_POST['phone'];?> 
+E-mail: <?=$_POST['email'];?> 
+Образование: <?=$_POST['education'];?> 
+Просмотреть фотографию: <? echo base_url().'/documents/'.$user.'/'.$_FILES['userfile']['name']; ?> 
+Скачать архив: <? echo base_url().'/documents/'.$user.'/'.$_FILES['userarhiv']['name']; ?> 
+Комментарий к письму: <?=$_POST['note'];?>
 				<?
 				$mess['msg'] = ob_get_clean();
 				
@@ -562,16 +569,16 @@ class Users_interface extends CI_Controller{
 				$config['wordwrap'] = TRUE;
 				$this->email->initialize($config);
 				$this->email->to('admin@sk-stroikov.ru');
-				$this->email->from($_POST['phone'],$_POST['name']);
+				$this->email->from($_POST['email'], $_POST['name']);
 				$this->email->bcc('');
-				$this->email->subject('Архив с материалами по промо-акции.');
+				$this->email->subject('Архив с материалами [Стройка#1]');
 				$textmail = strip_tags($mess['msg']);
 				$this->email->message($textmail);	
 				if($this->email->send()):
 					$this->session->set_userdata('msgs','Сообщение отправлено успешно.');
 				endif;
 			else:
-				$this->session->set_userdata('msgr','Сообщение не отправлено.');
+				$this->session->set_userdata('msgr','Сообщение не отправлено. Так как форма не прошла валидацию.');
 			endif;
 			redirect($this->uri->uri_string());
 		endif;
@@ -685,12 +692,12 @@ class Users_interface extends CI_Controller{
 	
 	public function userarhiv_check($file){
 		
-		$tmpName = $_FILES['userfile']['tmp_name'];
-		if($_FILES['userfile']['error'] == 4):
+		$tmpName = $_FILES['userarhiv']['tmp_name'];
+		if($_FILES['userarhiv']['error'] == 4):
 			$this->form_validation->set_message('userarhiv_check','Не указан файл');
 			return FALSE;
 		endif;
-		if($_FILES['userfile']['error'] == 1):
+		if($_FILES['userarhiv']['error'] == 1):
 			$this->form_validation->set_message('userarhiv_check','Размер более 5 Мб!');
 			return FALSE;
 		endif;
@@ -808,15 +815,25 @@ class Users_interface extends CI_Controller{
 	
 	public function fileupload($userfile,$overwrite,$catalog){
 		
-		$config['upload_path'] 		= getcwd().'/documents/'.$catalog.'/';
+		$config['upload_path'] 		= $catalog;
 		$config['allowed_types'] 	= 'zip|rar|7z|7zip|jpg|jpeg|gif|png';
 		$config['remove_spaces'] 	= TRUE;
+		$config['max_size']			= 1024 * 50;
 		$config['overwrite'] 		= $overwrite;
 		$this->load->library('upload',$config);
+		/*
 		if (!$this->upload->do_upload($userfile)):
 			return FALSE;
 		endif;
-		return TRUE;
+		 */
+		if ( ! $this->upload->do_upload($userfile)) {
+			$error = array('error' => $this->upload->display_errors());
+			$this->session->set_userdata('msgr',implode('  | ', $error));
+			return false;
+		} else {
+			$data = array('upload_data' => $this->upload->data());
+			return true;
+		}
 	}
 
 	public function randomPassword($length,$allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRSTUVWXYZ0123456789"){

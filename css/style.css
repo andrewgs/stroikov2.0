@@ -15,7 +15,7 @@ a, a:hover, a:visited { color: #c7c7c7; }
    
 
 /* ==|== header ====================================================== */
-header { height: 80px; background: #fff; }
+header { height: 80px; background: #fff; position: relative; }
 #logo { background: url("../img/logo.png"); height: 52px; margin: 12px 0 0 10px; text-indent: -9999px; width: 297px; }
 
 .contacts { font-size: 18px; line-height: 70px; }
@@ -35,6 +35,7 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 #main-nav li.stroika { float: right; }
 #main-nav li a { line-height: 30px; color: #523511; font-weight: bold; font-size: 14px; text-transform: uppercase; display: block; margin: 0 15px 0 0; letter-spacing: 1px; }
 #main-nav li.stroika a { float: right; color: #fff; }
+#stroika-pointer { background: url('../img/stroika.png') no-repeat; width: 126px; height: 88px; position: absolute; top: 22px; right: 20px; display: block; text-indent: -9999px;}
 
 /* ==|== main block ====================================================== */
 .promo-block { margin: 0 0 30px; }
@@ -99,6 +100,17 @@ p.signature { color: #523511; font: italic 16px/21px Georgia, serif; margin: 30p
 .contacts-data p { line-height: 18px; }
 .contacts-data a { font-style: italic; text-decoration: none; color: #eee; }
 .diplom { margin: 15px 0; }
+
+#stroika-promo-block { position: relative; }
+#stroika-promo-block h1 { border-bottom: 2px dashed #7EB91C; color: #7EB91C; font-weight: bold; padding-bottom: 15px; }
+#stroika-promo-block .stb { background: url("../img/bycicle.png") no-repeat; height: 58px; position: absolute; right: 50px; top: 43px; width: 125px; }
+#stroika-promo-block .separator { border-top: 2px dashed #7EB91C; margin: 25px 0 15px; }
+#stroika-promo-block p { font-size: 14px; line-height: 23px; margin-bottom: 15px; }
+#stroika-promo-block a { color: #523511; font-family: Georgia, serif; font-style: italic; }
+#stroika-promo-block a.btn { color: #fff !important; font-family: 'PT Sans', "Times New Roman", Times, serif; font-style: normal; }
+#stroika-promo-block .sponsors { position: absolute; right: 50px; text-align: right; top: 130px; }
+#stroika-promo-block .sponsors a { display: block; margin: 20px 0; }
+#stroika-promo-block .sponsors.info { position: absolute; right: 10px; text-align: right; top: 335px; }
 
 /* ==|== footer ====================================================== */
 footer { height: 70px; background: #89B838; color: #fff; line-height: 70px; }
