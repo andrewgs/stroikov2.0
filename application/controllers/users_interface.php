@@ -97,14 +97,14 @@ class Users_interface extends CI_Controller{
 					'objects'		=> $this->objectstypemodel->read_records(),
 					'interior'		=> array()
 			);
+		
 		for($i=0;$i<count($pagevar['objects']);$i++):
-			$pagevar['objects'][$i]['interiors'] = $this->interiorsmodel->read_records($pagevar['objects'][0]['id']);
+			$pagevar['objects'][$i]['interiors'] = $this->interiorsmodel->read_records($pagevar['objects'][$i]['id']);
 		endfor;
-		if(count($pagevar['objects']) == 1):
-			$pagevar['interior'] = $this->interiorsmodel->read_limit_records($pagevar['objects'][0]['id'],1,0);
-			if(count($pagevar['interior'])):
-			   $pagevar['interior'][0]['images'] = $this->photosmodel->read_records($pagevar['objects'][0]['id'],$pagevar['interior'][0]['id'],'interiors');
-			endif;
+		
+		$pagevar['interior'] = $this->interiorsmodel->read_limit_records($pagevar['objects'][0]['id'],1,0);
+		if(count($pagevar['interior'])):
+		   $pagevar['interior'][0]['images'] = $this->photosmodel->read_records($pagevar['objects'][0]['id'],$pagevar['interior'][0]['id'],'interiors');
 		endif;
 		
 		if($this->input->post('submit')):
@@ -149,7 +149,7 @@ class Users_interface extends CI_Controller{
 		$this->session->unset_userdata('msgr');
 		
 		for($i=0;$i<count($pagevar['objects']);$i++):
-			$pagevar['objects'][$i]['interiors'] = $this->interiorsmodel->read_records($pagevar['objects'][0]['id']);
+			$pagevar['objects'][$i]['interiors'] = $this->interiorsmodel->read_records($pagevar['objects'][$i]['id']);
 		endfor;
 		$type = $this->objectstypemodel->read_field_translit($this->uri->segment(2),'id');
 		$pagevar['interior'] = $this->interiorsmodel->read_record($this->uri->segment(3),$type);
