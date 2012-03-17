@@ -12,6 +12,12 @@
 		<section class="proposals">
 			<div class="grid_16">
 				<div class="info list">
+					<h1>Конкурс проектных идей в области архитектуры малых форм</h1>
+					<p>Сроки регистрации и подачи проектов с <u>20 марта</u> по <u>20 апреля</u></p>
+					<a href="<?= base_url(); ?>/press_release.pdf" class="btn btn-info" id="download">
+						<i class="icon-download icon-white"></i> Скачать пресс-релиз
+					</a>
+					<p>&nbsp;</p>
 					<?php $this->load->view('alert_messages/alert-error');?>
 					<?php $this->load->view('alert_messages/alert-success');?>
 					<?php $this->load->view('forms/formpromoakcia');?>

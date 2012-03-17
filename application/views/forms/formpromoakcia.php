@@ -1,32 +1,32 @@
 <div id="kontakt">
-	<p>Форма обратной связи<br/><br/></p>
 	<?=form_open_multipart($this->uri->uri_string(),array('class'=>'form-horizontal')); ?>
 		<fieldset>
+			<legend>Форма для отправления работы на конкурс</legend>
 			<div class="control-group">
 				<label for="name" class="control-label">Ваше имя: </label>
 				<div class="controls">
-					<input type="text" id="title" class="input-xlarge cinput" name="name">
+					<input type="text" id="title" class="input-xlarge cinput" name="name" placeholder="Укажите ваше полное имя и фамилию">
 					<span class="help-inline" style="display:none;">&nbsp;</span>
 				</div>
 			</div>
 			<div class="control-group">
 				<label for="phone" class="control-label">Контактный телефон: </label>
 				<div class="controls">
-					<input type="text" id="title" class="input-xlarge cinput" name="phone">
+					<input type="text" id="title" class="input-xlarge cinput" name="phone" placeholder="Чтобы мы могли связаться с Вами">
 					<span class="help-inline" style="display:none;">&nbsp;</span>
 				</div>
 			</div>
 			<div class="control-group" id="cgemail">
 				<label for="email" class="control-label">E-Mail: </label>
 				<div class="controls">
-					<input type="text" id="email" class="input-xlarge cinput" name="email">
+					<input type="text" id="email" class="input-xlarge cinput" name="email" placeholder="Или отправить Вам письмо">
 					<span class="help-inline" id="useremail" style="display:none;">&nbsp;</span>
 				</div>
 			</div>
 			<div class="control-group">
 				<label for="education" class="control-label">Образование: </label>
 				<div class="controls">
-					<input type="text" id="education" class="input-xlarge" name="education">
+					<input type="text" id="education" class="input-xlarge" name="education" placeholder="Если Вы работаете, то укажите где и кем">
 					<span class="help-inline" style="display:none;">&nbsp;</span>
 				</div>
 			</div>
@@ -35,6 +35,7 @@
 				<div class="controls">
 					<input type="file" id="ImageFile" class="input-file" name="userfile" size="30">
 					<span class="help-inline" style="display:none;">&nbsp;</span>
+					<div class="help-block">Фотографию загружать необязательно. Но как же тогда люди будут узнавать Вас на улице?</div>
 				</div>
 			</div>
 			<div class="control-group">
@@ -42,12 +43,13 @@
 				<div class="controls">
 					<input type="file" id="ArhiveFile" class="input-file cinput" name="userarhiv" size="30">
 					<span class="help-inline" style="display:none;">&nbsp;</span>
+					<div class="help-block">Объедините пожалуйста все необходимые по Вашему мнению файлы в один архив. Мы принимаем RAR, ZIP и 7Zip архивы.</div>
 				</div>
 			</div>
 			<div class="control-group">
 				<label for="note" class="control-label">Комментарий: </label>
 				<div class="controls">
-					<textarea rows="4" id="note" class="input-xlarge" name="note"></textarea>
+					<textarea rows="4" id="note" class="input-xlarge" name="note" placeholder="Если в создании данной работы участвовало несколько человек, то перечислите всех участников в данном поле."></textarea>
 					<span class="help-inline" style="display:none;">&nbsp;</span>
 				</div>
 			</div>

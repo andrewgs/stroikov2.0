@@ -534,7 +534,7 @@ class Users_interface extends CI_Controller{
 					$this->session->set_userdata('msgr','Ошибка при загрузке архива.');
 					redirect($this->uri->uri_string());
 				endif;
-//				print_r($_FILES);exit;
+				// print_r($_FILES);exit;
 				if(!$this->fileupload('userfile',FALSE,'photo')):
 					$this->session->set_userdata('msgr','Ошибка при загрузке фотографии.');
 					redirect($this->uri->uri_string());
@@ -809,12 +809,11 @@ class Users_interface extends CI_Controller{
 	public function fileupload($userfile,$overwrite,$catalog){
 		
 		$config['upload_path'] 		= getcwd().'/documents/'.$catalog.'/';
-		print_r($config['upload_path']);exit;
 		$config['allowed_types'] 	= 'zip|rar|7z|7zip|jpg|jpeg|gif|png';
 		$config['remove_spaces'] 	= TRUE;
 		$config['overwrite'] 		= $overwrite;
 		$this->load->library('upload',$config);
-		if(!$this->upload->do_upload($userfile)):
+		if (!$this->upload->do_upload($userfile)):
 			return FALSE;
 		endif;
 		return TRUE;
