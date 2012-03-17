@@ -529,15 +529,18 @@ class Users_interface extends CI_Controller{
 				
 				$_FILES['userfile']['name'] = preg_replace('/.+(.)(\.)+/',date("Ymdhis")."\$2", $_FILES['userfile']['name']);
 				$_FILES['userarhiv']['name'] = preg_replace('/.+(.)(\.)+/',date("Ymdhis")."\$2", $_FILES['userarhiv']['name']);
-				if(!$this->fileupload('userfile',FALSE,'photo')):
-					$this->session->set_userdata('msgr','Ошибка при загрузке фотографии.');
-					redirect($this->uri->uri_string());
-				endif;
-				print_r($_FILES);exit;
+				
 				if(!$this->fileupload('userarhiv',FALSE,'arhive')):
 					$this->session->set_userdata('msgr','Ошибка при загрузке архива.');
 					redirect($this->uri->uri_string());
 				endif;
+//				print_r($_FILES);exit;
+				if(!$this->fileupload('userfile',FALSE,'photo')):
+					$this->session->set_userdata('msgr','Ошибка при загрузке фотографии.');
+					redirect($this->uri->uri_string());
+				endif;
+				
+				
 				
 				ob_start();
 				?>
@@ -805,7 +808,8 @@ class Users_interface extends CI_Controller{
 	
 	public function fileupload($userfile,$overwrite,$catalog){
 		
-		$config['upload_path'] 		= './documents/'.$catalog.'/';
+		$config['upload_path'] 		= getcwd().'/documents/'.$catalog.'/';
+		print_r($config['upload_path']);exit;
 		$config['allowed_types'] 	= 'zip|rar|7z|7zip|jpg|jpeg|gif|png';
 		$config['remove_spaces'] 	= TRUE;
 		$config['overwrite'] 		= $overwrite;
