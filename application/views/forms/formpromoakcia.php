@@ -56,7 +56,7 @@
 			<div class="alert alert-success">
 		        <strong>Внимание!</strong> В том случае если у вас не получается 
 		        отправить проект через указанную форму, то вы можете отправить свой проект
-		        по адресу <?= safe_mailto('info@sk-stroikov.ru', 'info@sk-stroikov.ru'); ?>. 
+		        по адресу <?= safe_mailto('kd@sk-stroikov.ru', 'kd@sk-stroikov.ru'); ?>. 
 		        Также не стесняйтесь позвонить кураторам конкурса и задать все имеющиеся
 		        у вас вопросы.
 		    </div>

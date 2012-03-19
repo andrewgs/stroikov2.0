@@ -7,9 +7,9 @@
 	</div>
 	<div class="grid_4">
 		<ul class="social">
-			<li class="tw"><a href="#">следуйте за нами в twitter</a></li>
+			<li class="tw"><a href="https://twitter.com/stroikov">следуйте за нами в twitter</a></li>
 			<li class="lj"><a href="#">наш блог в livejournal</a></li>
-			<li class="vk"><a href="#">следите за нами в вконтакте</a></li>
+			<li class="vk"><a href="http://vk.com/skstroikov">следите за нами в вконтакте</a></li>
 		</ul>
 	</div>
 	<div class="clearfix"></div>

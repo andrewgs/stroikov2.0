@@ -17,6 +17,7 @@
 			<div class="grid_24">
 				<div id="stroika-promo-block" class="info list">
 					<div class="stb"> </div>
+					<a target="_blank" href="img/agreement.jpg" id="stroika-agreement"> </a>
 					<div class="sponsors">
 						при поддержке:
 						<a href="#"><img src="<?= base_url().'img/sponsor-5.png' ?>" alt="" /></a>
