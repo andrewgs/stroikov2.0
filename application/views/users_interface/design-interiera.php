@@ -25,10 +25,10 @@
 							<div class="design-sample">
 								<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$interior['images'][$i]['id'];?>" alt=""/>
 							</div>
-							<?php endfor;?>
 							<?php if($loginstatus['status']):?>
-								<button class="btn btn-success dlImage" img="<?=$interior['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"><i class="icon-trash"></i> Удалить фотографию</button>
-							<?php endif;?>
+								<a class="btn btn-success dlImage" data-img="<?=$interior['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"> <i class="icon-trash"></i> Удалить фотографию</a>
+							<?php endif;?>							
+							<?php endfor;?>
 						</div>
 						<?=anchor($this->uri->uri_string(),$interior['title']);?>
 						<p><?=$interior['note'];?></p>
@@ -106,7 +106,7 @@
 				if(err){event.preventDefault();}
 			});
 		
-			$(".dlImage").click(function(){image = $(this).attr('img');});
+			$(".dlImage").click(function(){image = $(this).attr('data-img');});
 			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/design-interierov/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
 			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
 			
