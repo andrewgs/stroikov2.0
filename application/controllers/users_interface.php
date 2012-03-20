@@ -574,6 +574,7 @@ E-mail: <?=$_POST['email'];?>
 				$textmail = strip_tags($mess['msg']);
 				$this->email->message($textmail);	
 				if($this->email->send()):
+					$this->sendbackmail($_POST['name'],$_POST['email']);
 					$this->session->set_userdata('msgs','Сообщение отправлено успешно.');
 				endif;
 			else:
@@ -607,6 +608,7 @@ E-mail: <?=$_POST['email'];?>
 				$textmail = strip_tags($mess['msg']);
 				$this->email->message($textmail);	
 				if($this->email->send()):
+					$this->sendbackmail($_POST['name'],$_POST['email']);
 					$this->session->set_userdata('msgs','Сообщение отправлено успешно.');
 				endif;
 			else:
@@ -640,6 +642,7 @@ E-mail: <?=$_POST['email'];?>
 				$textmail = strip_tags($mess['msg']);
 				$this->email->message($textmail);	
 				if($this->email->send()):
+					$this->sendbackmail($_POST['name'],$_POST['email']);
 					$this->session->set_userdata('msgs','Сообщение отправлено успешно.');
 				endif;
 			else:
@@ -901,6 +904,23 @@ E-mail: <?=$_POST['email'];?>
 		}
 	}
 
+	public function sendbackmail($name,$email){
+		
+		$msg = "Здравствуйте, {$name}. Спасибо за ваше участие. Мы обязательно вам ответим и расскажем о процессе прохождения конкурса и реализации лучших идей.\n\nС уважением, Компания Стройковъ\n";
+		$this->email->clear(TRUE);
+		$config['smtp_host'] = 'localhost';
+		$config['charset'] = 'utf-8';
+		$config['wordwrap'] = TRUE;
+		$this->email->initialize($config);
+		$this->email->from('admin@sk-stroikov.ru','Компания Стройковъ');
+		$this->email->to($email);
+		$this->email->bcc('');
+		$this->email->subject('Заявка принята. Cтроительная компания в Ростове-на-Дону :: ООО СК Стройковъ');
+		$textmail = strip_tags($msg);
+		$this->email->message($textmail);	
+		$this->email->send();
+	}
+	
 	public function randomPassword($length,$allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRSTUVWXYZ0123456789"){
 	
 		$i = 1;
