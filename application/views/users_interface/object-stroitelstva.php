@@ -123,6 +123,7 @@
 			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/stroitelstvo/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
 			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
 			
+			<?php if( !$loginstatus['status']): ?>
 			$('div#samples').cycle({
 				fx:     'scrollHorz',
 				speed:  '2000',					
@@ -131,6 +132,7 @@
 				prev:    '#prev',
 				next:    '#next'
 			}); 
+			<?php endif;?>
 		});
 	</script>
 </body>
