@@ -26,7 +26,7 @@
 								<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$interior['images'][$i]['id'];?>" alt=""/>
 							</div>
 							<?php endfor;?>
-							<?php if($loginstatus['status']):?>
+							<?php if($loginstatus['status'] && count($interior['images'])):?>
 								<button class="btn btn-success dlImage" img="<?=$interior['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"><i class="icon-trash"></i> Удалить фотографию</button>
 							<?php endif;?>
 						</div>
@@ -34,6 +34,8 @@
 						<p><?=$interior['note'];?></p>
 					<?php if($loginstatus['status']):?>
 						<button class="btn btn-success" data-toggle="modal" href="#addImage"><i class="icon-download-alt"></i> Загрузить фотографию</button>
+						<button class="btn btn-success" data-toggle="modal" href="#editInterior"><i class="icon-pencil"></i> Редактировать интерьер</button>
+						<button class="btn btn-danger" data-toggle="modal" href="#deleteInterior"><i class="icon-trash"></i> Удалить интерьер</button>
 					<?php endif;?>
 					</div>
 				</div>
@@ -60,13 +62,14 @@
 					<?php endfor;?>
 					</ul>
 					<?php if($loginstatus['status']):?>
-						<a class="details" style="right:120px;" data-toggle="modal" href="#addInterior"><i class="icon-plus"></i> Добавить интерьер</a>
+						<a class="details" style="right:119px;" data-toggle="modal" href="#addInterior"><i class="icon-plus"></i> Добавить интерьер</a>
 					<?php endif;?>
 				</div>
 			</div>
 			<div class="clearfix"></div>
 			<?php if($loginstatus['status']):?>
 				<?php $this->load->view('modal/admin-add-interior');?>
+				<?php $this->load->view('modal/admin-edit-interior');?>
 				<?php $this->load->view('modal/admin-add-image');?>
 				<?php $this->load->view('modal/admin-delete-image');?>
 			<?php endif;?>
