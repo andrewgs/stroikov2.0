@@ -15,6 +15,7 @@ class Admin_interface extends CI_Controller{
 		$this->load->model('objectstypemodel');
 		$this->load->model('estatemodel');
 		$this->load->model('photosmodel');
+		$this->load->model('constructionmodel');
 		
 		$cookieuid = $this->session->userdata('logon');
 		if(isset($cookieuid) and !empty($cookieuid)):
@@ -92,11 +93,22 @@ class Admin_interface extends CI_Controller{
 		
 		$interior = $this->uri->segment(7);
 		if($this->interiorsmodel->delete_record($interior)):
-			$type = $this->objectstypemodel->read_field_translit($this->uri->segment(3),'id');
-			$this->photosmodel->images_delete($type,$interior);
+			$this->photosmodel->images_delete($interior,'interiors');
 			$this->session->set_userdata('msgs','Интерьер удален успешно.');
 		else:
-			$this->session->set_userdata('msgr','Ошибка при удалении Интерьера.');
+			$this->session->set_userdata('msgr','Ошибка при удалении интерьера.');
+		endif;
+		redirect($this->uri->segment(2));
+	}
+	
+	public function admin_delete_object(){
+		
+		$object = $this->uri->segment(7);
+		if($this->constructionmodel->delete_record($object)):
+			$this->photosmodel->images_delete($object,'construction');
+			$this->session->set_userdata('msgs','Объект удален успешно.');
+		else:
+			$this->session->set_userdata('msgr','Ошибка при удалении объекта.');
 		endif;
 		redirect($this->uri->segment(2));
 	}

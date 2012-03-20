@@ -28,12 +28,13 @@ class Constructionmodel extends CI_Model{
 		return $this->db->insert_id();
 	}
 	
-	function update_record($id,$data){
+	function update_record($id,$translit,$data){
 			
 		$this->db->set('title',htmlspecialchars($data['title']));
 		$this->db->set('address',htmlspecialchars($data['address']));
 		$this->db->set('note',strip_tags($data['note']));
-		$this->db->set('translit',$data['translit']);
+		$this->db->set('translit',$translit);
+		$this->db->set('over',$data['over']);
 		$this->db->where('id',$id);
 		
 		$this->db->update('construction');
@@ -48,6 +49,17 @@ class Constructionmodel extends CI_Model{
 		if(count($data)) return TRUE;
 		return FALSE;
 	}
+	
+	function exist_translit_nonid($id,$translit){
+		
+		$this->db->where('id !=',$id);
+		$this->db->where('translit',$translit);
+		$query = $this->db->get('construction');
+		$data = $query->result_array();
+		if(count($data)) return TRUE;
+		return FALSE;
+	}
+	
 	
 	function read_record($translit){
 		

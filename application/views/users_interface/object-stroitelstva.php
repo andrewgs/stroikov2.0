@@ -34,6 +34,8 @@
 						<p><?=$object['note'];?></p>
 						<?php if($loginstatus['status']):?>
 							<button class="btn btn-success" data-toggle="modal" href="#addImage"><i class="icon-download-alt"></i> Загрузить фотографию</button>
+							<button class="btn btn-success" data-toggle="modal" href="#editObject"><i class="icon-pencil"></i> Редактировать объект</button>
+							<button class="btn btn-danger" data-toggle="modal" href="#deleteObject"><i class="icon-trash"></i> Удалить объект</button>
 						<?php endif;?>
 					</div>
 				</div>
@@ -79,6 +81,8 @@
 			<div class="clearfix"></div>
 			<?php if($loginstatus['status']):?>
 				<?php $this->load->view('modal/admin-add-stroiobjekt');?>
+				<?php $this->load->view('modal/admin-edit-stroiobjekt');?>
+				<?php $this->load->view('modal/admin-delete-stroiobjekt');?>
 				<?php $this->load->view('modal/admin-add-image');?>
 				<?php $this->load->view('modal/admin-delete-image');?>
 			<?php endif;?>
@@ -90,6 +94,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(){
+		<?php if($loginstatus['status']):?>
 			var image = 0;
 			$("#send").click(function(event){
 				var err = false;
@@ -105,6 +110,23 @@
 				if(err){event.preventDefault();}
 			});
 			$("#addObject").on("hidden",function(){$("#over").removeAttr("checked");$(".control-group").removeClass('error');$(".help-inline").hide();});
+			
+			$("#edsend").click(function(event){
+				var err = false;
+				$(".control-group").removeClass('error');
+				$(".help-inline").hide();
+				$(".edinput").each(function(i,element){
+					if($(this).val()==''){
+						$(this).parents(".control-group").addClass('error');
+						$(this).siblings(".help-inline").html("Поле не может быть пустым").show();
+						err = true;
+					}
+				});
+				if(err){event.preventDefault();}
+			});
+			$("#editObject").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
+			$("#deleteObject").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
+			
 			$("#imgsend").click(function(event){
 				var err = false;
 				$(".control-group").removeClass('error');
@@ -121,9 +143,10 @@
 			$(".addObj").click(function(){var over = $(this).attr('over'); if(over == 1){$("#over").attr("checked","checked");}})
 			$(".dlImage").click(function(){image = $(this).attr('img');});
 			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/stroitelstvo/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
+			$("#DelObject").click(function(){location.href='<?=$baseurl?>admin-panel/<?=$this->uri->uri_string();?>/delete-object/id/<?=$object['id'];?>'});
 			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
-			
-			<?php if( !$loginstatus['status']): ?>
+		<?php endif;?>
+		<?php if(!$loginstatus['status']): ?>
 			$('div#samples').cycle({
 				fx:     'scrollHorz',
 				speed:  '2000',					
@@ -132,7 +155,7 @@
 				prev:    '#prev',
 				next:    '#next'
 			}); 
-			<?php endif;?>
+		<?php endif;?>
 		});
 	</script>
 </body>

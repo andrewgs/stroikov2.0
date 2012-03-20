@@ -127,18 +127,21 @@
 				if(err){event.preventDefault();}
 			});
 			$("#DelInterior").click(function(){location.href='<?=$baseurl?>admin-panel/<?=$this->uri->uri_string();?>/delete-interior/id/<?=$interior['id'];?>'});
+			$("#deleteInterior").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
 			$(".dlImage").click(function(){image = $(this).attr('data-img');});
 			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/design-interierov/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
 			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
 		<?php endif;?>
-			/*$('div#samples').cycle({
+		<?php if(!$loginstatus['status']): ?>
+			$('div#samples').cycle({
 				fx:     'scrollHorz',
 				speed:  '2000',					
 				easing: 'easeInOutExpo',
 				timeout:  7000,
 				prev:    '#prev',
-				next:    '#next' 
-			});*/
+				next:    '#next'
+			}); 
+		<?php endif;?>
 		});
 	</script>
 </body>

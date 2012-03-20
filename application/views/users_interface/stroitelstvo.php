@@ -33,8 +33,9 @@
 					<a href="#" id="next" class="slider-arrow right">След.</a>
 				</div>
 			<?php else:?>
+				<h1>На данный момент строящихся объектов нет! Можете ознакомится с завершенными объектами</h1>
 				<?php if($loginstatus['status']):?>
-					<a class="btn btn-success" data-toggle="modal" href="#addObject"><i class="icon-plus"></i> Добавить первый объект</a>
+					<a class="btn btn-success" data-toggle="modal" href="#addObject"><i class="icon-plus"></i> Добавить строящийся объект</a>
 				<?php endif;?>
 			<?php endif;?>
 			</div>

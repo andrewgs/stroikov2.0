@@ -75,9 +75,9 @@ class Photosmodel extends CI_Model{
 		return $this->db->affected_rows();
 	}
 	
-	function images_delete($type,$object){
+	function images_delete($object,$table){
 	
-		$this->db->where('type',$type);
+		$this->db->where('table',$table);
 		$this->db->where('object',$object);
 		$this->db->delete('photos');
 		return $this->db->affected_rows();

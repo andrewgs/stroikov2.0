@@ -526,6 +526,30 @@ class Users_interface extends CI_Controller{
 			redirect($this->uri->uri_string());
 		endif;
 		
+		if($this->input->post('edsubmit')):
+			$this->form_validation->set_rules('object',' ','required|trim');
+			$this->form_validation->set_rules('title',' ','required|trim');
+			$this->form_validation->set_rules('address',' ','required|trim');
+			$this->form_validation->set_rules('note',' ','required|trim');
+			$this->form_validation->set_rules('translit',' ','trim');
+			if($this->form_validation->run()):
+				if(!isset($_POST['over'])):
+					$_POST['over'] = 0;
+				endif;
+				if(!empty($_POST['translit'])):
+					$translit = htmlspecialchars($_POST['translit']);
+				else:
+					$translit = $this->translite(htmlspecialchars($_POST['title']));
+				endif;
+				if(!$this->constructionmodel->exist_translit_nonid($_POST['object'],$translit)):
+					$this->constructionmodel->update_record($_POST['object'],$translit,$_POST);
+					$this->session->set_userdata('msgs','Объект сохранен успешно.');
+				endif;
+				redirect('stroitelstvo/object/'.$translit);
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
+		
 		$this->load->view("users_interface/object-stroitelstva",$pagevar);
 	}
 	
