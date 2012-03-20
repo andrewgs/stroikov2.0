@@ -70,6 +70,7 @@
 			<?php if($loginstatus['status']):?>
 				<?php $this->load->view('modal/admin-add-interior');?>
 				<?php $this->load->view('modal/admin-edit-interior');?>
+				<?php $this->load->view('modal/admin-delete-interior');?>
 				<?php $this->load->view('modal/admin-add-image');?>
 				<?php $this->load->view('modal/admin-delete-image');?>
 			<?php endif;?>
@@ -80,6 +81,7 @@
 	<?=$this->load->view('users_interface/google');?>
 	<script type="text/javascript">
 		$(document).ready(function(){
+		<?php if($loginstatus['status']):?>
 			var image = 0;
 			$("#send").click(function(event){
 				var err = false;
@@ -95,6 +97,22 @@
 				if(err){event.preventDefault();}
 			});
 			$("#addInterior").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
+			
+			$("#edsend").click(function(event){
+				var err = false;
+				$(".control-group").removeClass('error');
+				$(".help-inline").hide();
+				$(".edinput").each(function(i,element){
+					if($(this).val()==''){
+						$(this).parents(".control-group").addClass('error');
+						$(this).siblings(".help-inline").html("Поле не может быть пустым").show();
+						err = true;
+					}
+				});
+				if(err){event.preventDefault();}
+			});
+			$("#editInterior").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
+			
 			$("#imgsend").click(function(event){
 				var err = false;
 				$(".control-group").removeClass('error');
@@ -108,10 +126,11 @@
 				});
 				if(err){event.preventDefault();}
 			});
-		
+			$("#DelInterior").click(function(){location.href='<?=$baseurl?>admin-panel/<?=$this->uri->uri_string();?>/delete-interior/id/<?=$interior['id'];?>'});
 			$(".dlImage").click(function(){image = $(this).attr('data-img');});
 			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/design-interierov/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
 			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
+		<?php endif;?>
 			/*
 			$('div#samples').cycle({
 				fx:     'scrollHorz',

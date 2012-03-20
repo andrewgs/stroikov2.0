@@ -11,6 +11,8 @@
 		<?=$this->load->view('users_interface/navigation');?>
 		<section class="proposals">
 			<div class="grid_16 carousel list">
+			<?php $this->load->view('alert_messages/alert-error');?>
+			<?php $this->load->view('alert_messages/alert-success');?>
 			<?php if(count($interior)>0):?>
 				<h2><?=$interior[0]['title'].', '.$interior[0]['rooms'].'-комн.'.'<br/>'.$interior[0]['address'];?> <span class="details">Площадь <?=$interior[0]['area'];?>м<sup>2</sup></span></h2>
 				<div class="grid_1">

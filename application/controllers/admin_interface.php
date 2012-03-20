@@ -87,4 +87,17 @@ class Admin_interface extends CI_Controller{
 		endif;
 		redirect($this->uri->segment(2).'/'.$this->uri->segment(3).'/'.$this->uri->segment(4));
 	}
+	
+	public function admin_delete_interior(){
+		
+		$interior = $this->uri->segment(7);
+		if($this->interiorsmodel->delete_record($interior)):
+			$type = $this->objectstypemodel->read_field_translit($this->uri->segment(3),'id');
+			$this->photosmodel->images_delete($type,$interior);
+			$this->session->set_userdata('msgs','Интерьер удален успешно.');
+		else:
+			$this->session->set_userdata('msgr','Ошибка при удалении Интерьера.');
+		endif;
+		redirect($this->uri->segment(2));
+	}
 }

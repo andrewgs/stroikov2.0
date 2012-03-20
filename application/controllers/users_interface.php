@@ -95,8 +95,12 @@ class Users_interface extends CI_Controller{
 					'loginstatus'	=> $this->loginstatus,
 					'userinfo'		=> $this->user,
 					'objects'		=> $this->objectstypemodel->read_records(),
-					'interior'		=> array()
+					'interior'		=> array(),
+					'msgs'			=> $this->session->userdata('msgs'),
+					'msgr'			=> $this->session->userdata('msgr')
 			);
+		$this->session->unset_userdata('msgs');
+		$this->session->unset_userdata('msgr');
 		
 		for($i=0;$i<count($pagevar['objects']);$i++):
 			$pagevar['objects'][$i]['interiors'] = $this->interiorsmodel->read_records($pagevar['objects'][$i]['id']);
@@ -193,6 +197,29 @@ class Users_interface extends CI_Controller{
 					$this->photosmodel->insert_record($_POST,$type,$object,'interiors');
 					$this->session->set_userdata('msgs','Фотогафия добавлена успешно.');
 				endif;
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
+		
+		if($this->input->post('edsubmit')):
+			$this->form_validation->set_rules('interior',' ','required|trim');
+			$this->form_validation->set_rules('title',' ','required|trim');
+			$this->form_validation->set_rules('rooms',' ','required|trim');
+			$this->form_validation->set_rules('address',' ','required|trim');
+			$this->form_validation->set_rules('area',' ','required|trim');
+			$this->form_validation->set_rules('note',' ','required|trim');
+			$this->form_validation->set_rules('pranslit',' ','trim');
+			if($this->form_validation->run()):
+				if(!empty($_POST['pranslit'])):
+					$translit = htmlspecialchars($_POST['pranslit']);
+				else:
+					$translit = $this->translite(htmlspecialchars($_POST['title']));
+				endif;
+				if(!$this->interiorsmodel->exist_translit_nonid($_POST['interior'],$translit)):
+					$this->interiorsmodel->update_record($_POST['interior'],$translit,$_POST);
+					$this->session->set_userdata('msgs','Интерьер сохранен успешно.');
+				endif;
+				redirect('design-interierov/'.$this->uri->segment(2).'/'.$translit);
 			endif;
 			redirect($this->uri->uri_string());
 		endif;
