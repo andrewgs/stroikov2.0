@@ -31,12 +31,10 @@
 							<?php endif;?>
 						</div>
 						<?=anchor($this->uri->uri_string(),$interior['title']);?>
-							<p>
-								<?=$interior['note'];?>
-							</p>
-						<?php if($loginstatus['status']):?>
-							<button class="btn btn-success" data-toggle="modal" href="#addImage"><i class="icon-download-alt"></i> Загрузить фотографию</button>
-						<?php endif;?>
+						<p><?=$interior['note'];?></p>
+					<?php if($loginstatus['status']):?>
+						<button class="btn btn-success" data-toggle="modal" href="#addImage"><i class="icon-download-alt"></i> Загрузить фотографию</button>
+					<?php endif;?>
 					</div>
 				</div>
 				<div class="grid_1">

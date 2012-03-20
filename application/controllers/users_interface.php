@@ -533,7 +533,6 @@ class Users_interface extends CI_Controller{
 					$catalog .= '-'.date("Ymdhis");
 				endif;
 				mkdir($catalog, 0777);
-				
 				if($_FILES['userfile']['error'] != 4):
 					$_FILES['userfile']['name'] = preg_replace('/.+(.)(\.)+/',date("Ymdhis")."\$2", $_FILES['userfile']['name']);
 					if(!$this->fileupload('userfile',FALSE,$catalog)):
@@ -541,7 +540,7 @@ class Users_interface extends CI_Controller{
 						redirect($this->uri->uri_string());
 					endif;
 				endif;
-				
+		
 				if($_FILES['userarhiv']['error'] != 4):
 					$_FILES['userarhiv']['name'] = preg_replace('/.+(.)(\.)+/',date("Ymdhis")."\$2", $_FILES['userarhiv']['name']);
 					if(!$this->fileupload('userarhiv',FALSE,$catalog)):
