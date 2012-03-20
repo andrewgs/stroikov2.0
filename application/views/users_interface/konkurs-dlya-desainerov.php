@@ -31,6 +31,11 @@
 						<a href="#"><img src="<?= base_url().'img/sponsor-4.png' ?>" alt="" /></a>
 					</div>
 					<h1>Конкурс проектных идей <br>в области архитектуры малых форм</h1>
+					<div class="pnav">
+						<a href="#kontakt" id="participants">Участникам </a>
+						<a href="#kontakt-velo" id="velo-participants">Велосипедистам </a>
+						<a href="#kontakt-walk" id="walk-participants">Пешеходам </a>
+					</div>
 					<h2>Цель проекта:</h2>
 					<p>
 						Создать арт-объекты (велопарковки, лавочки) для г. Ростова-на-Дону<br />
@@ -39,12 +44,14 @@
 					</p>
 					<p>Сроки регистрации и подачи проектов <u>20 марта</u> по <u>20 апреля</u> 2012 года</p>
 					<div class="btn-toolbar">
-						<a href="<?= base_url(); ?>press_release.pdf" class="btn btn-info" id="download">
+						<a href="<?= base_url(); ?>press_release.pdf" class="btn btn-danger" id="download">
 							<i class="icon-download-alt icon-white"></i> Скачать пресс-релиз
-						</a>				
+						</a>
+						<!--				
 						<a href="#kontakt" class="btn btn-success" id="download">
 							<i class="icon-pencil icon-white"></i> Принять участие
-						</a>		
+						</a>
+						-->
 					</div>
 					<p>
 						контакты:<br />
@@ -55,8 +62,20 @@
 					<div class="separator"> </div>
 					<?php $this->load->view('alert_messages/alert-error');?>
 					<?php $this->load->view('alert_messages/alert-success');?>
-					<div class="span6">
-						<?php $this->load->view('forms/formpromoakcia');?>
+					<div class="row">
+						<div class="span7">
+							<?php $this->load->view('forms/formpromoakcia');?>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span7">
+							<?php $this->load->view('forms/formpromoakcia_velo');?>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span7">
+							<?php $this->load->view('forms/formpromoakcia_walk');?>
+						</div>
 					</div>
 				</div>
 			</div>

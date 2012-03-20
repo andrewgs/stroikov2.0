@@ -1,5 +1,5 @@
 <div id="kontakt">
-	<?=form_open_multipart($this->uri->uri_string(),array('class'=>'form-horizontal')); ?>
+	<?=form_open_multipart($this->uri->uri_string(),array('class'=>'well form-horizontal')); ?>
 		<fieldset>
 			<legend>Форма для подачи проекта на конкурс</legend>
 			<div class="control-group">
@@ -62,7 +62,7 @@
 		    </div>
 		</fieldset>
 		<div class="modal-footer">
-			<button class="btn btn-success" type="submit" id="send" name="submit" value="csend">Отправить</button>
+			<button class="btn btn-success" type="submit" id="send" name="submit" value="csend">Принять участие</button>
 		</div>
 	<?=form_close(); ?>
 	<p>&nbsp;</p>					

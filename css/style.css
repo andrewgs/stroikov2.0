@@ -36,6 +36,7 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 #main-nav li a { line-height: 30px; color: #523511; font-weight: bold; font-size: 14px; text-transform: uppercase; display: block; margin: 0 15px 0 0; letter-spacing: 1px; }
 #main-nav li.stroika a { float: right; color: #fff; }
 #stroika-pointer { background: url('../img/stroika.png') no-repeat; width: 126px; height: 88px; position: absolute; top: 22px; right: 20px; display: block; text-indent: -9999px;}
+#stroika-agreement { background: url('../img/agreement.png') no-repeat; width: 233px; height: 220px; position: absolute; top: 30px; right: 180px; display: block; outline: 0 none; }
 
 /* ==|== main block ====================================================== */
 .promo-block { margin: 0 0 30px; }
@@ -111,6 +112,8 @@ p.signature { color: #523511; font: italic 16px/21px Georgia, serif; margin: 30p
 #stroika-promo-block .sponsors { position: absolute; right: 50px; text-align: right; top: 130px; }
 #stroika-promo-block .sponsors a { display: block; margin: 20px 0; }
 #stroika-promo-block .sponsors.info { position: absolute; right: 10px; text-align: right; top: 335px; }
+.pnav { margin: 20px 0 5px; }
+.pnav a { display: inline-block; margin: 0 10px 0 0; text-decoration: underline; font-size: 18px;}
 
 /* ==|== footer ====================================================== */
 footer { height: 70px; background: #89B838; color: #fff; line-height: 70px; }

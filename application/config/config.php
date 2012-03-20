@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url'] = "http://stroikov/";
+$config['base_url'] = "http://sk-stroikov.ru/";
 
 /*
 |--------------------------------------------------------------------------
