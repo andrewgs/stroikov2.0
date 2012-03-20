@@ -112,4 +112,17 @@ class Admin_interface extends CI_Controller{
 		endif;
 		redirect($this->uri->segment(2));
 	}
+	
+	public function admin_delete_objecttypes(){
+		
+		$type = $this->uri->segment(4);
+		if(!count($this->interiorsmodel->read_records($type))):
+			$this->objectstypemodel->delete_record($type);
+		endif;
+		/*if($this->objectstypemodel->delete_record($type)):
+			$this->interiorsmodel->delete_records($type);
+			$this->photosmodel->images_type_delete($type,'interiors');
+		endif;*/
+		redirect('');
+	}
 }

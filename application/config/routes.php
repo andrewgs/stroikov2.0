@@ -40,6 +40,7 @@ $route['admin-panel/design-interierov/:any/:any/delete/image/:num'] 	= "admin_in
 
 $route['admin-panel/design-interierov/:any/:any/delete-interior/id/:num'] 	= "admin_interface/admin_delete_interior";
 $route['admin-panel/stroitelstvo/object/:any/delete-object/id/:num'] 		= "admin_interface/admin_delete_object";
+$route['admin-panel/delete/object-types/:num']								= "admin_interface/admin_delete_objecttypes";
 
 $route['admin-panel/stroitelstvo/object/:any/delete/image/:num'] 		= "admin_interface/admin_delete_image";
 

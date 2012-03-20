@@ -54,6 +54,10 @@ class Users_interface extends CI_Controller{
 		if(count($pagevar['objects']) == 1):
 			$pagevar['estate'] = $this->estatemodel->read_limit_records($pagevar['objects'][0]['id'],5,0);
 			$pagevar['interiors'] = $this->interiorsmodel->read_limit_records($pagevar['objects'][0]['id'],5,0);
+		else:
+			for($i=0;$i<count($pagevar['objects']);$i++):
+				$pagevar['objects'][$i]['interior'] = $this->interiorsmodel->read_limit_records($pagevar['objects'][$i]['id'],1,0);
+			endfor;
 		endif;
 		
 		$pagevar['slideshow'] = $this->interiorsmodel->limit_interiors(10,0);
@@ -66,6 +70,29 @@ class Users_interface extends CI_Controller{
 				$pagevar['slideshow'][$i]['note'] = mb_substr($pagevar['slideshow'][$i]['note'],0,$pos,'UTF-8');
 			endif;
 		endfor;
+		
+		if($this->input->post('addsubmit')):
+			$this->form_validation->set_rules('title',' ','required|trim');
+			$this->form_validation->set_rules('rooms',' ','required|trim');
+			$this->form_validation->set_rules('address',' ','required|trim');
+			$this->form_validation->set_rules('area',' ','required|trim');
+			$this->form_validation->set_rules('note',' ','required|trim');
+			$this->form_validation->set_rules('pranslit',' ','trim');
+			if($this->form_validation->run()):
+				if(!empty($_POST['pranslit'])):
+					$translit = preg_replace("/\ +/","-",htmlspecialchars($_POST['pranslit']));
+				else:
+					$translit = $this->translite(htmlspecialchars($_POST['title']));
+				endif;
+				if(!$this->interiorsmodel->exist_translit($translit,$_POST['type'])):
+					$this->interiorsmodel->insert_record($_POST,$translit,$_POST['type']);
+					$this->session->set_userdata('msgs','Интерьер добавлен успешно.');
+					$ttranslite = $this->objectstypemodel->read_field($_POST['type'],'translit');
+					redirect('design-interierov/'.$ttranslite.'/'.$translit);
+				endif;
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
 		
 		if($this->input->post('submit')):
 			$this->form_validation->set_rules('title',' ','required|trim');
@@ -125,7 +152,7 @@ class Users_interface extends CI_Controller{
 					$translit = $this->translite($_POST['title']);
 				endif;
 				
-				if(!$this->interiorsmodel->exist_translit($translit)):
+				if(!$this->interiorsmodel->exist_translit($translit,$_POST['type'])):
 					$this->interiorsmodel->insert_record($_POST,$translit,$_POST['type']);
 				endif;
 			endif;
@@ -159,7 +186,7 @@ class Users_interface extends CI_Controller{
 		$pagevar['interior'] = $this->interiorsmodel->read_record($this->uri->segment(3),$type);
 		$pagevar['interior']['images'] = $this->photosmodel->read_records($type,$pagevar['interior']['id'],'interiors');
 		
-		if($this->input->post('submit')):
+		if($this->input->post('addsubmit')):
 			$this->form_validation->set_rules('title',' ','required|trim');
 			$this->form_validation->set_rules('rooms',' ','required|trim');
 			$this->form_validation->set_rules('address',' ','required|trim');
@@ -172,11 +199,12 @@ class Users_interface extends CI_Controller{
 				else:
 					$translit = $this->translite(htmlspecialchars($_POST['title']));
 				endif;
-				if(!$this->interiorsmodel->exist_translit($translit)):
+				if(!$this->interiorsmodel->exist_translit($translit,$_POST['type'])):
 					$this->interiorsmodel->insert_record($_POST,$translit,$_POST['type']);
 					$this->session->set_userdata('msgs','Интерьер добавлен успешно.');
+					$ttranslite = $this->objectstypemodel->read_field($_POST['type'],'translit');
+					redirect('design-interierov/'.$ttranslite.'/'.$translit);
 				endif;
-				redirect('design-interierov/'.$this->uri->segment(2).'/'.$translit);
 			endif;
 			redirect($this->uri->uri_string());
 		endif;
@@ -192,7 +220,7 @@ class Users_interface extends CI_Controller{
 					$_POST['small'] = $this->resize_image($_FILES['userfile']['tmp_name'],141,104,TRUE);
 				endif;
 				$type = $this->objectstypemodel->read_field_translit($this->uri->segment(2),'id');
-				if($this->interiorsmodel->exist_translit($this->uri->segment(3)) && $type):
+				if($this->interiorsmodel->exist_translit($this->uri->segment(3),$type) && $type):
 					$object = $this->interiorsmodel->read_field_translit($this->uri->segment(3),'id');
 					$this->photosmodel->insert_record($_POST,$type,$object,'interiors');
 					$this->session->set_userdata('msgs','Фотогафия добавлена успешно.');

@@ -107,7 +107,16 @@
 					<ul>
 				<?php if(count($objects) > 1):?>
 					<?php for($i=0;$i<count($objects);$i++):?>
-						<li><?=anchor('design-interierov/'.$objects[$i]['translit'],$objects[$i]['title']);?></li>
+						<li>
+					<?php if(count($objects[$i]['interior'])):?>
+							<?=anchor('design-interierov/'.$objects[$i]['translit'].'/'.$objects[$i]['interior'][0]['translit'],$objects[$i]['title']);?>
+					<?php else:?>
+						<?php if($loginstatus['status']):?>
+							<a class="insInterior" data-toggle="modal" itype="<?=$objects[$i]['id'];?>" href="#addInterior"><?=$objects[$i]['title'];?></a>
+							<a class="deleteTypes" data-toggle="modal" itype="<?=$objects[$i]['id'];?>" title="Удалить" href="#deleteObjectType"><i class="icon-trash"></i></a>
+						<?php endif;?>
+					<?php endif;?>
+						</li>
 					<?php endfor;?>
 				<?php else:?>
 						<!--<?=$objects[0]['title'];?>-->
@@ -125,7 +134,9 @@
 			<div class="clearfix"></div>
 		</section>
 		<?php if($loginstatus['status']):?>
+			<?php $this->load->view('modal/admin-add-interior');?>
 			<?php $this->load->view('modal/admin-add-objectstype');?>
+			<?php $this->load->view('modal/admin-delete-objectstype');?>
 		<?php endif;?>
 		<?=$this->load->view('users_interface/footer');?>
 	</div>
@@ -133,6 +144,21 @@
 	<?=$this->load->view('users_interface/google');?>
 	<script type="text/javascript">
 		$(document).ready(function(){
+		<?php if($loginstatus['status']):?>
+			var objType = 0;
+			$("#atsend").click(function(event){
+				var err = false;
+				$(".control-group").removeClass('error');
+				$(".help-inline").hide();
+				$(".atinput").each(function(i,element){
+					if($(this).val()==''){
+						$(this).parents(".control-group").addClass('error');
+						$(this).siblings(".help-inline").html("Поле не может быть пустым").show();
+						err = true;
+					}
+				});
+				if(err){event.preventDefault();}
+			});
 			$("#send").click(function(event){
 				var err = false;
 				$(".control-group").removeClass('error');
@@ -146,8 +172,12 @@
 				});
 				if(err){event.preventDefault();}
 			});
+			$("#addInterior").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
+			$(".insInterior").click(function(){$("#types").val($(this).attr('itype'));});
 			$("#addObjectType").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
-
+			$(".deleteTypes").click(function(){objType = $(this).attr('itype');});
+			$("#DelInterior").click(function(){location.href='<?=$baseurl;?>admin-panel/delete/object-types/'+objType});
+		<?php endif;?>
 			$('div#samples-row').cycle({
 				fx:     'scrollHorz',
 				speed:  '1000',					

@@ -9,7 +9,7 @@
 				<div class="control-group">
 					<label for="title" class="control-label">Название: </label>
 					<div class="controls">
-						<input type="text" id="title" class="input-xlarge linput" name="title">
+						<input type="text" id="title" class="input-xlarge atinput" name="title">
 						<span class="help-inline" style="display:none;">&nbsp;</span>
 					</div>
 				</div>
@@ -25,7 +25,7 @@
 		</div>
 		<div class="modal-footer">
 			<button class="btn" data-dismiss="modal">Отменить</button>
-			<button class="btn btn-success" type="submit" id="send" name="submit" value="osend">Добавить</button>
+			<button class="btn btn-success" type="submit" id="atsend" name="submit" value="osend">Добавить</button>
 		</div>
 	</div>
 <?= form_close(); ?>

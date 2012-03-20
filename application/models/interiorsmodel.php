@@ -46,8 +46,9 @@ class Interiorsmodel extends CI_Model{
 		return $this->db->affected_rows();
 	}
 	
-	function exist_translit($translit){
+	function exist_translit($translit,$type){
 		
+		$this->db->where('type',$type);
 		$this->db->where('translit',$translit);
 		$query = $this->db->get('interiors');
 		$data = $query->result_array();
@@ -115,6 +116,13 @@ class Interiorsmodel extends CI_Model{
 	function delete_record($id){
 	
 		$this->db->where('id',$id);
+		$this->db->delete('interiors');
+		return $this->db->affected_rows();
+	}
+	
+	function delete_records($type){
+	
+		$this->db->where('type',$type);
 		$this->db->delete('interiors');
 		return $this->db->affected_rows();
 	}
