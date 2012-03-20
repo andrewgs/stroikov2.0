@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="<?=$baseurl;?>css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?=$baseurl;?>css/960.css">
 	<link rel="stylesheet" href="<?=$baseurl;?>css/style.css">
-	<link rel="shortcut icon" href="<?=$baseurl;?>img/favicon.png">
+	<link rel="shortcut icon" href="<?=$baseurl;?>favicon.ico">
 	<link rel="apple-touch-icon" href="<?=$baseurl;?>img/apple-touch-icon.png">
 	<script src="<?=$baseurl;?>js/libs/modernizr-2.5.3.min.js"></script>
 </head>

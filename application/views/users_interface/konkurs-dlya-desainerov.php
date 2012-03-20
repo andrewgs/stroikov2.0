@@ -5,22 +5,59 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <?=$this->load->view('users_interface/head');?>
 <body>
+	<style type="text/css">
+		#stroika-pointer { display: none; }
+		[class*="span"] { float: none; }
+	</style>
 	<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 	<div class="container_24">
 		<?=$this->load->view('users_interface/header');?>
 		<?=$this->load->view('users_interface/navigation');?>
 		<section class="proposals">
-			<div class="grid_16">
-				<div class="info list">
-					<h1>Конкурс проектных идей в области архитектуры малых форм</h1>
-					<p>Сроки регистрации и подачи проектов с <u>20 марта</u> по <u>20 апреля</u></p>
-					<a href="<?= base_url(); ?>/press_release.pdf" class="btn btn-info" id="download">
-						<i class="icon-download icon-white"></i> Скачать пресс-релиз
-					</a>
-					<p>&nbsp;</p>
+			<div class="grid_24">
+				<div id="stroika-promo-block" class="info list">
+					<div class="stb"> </div>
+					<a target="_blank" href="img/agreement.jpg" id="stroika-agreement"> </a>
+					<div class="sponsors">
+						при поддержке:
+						<a href="#"><img src="<?= base_url().'img/sponsor-5.png' ?>" alt="" /></a>
+						<a href="#"><img src="<?= base_url().'img/sponsor-6.png' ?>" alt="" /></a>
+					</div>
+					<div class="sponsors info">
+						при информационной поддержке:
+						<a href="#"><img src="<?= base_url().'img/sponsor-1.png' ?>" alt="" /></a>
+						<a href="#"><img src="<?= base_url().'img/sponsor-2.png' ?>" alt="" /></a>
+						<a href="#"><img src="<?= base_url().'img/sponsor-3.png' ?>" alt="" /></a>
+						<a href="#"><img src="<?= base_url().'img/sponsor-4.png' ?>" alt="" /></a>
+					</div>
+					<h1>Конкурс проектных идей <br>в области архитектуры малых форм</h1>
+					<h2>Цель проекта:</h2>
+					<p>
+						Создать арт-объекты (велопарковки, лавочки) для г. Ростова-на-Дону<br />
+						Награждение победителей: 27 апреля 2012 г.<br />
+						Реализация проектов: май 2012 г.
+					</p>
+					<p>Сроки регистрации и подачи проектов <u>20 марта</u> по <u>20 апреля</u> 2012 года</p>
+					<div class="btn-toolbar">
+						<a href="<?= base_url(); ?>press_release.pdf" class="btn btn-info" id="download">
+							<i class="icon-download-alt icon-white"></i> Скачать пресс-релиз
+						</a>				
+						<a href="#kontakt" class="btn btn-success" id="download">
+							<i class="icon-pencil icon-white"></i> Принять участие
+						</a>		
+					</div>
+					<p>
+						контакты:<br />
+						т.: 295-51-11 ; 295-51-12 - студия <br />
+						т.: 8[988]544 21 23 - куратор Диана Карнаухова <br />
+						т.: 8[951]535 78 55 - координатор Руслан Чернышев
+					</p>
+					<div class="separator"> </div>
 					<?php $this->load->view('alert_messages/alert-error');?>
 					<?php $this->load->view('alert_messages/alert-success');?>
-					<?php $this->load->view('forms/formpromoakcia');?>
+					<div class="span6">
+						<?php $this->load->view('forms/formpromoakcia');?>
+					</div>
 				</div>
 			</div>
 			<div class="clearfix"></div>

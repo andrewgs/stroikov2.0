@@ -1,7 +1,7 @@
 <div id="kontakt">
 	<?=form_open_multipart($this->uri->uri_string(),array('class'=>'form-horizontal')); ?>
 		<fieldset>
-			<legend>Форма для отправления работы на конкурс</legend>
+			<legend>Форма для подачи проекта на конкурс</legend>
 			<div class="control-group">
 				<label for="name" class="control-label">Ваше имя: </label>
 				<div class="controls">
@@ -33,7 +33,7 @@
 			<div class="control-group">
 				<label for="ImageFile" class="control-label">Фотография: </label>
 				<div class="controls">
-					<input type="file" id="ImageFile" class="input-file" name="userfile" size="30">
+					<input type="file" id="ImageFile" class="input-file" name="userfile">
 					<span class="help-inline" style="display:none;">&nbsp;</span>
 					<div class="help-block">Фотографию загружать необязательно. Но как же тогда люди будут узнавать Вас на улице?</div>
 				</div>
@@ -41,7 +41,7 @@
 			<div class="control-group">
 				<label for="ArhiveFile" class="control-label">Архив с материалами: </label>
 				<div class="controls">
-					<input type="file" id="ArhiveFile" class="input-file cinput" name="userarhiv" size="30">
+					<input type="file" id="ArhiveFile" class="input-file cinput" name="userarhiv">
 					<span class="help-inline" style="display:none;">&nbsp;</span>
 					<div class="help-block">Объедините пожалуйста все необходимые по Вашему мнению файлы в один архив. Мы принимаем RAR, ZIP и 7Zip архивы.</div>
 				</div>
@@ -53,6 +53,13 @@
 					<span class="help-inline" style="display:none;">&nbsp;</span>
 				</div>
 			</div>
+			<div class="alert alert-success">
+		        <strong>Внимание!</strong> В том случае если у вас не получается 
+		        отправить проект через указанную форму, то вы можете отправить свой проект
+		        по адресу <?= safe_mailto('kd@sk-stroikov.ru', 'kd@sk-stroikov.ru'); ?>. 
+		        Также не стесняйтесь позвонить кураторам конкурса и задать все имеющиеся
+		        у вас вопросы.
+		    </div>
 		</fieldset>
 		<div class="modal-footer">
 			<button class="btn btn-success" type="submit" id="send" name="submit" value="csend">Отправить</button>
