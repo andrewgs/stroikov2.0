@@ -505,151 +505,150 @@ class Users_interface extends CI_Controller{
 	public function konkurs_dlya_desainerov(){
 		
 		$pagevar = array(
-					'description'	=> '',
-					'author'		=> '',
-					'title'			=> 'Конкурс проектных идей в области архитектуры малых форм | Строительная компания Стройковъ',
-					'baseurl' 		=> base_url(),
-					'loginstatus'	=> $this->loginstatus,
-					'userinfo'		=> $this->user,
-					'msgs'			=> $this->session->userdata('msgs'),
-					'msgr'			=> $this->session->userdata('msgr')
-			);
+			'description'	=> '',
+			'author'		=> '',
+			'title'			=> 'Конкурс проектных идей в области архитектуры малых форм | Строительная компания Стройковъ',
+			'baseurl' 		=> base_url(),
+			'loginstatus'	=> $this->loginstatus,
+			'userinfo'		=> $this->user,
+			'msgs'			=> $this->session->userdata('msgs'),
+			'msgr'			=> $this->session->userdata('msgr')
+		);
 		$this->session->unset_userdata('msgs');
 		$this->session->unset_userdata('msgr');
 		
-		if($this->input->post('submit')):
+		if ( $this->input->post('submit') ) {
 			$this->form_validation->set_rules('name',' ','required|trim');
 			$this->form_validation->set_rules('phone',' ','required|trim');
 			$this->form_validation->set_rules('email',' ','required|valid_email|trim');
 			$this->form_validation->set_rules('education',' ','trim');
-			// $this->form_validation->set_rules('userfile',' ','callback_userfile_check');
 			$this->form_validation->set_rules('userarhiv',' ','callback_userarhiv_check');
 			$this->form_validation->set_rules('note',' ','trim');
-			if($this->form_validation->run()):
+			
+			if ( $this->form_validation->run() ) {
 				
 				$user = $this->translite(htmlspecialchars($_POST['name']));
 				$catalog = getcwd().'/documents/'.$user;
-				if(is_dir($catalog)):
+				if ( is_dir($catalog) ) {
 					$catalog .= '-'.date("Ymdhis");
-				endif;
+				}
 				mkdir($catalog, 0777);
-				if($_FILES['userfile']['error'] != 4):
+				if ( $_FILES['userfile']['error'] != 4 ) {
 					$_FILES['userfile']['name'] = preg_replace('/.+(.)(\.)+/',date("Ymdhis")."\$2", $_FILES['userfile']['name']);
-					if(!$this->fileupload('userfile',FALSE,$catalog)):
-						// $this->session->set_userdata('msgr','Ошибка при загрузке фотографии.');
+					if ( !$this->fileupload('userfile',FALSE,$catalog) ) {
 						redirect($this->uri->uri_string());
-					endif;
-				endif;
+					}
+				}
 		
-				if($_FILES['userarhiv']['error'] != 4):
+				if ( $_FILES['userarhiv']['error'] != 4 ) {
 					$_FILES['userarhiv']['name'] = preg_replace('/.+(.)(\.)+/',date("Ymdhis")."\$2", $_FILES['userarhiv']['name']);
-					if(!$this->fileupload('userarhiv',FALSE,$catalog)):
-						// $this->session->set_userdata('msgr','Ошибка при загрузке архива.');
+					if ( !$this->fileupload('userarhiv',FALSE,$catalog) ){
 						redirect($this->uri->uri_string());
-					endif;
-				else:
+					}
+				} else {
 					$this->session->set_userdata('msgr','Сообщение не отправлено. Не указан архив с материалами.');
-				endif;
+				}
 				ob_start();
 				?>
-Получено письмо от <?=$_POST['name'];?> 
-Контактный номер: <?=$_POST['phone'];?> 
-E-mail: <?=$_POST['email'];?> 
-Образование: <?=$_POST['education'];?> 
-Просмотреть фотографию: <? echo base_url().'/documents/'.$user.'/'.$_FILES['userfile']['name']; ?> 
-Скачать архив: <? echo base_url().'/documents/'.$user.'/'.$_FILES['userarhiv']['name']; ?> 
-Комментарий к письму: <?=$_POST['note'];?>
+<h2>Архив с материалами конкурса Стройка#1</h2>
+<p><strong>Участник:</strong> <?=$_POST['name'];?> (тел.: <?=$_POST['phone'];?>)</p>
+<p><strong>Образование:</strong> <?=$_POST['education'];?></p> 
+<p>Просмотреть фотографию конкурсанта: <a href="<? echo base_url().'/documents/'.$user.'/'.$_FILES['userfile']['name']; ?>">Фотография</a></p> 
+<p>Скачать архив c проектом: <a href="<? echo base_url().'/documents/'.$user.'/'.$_FILES['userarhiv']['name']; ?>">Архив с проектом</a></p> 
+<p><b>Комментарий к письму:</b> <?= strip_tags($_POST['note']) ;?></p>
 				<?
-				$mess['msg'] = ob_get_clean();
+				$mailtext = ob_get_clean();
 				
 				$this->email->clear(TRUE);
 				$config['smtp_host'] = 'localhost';
 				$config['charset'] = 'utf-8';
-				$config['wordwrap'] = TRUE;
+				$config['wordwrap'] = FALSE;
+				$config['mailtype'] = 'html';
+				
 				$this->email->initialize($config);
-				$this->email->to('admin@sk-stroikov.ru');
+				$this->email->to('kd@sk-stroikov.ru');
 				$this->email->from($_POST['email'], $_POST['name']);
-				$this->email->bcc('');
-				$this->email->subject('Архив с материалами [Стройка#1]');
-				$textmail = strip_tags($mess['msg']);
-				$this->email->message($textmail);	
-				if($this->email->send()):
+				$this->email->bcc('admin@sk-stroikov.ru');
+				$this->email->subject('Архив с материалами (Стройка#1)');
+				$this->email->message($mailtext);
+					
+				if ( $this->email->send() ) {
 					$this->sendbackmail($_POST['name'],$_POST['email']);
 					$this->session->set_userdata('msgs','Сообщение отправлено успешно.');
-				endif;
-			else:
+				}
+			} else {
 				$this->session->set_userdata('msgr','Сообщение не отправлено. Так как форма не прошла валидацию.');
-			endif;
+			}
 			redirect($this->uri->uri_string());
-		endif;
+		}
 		
-		if($this->input->post('vsubmit')):
+		if ( $this->input->post('vsubmit') ) {
 			$this->form_validation->set_rules('name',' ','required|trim');
 			$this->form_validation->set_rules('email',' ','required|valid_email|trim');
 			$this->form_validation->set_rules('note',' ','trim');
-			if($this->form_validation->run()):
+			if ( $this->form_validation->run() ) {
 				ob_start();
 				?>
-Получено письмо от <?=$_POST['name'];?> 
-E-mail: <?=$_POST['email'];?> 
-Комментарий к письму: <?=$_POST['note'];?>
+<h2>Выбор мест для установки велопарковок [Стройка#1]</h2>
+<p><strong>Сообщение:</strong> <?= strip_tags($_POST['note']); ?></p>
 				<?
-				$mess['msg'] = ob_get_clean();
+				$mailtext = ob_get_clean();
 				
 				$this->email->clear(TRUE);
 				$config['smtp_host'] = 'localhost';
 				$config['charset'] = 'utf-8';
-				$config['wordwrap'] = TRUE;
+				$config['wordwrap'] = FALSE;
+				$config['mailtype'] = 'html';
+				
 				$this->email->initialize($config);
-				$this->email->to('admin@sk-stroikov.ru');
+				$this->email->to('kd@sk-stroikov.ru');
 				$this->email->from($_POST['email'], $_POST['name']);
-				$this->email->bcc('');
+				$this->email->bcc('admin@sk-stroikov.ru');
 				$this->email->subject('Выбор мест для установки велопарковок [Стройка#1]');
-				$textmail = strip_tags($mess['msg']);
-				$this->email->message($textmail);	
-				if($this->email->send()):
+				$this->email->message($mailtext);	
+				if ( $this->email->send() ) {
 					$this->sendbackmail($_POST['name'],$_POST['email']);
 					$this->session->set_userdata('msgs','Сообщение отправлено успешно.');
-				endif;
-			else:
+				}
+			} else {
 				$this->session->set_userdata('msgr','Сообщение не отправлено. Так как форма не прошла валидацию.');
-			endif;
+			}
 			redirect($this->uri->uri_string());
-		endif;
+		}
 		
-		if($this->input->post('wsubmit')):
+		if ( $this->input->post('wsubmit') ) {
 			$this->form_validation->set_rules('name',' ','required|trim');
 			$this->form_validation->set_rules('email',' ','required|valid_email|trim');
 			$this->form_validation->set_rules('note',' ','trim');
-			if($this->form_validation->run()):
+			if ( $this->form_validation->run() ) {
 				ob_start();
 				?>
-Получено письмо от <?=$_POST['name'];?> 
-E-mail: <?=$_POST['email'];?> 
-Комментарий к письму: <?=$_POST['note'];?>
+<h2>Выбор мест для отдыха на лавочках [Стройка#1]</h2>
+<p><strong>Сообщение:</strong> <?= strip_tags($_POST['note']); ?></p>
 				<?
-				$mess['msg'] = ob_get_clean();
+				$mailtext = ob_get_clean();
 				
 				$this->email->clear(TRUE);
 				$config['smtp_host'] = 'localhost';
 				$config['charset'] = 'utf-8';
-				$config['wordwrap'] = TRUE;
+				$config['wordwrap'] = FALSE;
+				$config['mailtype'] = 'html';
+				
 				$this->email->initialize($config);
-				$this->email->to('admin@sk-stroikov.ru');
+				$this->email->to('kd@sk-stroikov.ru');
 				$this->email->from($_POST['email'], $_POST['name']);
-				$this->email->bcc('');
-				$this->email->subject('Выбор мест для отдыха на лавочках [Стройка#1]');
-				$textmail = strip_tags($mess['msg']);
-				$this->email->message($textmail);	
-				if($this->email->send()):
+				$this->email->bcc('admin@sk-stroikov.ru');
+				$this->email->subject('Выбор мест для отдыха на лавочках');
+				$this->email->message($mailtext);	
+				if ( $this->email->send() ) {
 					$this->sendbackmail($_POST['name'],$_POST['email']);
 					$this->session->set_userdata('msgs','Сообщение отправлено успешно.');
-				endif;
-			else:
+				}
+			} else {
 				$this->session->set_userdata('msgr','Сообщение не отправлено. Так как форма не прошла валидацию.');
-			endif;
+			}
 			redirect($this->uri->uri_string());
-		endif;
+		}
 		
 		$this->load->view("users_interface/konkurs-dlya-desainerov",$pagevar);
 	}
@@ -906,18 +905,18 @@ E-mail: <?=$_POST['email'];?>
 
 	public function sendbackmail($name,$email){
 		
-		$msg = "Здравствуйте, {$name}. Спасибо за ваше участие. Мы обязательно вам ответим и расскажем о процессе прохождения конкурса и реализации лучших идей.\n\nС уважением, Компания Стройковъ\n";
+		$mailtext = "<p>Здравствуйте, {$name}.</p> <p>Спасибо за ваше участие. Мы обязательно вам ответим и расскажем о процессе прохождения конкурса и реализации лучших идей.</p> <p>--<br/>С уважением,<br/> Компания Стройковъ</p>";
 		$this->email->clear(TRUE);
 		$config['smtp_host'] = 'localhost';
 		$config['charset'] = 'utf-8';
-		$config['wordwrap'] = TRUE;
+		$config['wordwrap'] = FALSE;
+		$config['mailtype'] = 'html';
 		$this->email->initialize($config);
-		$this->email->from('admin@sk-stroikov.ru','Компания Стройковъ');
+		$this->email->from('kd@sk-stroikov.ru','Стройковъ');
 		$this->email->to($email);
 		$this->email->bcc('');
-		$this->email->subject('Заявка принята. Cтроительная компания в Ростове-на-Дону :: ООО СК Стройковъ');
-		$textmail = strip_tags($msg);
-		$this->email->message($textmail);	
+		$this->email->subject('Вашя заявка принята (Стройка#1)');
+		$this->email->message($mailtext);
 		$this->email->send();
 	}
 	
