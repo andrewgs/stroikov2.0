@@ -582,6 +582,72 @@ E-mail: <?=$_POST['email'];?>
 			redirect($this->uri->uri_string());
 		endif;
 		
+		if($this->input->post('vsubmit')):
+			$this->form_validation->set_rules('name',' ','required|trim');
+			$this->form_validation->set_rules('email',' ','required|valid_email|trim');
+			$this->form_validation->set_rules('note',' ','trim');
+			if($this->form_validation->run()):
+				ob_start();
+				?>
+Получено письмо от <?=$_POST['name'];?> 
+E-mail: <?=$_POST['email'];?> 
+Комментарий к письму: <?=$_POST['note'];?>
+				<?
+				$mess['msg'] = ob_get_clean();
+				
+				$this->email->clear(TRUE);
+				$config['smtp_host'] = 'localhost';
+				$config['charset'] = 'utf-8';
+				$config['wordwrap'] = TRUE;
+				$this->email->initialize($config);
+				$this->email->to('admin@sk-stroikov.ru');
+				$this->email->from($_POST['email'], $_POST['name']);
+				$this->email->bcc('');
+				$this->email->subject('Выбор мест для установки велопарковок [Стройка#1]');
+				$textmail = strip_tags($mess['msg']);
+				$this->email->message($textmail);	
+				if($this->email->send()):
+					$this->session->set_userdata('msgs','Сообщение отправлено успешно.');
+				endif;
+			else:
+				$this->session->set_userdata('msgr','Сообщение не отправлено. Так как форма не прошла валидацию.');
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
+		
+		if($this->input->post('wsubmit')):
+			$this->form_validation->set_rules('name',' ','required|trim');
+			$this->form_validation->set_rules('email',' ','required|valid_email|trim');
+			$this->form_validation->set_rules('note',' ','trim');
+			if($this->form_validation->run()):
+				ob_start();
+				?>
+Получено письмо от <?=$_POST['name'];?> 
+E-mail: <?=$_POST['email'];?> 
+Комментарий к письму: <?=$_POST['note'];?>
+				<?
+				$mess['msg'] = ob_get_clean();
+				
+				$this->email->clear(TRUE);
+				$config['smtp_host'] = 'localhost';
+				$config['charset'] = 'utf-8';
+				$config['wordwrap'] = TRUE;
+				$this->email->initialize($config);
+				$this->email->to('admin@sk-stroikov.ru');
+				$this->email->from($_POST['email'], $_POST['name']);
+				$this->email->bcc('');
+				$this->email->subject('Выбор мест для отдыха на лавочках [Стройка#1]');
+				$textmail = strip_tags($mess['msg']);
+				$this->email->message($textmail);	
+				if($this->email->send()):
+					$this->session->set_userdata('msgs','Сообщение отправлено успешно.');
+				endif;
+			else:
+				$this->session->set_userdata('msgr','Сообщение не отправлено. Так как форма не прошла валидацию.');
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
+		
 		$this->load->view("users_interface/konkurs-dlya-desainerov",$pagevar);
 	}
 	

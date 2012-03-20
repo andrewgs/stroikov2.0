@@ -95,6 +95,25 @@
 				if(!err && !isValidEmailAddress($("#email").val())){$("#cgemail").addClass('error');$("#useremail").html("Не верный адрес E-Mail").show();event.preventDefault();}
 				if(err){event.preventDefault();}
 			});
+			
+			$("#vsend").click(function(event){
+				var err = false;
+				$(".control-group").removeClass('error');
+				$(".help-inline").hide();
+				$(".vinput").each(function(i,element){if($(this).val()==''){$(this).parents(".control-group").addClass('error');$(this).siblings(".help-inline").html("Поле не может быть пустым").show();err = true;}});
+				if(!err && !isValidEmailAddress($("#vemail").val())){$("#vgemail").addClass('error');$("#vuseremail").html("Не верный адрес E-Mail").show();event.preventDefault();}
+				if(err){event.preventDefault();}
+			});
+			
+			$("#wsend").click(function(event){
+				var err = false;
+				$(".control-group").removeClass('error');
+				$(".help-inline").hide();
+				$(".winput").each(function(i,element){if($(this).val()==''){$(this).parents(".control-group").addClass('error');$(this).siblings(".help-inline").html("Поле не может быть пустым").show();err = true;}});
+				if(!err && !isValidEmailAddress($("#wemail").val())){$("#wgemail").addClass('error');$("#wuseremail").html("Не верный адрес E-Mail").show();event.preventDefault();}
+				if(err){event.preventDefault();}
+			});
+			
 			function isValidEmailAddress(emailAddress){var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);return pattern.test(emailAddress);};
 		});
 	</script>
