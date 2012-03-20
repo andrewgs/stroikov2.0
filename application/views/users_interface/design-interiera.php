@@ -26,7 +26,7 @@
 								<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$interior['images'][$i]['id'];?>" alt=""/>
 							</div>
 							<?php if($loginstatus['status']):?>
-								<a class="btn btn-success dlImage" data-img="<?=$interior['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"> <i class="icon-trash"></i> Удалить фотографию</a>
+								<button class="btn btn-success dlImage" data-img="<?=$interior['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"> <i class="icon-trash"></i> Удалить фотографию</button>
 							<?php endif;?>							
 						<?php endfor;?>
 						</div>
@@ -112,7 +112,7 @@
 			$(".dlImage").click(function(){image = $(this).attr('data-img');});
 			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/design-interierov/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
 			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
-			
+			/*
 			$('div#samples').cycle({
 				fx:     'scrollHorz',
 				speed:  '2000',					
@@ -120,7 +120,8 @@
 				timeout:  7000,
 				prev:    '#prev',
 				next:    '#next'
-			});  	
+			});
+			*/  	
 		});
 	</script>
 </body>
