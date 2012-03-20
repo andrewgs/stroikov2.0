@@ -109,16 +109,17 @@
 			$(".dlImage").click(function(){image = $(this).attr('data-img');});
 			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/design-interierov/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
 			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
-			/*
+			
+			<?php if( !$loginstatus['status']): ?>
 			$('div#samples').cycle({
 				fx:     'scrollHorz',
 				speed:  '2000',					
 				easing: 'easeInOutExpo',
 				timeout:  7000,
 				prev:    '#prev',
-				next:    '#next'
+				next:    '#next' 
 			});
-			*/  	
+			<?php endif;?>
 		});
 	</script>
 </body>
