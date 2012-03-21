@@ -54,12 +54,14 @@
 				<div class="aside-block list">
 					<h3>Смотреть интерьеры</h3>
 					<ul>
-					<?php for($i=0;$i<count($objects);$i++):?>
+				<?php for($i=0;$i<count($objects);$i++):?>
+					<?php if(!empty($objects[$i]['interiors']) || $loginstatus['status']):?>
 						<li><?=$objects[$i]['title'];?></li>
 						<?php for($j=0;$j<count($objects[$i]['interiors']);$j++):?>
 							<li><?=anchor('design-interierov/'.$objects[$i]['translit'].'/'.$objects[$i]['interiors'][$j]['translit'],$objects[$i]['interiors'][$j]['rooms'].'-к квартира');?> <?= $objects[$i]['interiors'][$j]['address']; ?></li>
 						<?php endfor;?>
-					<?php endfor;?>
+					<?php endif;?>
+				<?php endfor;?>
 					</ul>
 					<?php if($loginstatus['status']):?>
 						<a class="details" style="right:119px;" data-toggle="modal" href="#addInterior"><i class="icon-plus"></i> Добавить интерьер</a>

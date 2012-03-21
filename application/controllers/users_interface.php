@@ -123,6 +123,7 @@ class Users_interface extends CI_Controller{
 					'userinfo'		=> $this->user,
 					'objects'		=> $this->objectstypemodel->read_records(),
 					'interior'		=> array(),
+					'num'			=> 0,
 					'msgs'			=> $this->session->userdata('msgs'),
 					'msgr'			=> $this->session->userdata('msgr')
 			);
@@ -131,11 +132,14 @@ class Users_interface extends CI_Controller{
 		
 		for($i=0;$i<count($pagevar['objects']);$i++):
 			$pagevar['objects'][$i]['interiors'] = $this->interiorsmodel->read_records($pagevar['objects'][$i]['id']);
+			if(!empty($pagevar['objects'][$i]['interiors'])):
+				$pagevar['num'] = $i;
+			endif;
 		endfor;
 		
-		$pagevar['interior'] = $this->interiorsmodel->read_limit_records($pagevar['objects'][0]['id'],1,0);
+		$pagevar['interior'] = $this->interiorsmodel->read_limit_records($pagevar['objects'][$pagevar['num']]['id'],1,0);
 		if(count($pagevar['interior'])):
-		   $pagevar['interior'][0]['images'] = $this->photosmodel->read_records($pagevar['objects'][0]['id'],$pagevar['interior'][0]['id'],'interiors');
+			$pagevar['interior'][0]['images'] = $this->photosmodel->read_records($pagevar['objects'][$pagevar['num']]['id'],$pagevar['interior'][0]['id'],'interiors');
 		endif;
 		
 		if($this->input->post('submit')):
