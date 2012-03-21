@@ -50,24 +50,24 @@
 						<?php if(isset($slideshow[$i]['images']['id'])):?>
 						<div class="design-sample">
 							<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i]['images']['id'];?>" alt=""/>
-							<?=anchor('design-interierov/'.$slideshow[$i]['object'].'/'.$slideshow[$i]['translit'],$slideshow[$i]['title']);?>
-							<p><?=$slideshow[$i]['note'];?></p>
+							<?=anchor('design-interierov/'.$slideshow[$i]['object'].'/'.$slideshow[$i]['translit'],$slideshow[$i]['title'], array('class'=>'caption'));?>
+							<div class="note"><?=$slideshow[$i]['note'];?></div>
 							<?=anchor('design-interierov/'.$slideshow[$i]['object'].'/'.$slideshow[$i]['translit'],'Подробнее &gt;');?>
 						</div>
 						<?php endif;?>
 						<?php if(isset($slideshow[$i+1]['images']['id'])):?>
 						<div class="design-sample">
 							<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i+1]['images']['id'];?>" alt=""/>
-							<?=anchor('design-interierov/'.$slideshow[$i+1]['object'].'/'.$slideshow[$i+1]['translit'],$slideshow[$i+1]['title']);?>
-							<p><?=$slideshow[$i+1]['note'];?></p>
+							<?=anchor('design-interierov/'.$slideshow[$i+1]['object'].'/'.$slideshow[$i+1]['translit'],$slideshow[$i+1]['title'], array('class'=>'caption'));?>
+							<div class="note"><?=$slideshow[$i+1]['note'];?></div>
 							<?=anchor('design-interierov/'.$slideshow[$i+1]['object'].'/'.$slideshow[$i+1]['translit'],'Подробнее &gt;');?>
 						</div>
 						<?php endif;?>
 						<?php if(isset($slideshow[$i+2]['images']['id'])):?>
 						<div class="design-sample">
 							<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i+2]['images']['id'];?>" alt=""/>
-							<?=anchor('design-interierov/'.$slideshow[$i+2]['object'].'/'.$slideshow[$i+2]['translit'],$slideshow[$i+2]['title']);?>
-							<p><?=$slideshow[$i+2]['note'];?></p>
+							<?=anchor('design-interierov/'.$slideshow[$i+2]['object'].'/'.$slideshow[$i+2]['translit'],$slideshow[$i+2]['title'], array('class'=>'caption'));?>
+							<div class="note"><?=$slideshow[$i+2]['note'];?></div>
 							<?=anchor('design-interierov/'.$slideshow[$i+2]['object'].'/'.$slideshow[$i+2]['translit'],'Подробнее &gt;');?>
 						</div>
 						<?php endif;?>

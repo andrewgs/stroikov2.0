@@ -68,9 +68,10 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 	.info h2 { color: #523511; font-size: 17px; padding: 10px 0 0; font-weight: normal; }
 
 .slider img { border: 1px solid #808a70; padding: 3px;}
-.slider p { color: #808a70; font: 11px/14px 'PT Sans',"Times New Roman",Times,serif; }
-.slider a { color: #523511; font-size: 13px; text-transform: uppercase; text-decoration: underline; display: block; margin: 40px 0 22px 0; }
+.slider .note { background: #fff; color: #808A70; font: 11px/14px 'PT Sans',"Times New Roman",Times,serif; height: 85px; overflow: hidden; }
+.slider a { color: #523511; font-size: 13px; text-transform: uppercase; text-decoration: underline; display: block; margin: 30px 0 22px 0; }
 .slider a.details { color: #89b838; font-size: 14px; text-decoration: underline; display: block; font-style: italic; text-transform: none; margin: 10px 0; text-align: right; }
+.slider a.caption { display: block; min-height: 30px; line-height: 18px; }
 
 #samples { min-height: 410px; width: 548px; }
 #samples .design-sample { min-height: 400px; width: 540px; }
@@ -81,7 +82,7 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 	.aside-block.list { height: auto; padding-bottom: 50px; }
 	.aside-block.green { background: #92b555; color: #523511; }
 	.aside-block h3 { color: #523511; font-size: 24px; font-weight: normal; padding: 10px 15px; }
-	.aside-block ul { list-style: none outside none; margin: 5px 0 0 48px; }
+	.aside-block ul { list-style: none outside none; margin: 5px 0 0 40px; }
 	.aside-block li { line-height: 24px; }
 	.aside-block li a { color: #89B838; font-style: italic; text-decoration: underline; padding-right: 10px; }
 	.aside-block a.details { background: #89B838; bottom: 0; color: #fff; font-style: italic; padding: 0 6px 4px; position: absolute; right: 0; text-decoration: underline; }
@@ -123,6 +124,7 @@ footer .copy { padding-left: 15px; }
 
 /* ==|== general ====================================================== */
 .no-margin { margin: 0 !important; }
+.modal { max-height: 525px; }
 
 /* ==|== media queries ======================================================
    EXAMPLE Media Query for Responsive Design.
