@@ -75,7 +75,7 @@
 					<a href="#" class="details">Подробнее &gt;</a>
 				</div>
 			</div>
-			<div class="clearfix"></div>
+			<div class="clear"></div>
 			<?php if(!count($objects['current'])):?>
 				<?php if($loginstatus['status']):?>
 					<?php $this->load->view('modal/admin-add-stroiobjekt');?>
@@ -103,13 +103,37 @@
 			});
 			$("#addObject").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
 			
+			var img = $('.design-sample:first img')[0]; // Get my img elem
+			var pic_real_width, pic_real_height;
+			var first = true;
+			$("<img/>") // Make in memory copy of image to avoid css issues
+			    .attr("src", $(img).attr("src"))
+			    .load(function() {
+			        pic_real_width = this.width;   // Note: $(this).width() will not
+			        pic_real_height = this.height; // work for in memory images.
+			        console.log(pic_real_height);
+			        console.log( $('div#samples').height() );
+			        $('div#samples').height(pic_real_height + 10);
+			        console.log( $('div#samples').height() ); 
+			    });
+
 			$('div#samples').cycle({
 				fx:     'scrollHorz',
-				speed:  '2000',					
+				speed:  '2000',
 				easing: 'easeInOutExpo',
 				timeout:  7000,
 				prev:    '#prev',
-				next:    '#next'
+				next:    '#next',
+				containerResize: 0,
+				slideResize: 1,
+				width: 550,
+				before: function(currSlideElement, nextSlideElement, options, forwardFlag) {
+					if ( !first ) {
+						$('div#samples').animate({ height: $(nextSlideElement).height() }, 2000, 'easeInOutExpo');						
+					}
+					first = false;
+				},
+				fit: 1
 			}); 
 		});
 	</script>

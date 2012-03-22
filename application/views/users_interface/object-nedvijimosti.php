@@ -64,7 +64,7 @@
 					<?php endif;?>
 				</div>
 			</div>
-			<div class="clearfix"></div>
+			<div class="clear"></div>
 			<?php if($loginstatus['status']):?>
 				<?php $this->load->view('modal/admin-add-estate');?>
 				<?php $this->load->view('modal/admin-add-image');?>

@@ -29,14 +29,14 @@
 			<div class="grid_7 prefix_1">
 				<div class="aside-block no-margin stroika">
 					<a href="<?=base_url();?>konkurs-dlya-desainerov-architektorov-stroika1" class="promo-action">
-						<div class="annotation">Конкурс проектных идей в области архитектуры малых форм</div>
+						<div class="annotation">Конкурс проектных идей в<br /> области архитектуры <br /> малых форм</div>
 						<div class="conditions">Сроки регистрации и подачи проектов с 20 марта по 20 апреля	</div>
 						<div class="banner">Стройка#<b>1</b></div>
 					</a>
 					<?=anchor('konkurs-dlya-desainerov-architektorov-stroika1','Подробнее &gt;',array('class'=>'details'));?>
 				</div>
 			</div>
-			<div class="clearfix"></div>
+			<div class="clear"></div>
 		</section>
 		
 		<section class="proposals">
@@ -49,7 +49,11 @@
 					<div class="design-row">
 						<?php if(isset($slideshow[$i]['images']['id'])):?>
 						<div class="design-sample">
-							<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i]['images']['id'];?>" alt=""/>
+							<div class="frame">
+								<div class="inner">
+									<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i]['images']['id'];?>" alt=""/>
+								</div>
+							</div>
 							<?=anchor('design-interierov/'.$slideshow[$i]['object'].'/'.$slideshow[$i]['translit'],$slideshow[$i]['title'], array('class'=>'caption'));?>
 							<div class="note"><?=$slideshow[$i]['note'];?></div>
 							<?=anchor('design-interierov/'.$slideshow[$i]['object'].'/'.$slideshow[$i]['translit'],'Подробнее &gt;');?>
@@ -57,7 +61,11 @@
 						<?php endif;?>
 						<?php if(isset($slideshow[$i+1]['images']['id'])):?>
 						<div class="design-sample">
-							<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i+1]['images']['id'];?>" alt=""/>
+							<div class="frame">
+								<div class="inner">
+									<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i+1]['images']['id'];?>" alt=""/>
+								</div>
+							</div>
 							<?=anchor('design-interierov/'.$slideshow[$i+1]['object'].'/'.$slideshow[$i+1]['translit'],$slideshow[$i+1]['title'], array('class'=>'caption'));?>
 							<div class="note"><?=$slideshow[$i+1]['note'];?></div>
 							<?=anchor('design-interierov/'.$slideshow[$i+1]['object'].'/'.$slideshow[$i+1]['translit'],'Подробнее &gt;');?>
@@ -65,7 +73,11 @@
 						<?php endif;?>
 						<?php if(isset($slideshow[$i+2]['images']['id'])):?>
 						<div class="design-sample">
-							<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i+2]['images']['id'];?>" alt=""/>
+							<div class="frame">
+								<div class="inner">
+									<img src="<?=$baseurl;?>design-interierov/viewsmallimage/<?=$slideshow[$i+2]['images']['id'];?>" alt=""/>
+								</div>
+							</div>
 							<?=anchor('design-interierov/'.$slideshow[$i+2]['object'].'/'.$slideshow[$i+2]['translit'],$slideshow[$i+2]['title'], array('class'=>'caption'));?>
 							<div class="note"><?=$slideshow[$i+2]['note'];?></div>
 							<?=anchor('design-interierov/'.$slideshow[$i+2]['object'].'/'.$slideshow[$i+2]['translit'],'Подробнее &gt;');?>
@@ -131,7 +143,7 @@
 					<?=anchor('design-interierov','Подробнее &gt;',array('class'=>'details'));?>
 				</div>
 			</div>
-			<div class="clearfix"></div>
+			<div class="clear"></div>
 		</section>
 		<?php if($loginstatus['status']):?>
 			<?php $this->load->view('modal/admin-add-interior');?>

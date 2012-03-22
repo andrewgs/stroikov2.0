@@ -44,9 +44,9 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 	.reviews .text { line-height: 28px; font-size: 24px; width: 315px; position: absolute; top: 30px; left: 40px; }
 	.reviews .author { line-height: 16px; font-size: 13px; position: absolute; top: 170px; left: 40px; }
 	.reviews .author i { display: inline-block; margin-left: 5px; }
-	.reviews .quote { font-size: 64px; position: absolute; }
-	.reviews .quote.left { left: 7px; top: 27px; }
-	.reviews .quote.right { left: 295px; top: 112px; }
+	.reviews .quote { font-size: 64px; position: absolute; height: 40px; line-height: 40px;}
+	.reviews .quote.left { left: 7px; top: 17px; }
+	.reviews .quote.right { left: 295px; top: 102px; }
 	.reviews .client { position: absolute; top: 0; right: 0; }
 	a#read-reviews { background: #523511; bottom: 0; color: #89B838; font-style: italic; padding: 0 6px 4px; position: absolute; right: 0; text-decoration: underline; }
 		a#read-reviews:hover { text-decoration: none; }
@@ -56,7 +56,7 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 	.promo-action p { color: #523511; display: block; font: 26px/33px 'PT Sans',"Times New Roman",Times,serif; padding: 35px 45px; text-transform: uppercase; width: 150px; }
 .banner { background: #523511; color: #fff; font-size: 27px; font-weight: bold; height: 50px; letter-spacing: 1px; line-height: 50px; margin-top: 2px; padding: 0 15px; text-transform: uppercase; } 
 .banner b { color: #92B555; }
-.annotation { color: #89B838; font-size: 20px; font-weight: bold; line-height: 24px; padding: 10px 15px 3px; }
+.annotation { color: #89B838; font-size: 19px; font-weight: bold; line-height: 24px; padding: 10px 15px 3px; }
 .conditions { color: #523511; font-size: 12px; line-height: 15px; padding: 2px 16px 20px; }
 
 .carousel { background: #fff; height: 440px; }
@@ -69,12 +69,16 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 
 .slider img { border: 1px solid #808a70; padding: 3px;}
 .slider .note { background: #fff; color: #808A70; font: 11px/14px 'PT Sans',"Times New Roman",Times,serif; height: 85px; overflow: hidden; }
+.slider p { color: #808A70; font: 12px/18px 'PT Sans',"Times New Roman",Times,serif; }
 .slider a { color: #523511; font-size: 13px; text-transform: uppercase; text-decoration: underline; display: block; margin: 30px 0 22px 0; }
 .slider a.details { color: #89b838; font-size: 14px; text-decoration: underline; display: block; font-style: italic; text-transform: none; margin: 10px 0; text-align: right; }
 .slider a.caption { display: block; min-height: 30px; line-height: 18px; }
+.slider .frame { border: 1px solid #808a70; padding: 3px; }
+.slider .frame .inner { height: 107px; overflow: hidden; }
+.slider .frame img { border: 0 none; padding: 0; }
 
-#samples { min-height: 410px; width: 548px; }
-#samples .design-sample { min-height: 400px; width: 540px; }
+#samples { background: #fff; }
+#samples .design-sample { background: #fff; }
 #samples-row { left: 47px; position: absolute; top: 85px; width: 570px; z-index: 1001; background: #fff; }
 #samples-row .design-sample { float: left; margin-right: 40px; width: 150px; }
 
