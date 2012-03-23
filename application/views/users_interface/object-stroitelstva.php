@@ -166,7 +166,7 @@
 				fx:     'scrollHorz',
 				speed:  '2000',
 				easing: 'easeInOutExpo',
-				timeout:  7000,
+				timeout:  0,
 				prev:    '#prev',
 				next:    '#next',
 				containerResize: 0,

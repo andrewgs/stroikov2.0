@@ -25,7 +25,7 @@
 							<div class="design-sample">
 								<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$interior['images'][$i]['id'];?>" alt=""/>
 							</div>
-							<?php if($loginstatus['status']):?>
+							<?php if($loginstatus['status']): ?>
 								<button class="btn btn-success dlImage" data-img="<?=$interior['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"> <i class="icon-trash"></i> Удалить фотографию</button>
 							<?php endif;?>							
 						<?php endfor;?>
@@ -154,7 +154,7 @@
 				fx:     'scrollHorz',
 				speed:  '2000',
 				easing: 'easeInOutExpo',
-				timeout:  7000,
+				timeout:  0,
 				prev:    '#prev',
 				next:    '#next',
 				containerResize: 0,
