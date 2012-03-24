@@ -931,9 +931,9 @@ class Users_interface extends CI_Controller{
 		$config['wordwrap'] = TRUE;
 		$this->email->initialize($config);
 		$this->email->from($from,$email);
-		$this->email->to('kv@sk-stroikov.ru');
+		$this->email->to('kd@sk-stroikov.ru');
 		$this->email->bcc('admin@sk-stroikov.ru');
-		$this->email->subject('Сообщение от пользователя SK-STROIKOV.RU');
+		$this->email->subject('Сообщение от пользователя сайта');
 		
 		$this->email->message(strip_tags($msg));
 		if (!$this->email->send()):
