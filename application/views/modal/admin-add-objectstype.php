@@ -16,7 +16,7 @@
 				<div class="control-group">
 					<label for="translit" class="control-label">Транслит: </label>
 					<div class="controls">
-						<input type="text" id="translit" class="input-xlarge" name="translit">
+						<input type="text" id="translit" class="input-xlarge translate" name="translit">
 						<p class="help-block">Заполните поле на транслитом или оставьте пустым</p>
 						<span class="help-inline" style="display:none;">&nbsp;</span>
 					</div>

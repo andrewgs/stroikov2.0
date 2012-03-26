@@ -9,4 +9,10 @@
 <script type="text/javascript">
 	$("#msgeclose").click(function(){$("#msgdealert").fadeOut(1000,function(){$(this).remove();});});
 	$("#msgsclose").click(function(){$("#msgdsalert").fadeOut(1000,function(){$(this).remove();});});
+	
+	<?php if($loginstatus['status']):?>
+		$(".translate").keypress(function(e){
+			if(e.which!=8 && e.which!=0 && e.which!=45 && e.which!=95 && (e.which<97 || e.which>122)){return false;}
+		});	
+	<?php endif;?>
 </script>
