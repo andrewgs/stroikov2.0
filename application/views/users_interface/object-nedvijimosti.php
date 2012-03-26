@@ -16,29 +16,31 @@
 				<?php $this->load->view('alert_messages/alert-success');?>
 				<h2><?=$estate['rooms'].'-к квартира'.'<br/>'.$estate['address'];?> <span class="details">Площадь <?=$estate['area'];?>м<sup>2</sup></span></h2>
 				<div class="grid_1">
-					<div class="slider-arrow left">Пред.</div>
+					<a id="prev" href="#" class="slider-arrow left">Пред.</a>
 				</div>
-				<div class="slider">
-					<div class="grid_14 alpha omega">
-						<div class="design-sample">
+				<div class="grid_14 alpha omega">
+					<div class="slider">
+						<div id="samples">
 						<?php for($i=0;$i<count($estate['images']);$i++):?>
-							<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$estate['images'][$i]['id'];?>" alt=""/>
+							<div class="design-sample">
+								<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$estate['images'][$i]['id'];?>" alt=""/>
+							</div>
 							<?php if($loginstatus['status']):?>
-								<button class="btn btn-success dlImage" img="<?=$estate['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"><i class="icon-trash"></i> Удалить фотографию</button>
-							<?php endif;?>
+								<button class="btn btn-success dlImage" data-img="<?=$estate['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"> <i class="icon-trash"></i> Удалить фотографию</button>
+							<?php endif;?>							
 						<?php endfor;?>
-							<?=anchor($this->uri->uri_string(),$estate['title']);?>
-							<p>
-								<?=$estate['note'];?>
-							</p>
 						</div>
-						<?php if($loginstatus['status']):?>
-							<button class="btn btn-success" data-toggle="modal" href="#addImage"><i class="icon-download-alt"></i> Загрузить фотографию</button>
-						<?php endif;?>
+						<?=anchor($this->uri->uri_string(),$estate['title']);?>
+						<p><?=$estate['note'];?></p>
+					<?php if($loginstatus['status']):?>
+						<button class="btn btn-success" data-toggle="modal" href="#addImage"><i class="icon-download-alt"></i> Загрузить фотографию</button>
+						<button class="btn btn-success" data-toggle="modal" href="#editEstate"><i class="icon-pencil"></i> Редактировать объект</button>
+						<button class="btn btn-danger" data-toggle="modal" href="#deleteEstate"><i class="icon-trash"></i> Удалить объект</button>
+					<?php endif;?>
 					</div>
 				</div>
 				<div class="grid_1">
-					<div class="slider-arrow right">След.</div>
+					<a id="next" href="#" class="slider-arrow right">След.</a>
 				</div>
 			</div>
 			<div class="grid_7 prefix_1">
@@ -52,15 +54,17 @@
 				<div class="aside-block list">
 					<h3>Смотреть объекты</h3>
 					<ul>
-					<?php for($i=0;$i<count($objects);$i++):?>
-						<li><h4><?=$objects[$i]['title'];?></h4></li>
+				<?php for($i=0;$i<count($objects);$i++):?>
+					<?php if(!empty($objects[$i]['estate']) || $loginstatus['status']):?>
+						<li><?=$objects[$i]['title'];?></li>
 						<?php for($j=0;$j<count($objects[$i]['estate']);$j++):?>
-							<li><?=anchor('agentstvo-nedvijimosti/'.$objects[$i]['translit'].'/'.$objects[$i]['estate'][$j]['translit'],$objects[$i]['estate'][$j]['title']);?></li>
+							<li><?=anchor('agentstvo-nedvijimosti/'.$objects[$i]['translit'].'/'.$objects[$i]['estate'][$j]['translit'],$objects[$i]['estate'][$j]['rooms'].'-к квартира');?> <?=$objects[$i]['estate'][$j]['address']; ?></li>
 						<?php endfor;?>
-					<?php endfor;?>
+					<?php endif;?>
+				<?php endfor;?>
 					</ul>
 					<?php if($loginstatus['status']):?>
-						<a class="details" style="right:120px;" data-toggle="modal" href="#addEstate"><i class="icon-plus"></i> Добавить объект</a>
+						<a class="details" style="right:119px;" data-toggle="modal" href="#addEstate"><i class="icon-plus"></i> Добавить интерьер</a>
 					<?php endif;?>
 				</div>
 			</div>
@@ -68,7 +72,11 @@
 			<?php if($loginstatus['status']):?>
 				<?php $this->load->view('modal/admin-add-estate');?>
 				<?php $this->load->view('modal/admin-add-image');?>
+				
+				<?php $this->load->view('modal/admin-edit-estate');?>
+				<?php $this->load->view('modal/admin-delete-estate');?>
 				<?php $this->load->view('modal/admin-delete-image');?>
+				
 			<?php endif;?>
 		</section>
 		<?=$this->load->view('users_interface/footer');?>
@@ -106,8 +114,9 @@
 				});
 				if(err){event.preventDefault();}
 			});
-		
-			$(".dlImage").click(function(){image = $(this).attr('img');});
+			$("#DelEstate").click(function(){location.href='<?=$baseurl?>admin-panel/<?=$this->uri->uri_string();?>/delete-estate/id/<?=$estate['id'];?>'});
+			$("#deleteEstate").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
+			$(".dlImage").click(function(){image = $(this).attr('data-img');});
 			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/agentstvo-nedvijimosti/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
 			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
 		});

@@ -43,9 +43,9 @@
 					</div>
 				</div>
 				<div class="control-group">
-					<label for="pranslit" class="control-label">Транслит: </label>
+					<label for="translit" class="control-label">Транслит: </label>
 					<div class="controls">
-						<input type="text" id="pranslit" class="input-xlarge" name="pranslit" value="<?=$interior['translit'];?>">
+						<input type="text" id="translit" class="input-xlarge" name="translit" value="<?=$interior['translit'];?>">
 						<p class="help-block">Заполните поле на транслитом или оставьте пустым</p>
 						<span class="help-inline" style="display:none;">&nbsp;</span>
 					</div>

@@ -11,29 +11,33 @@
 		<?=$this->load->view('users_interface/navigation');?>
 		<section class="proposals">
 			<div class="grid_16 carousel list">
+			<?php $this->load->view('alert_messages/alert-error');?>
+			<?php $this->load->view('alert_messages/alert-success');?>
 			<?php if(count($estate)>0):?>
 				<h2><?=$estate[0]['rooms'].'-к квартира'.'<br/>'.$estate[0]['address'];?> <span class="details">Площадь <?=$estate[0]['area'];?>м<sup>2</sup></span></h2>
 				<div class="grid_1">
-					<div class="slider-arrow left">Пред.</div>
+					<a href="#" id="prev" class="slider-arrow left">Пред.</a>
 				</div>
-				<div class="slider">
-					<div class="grid_14 alpha omega">
-						<div class="design-sample">
-						<?php for($i=0;$i<count($estate[0]['images']);$i++):?>
-							<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$estate[0]['images'][$i]['id'];?>" alt=""/>
-						<?php endfor;?>
-							<?=anchor('design-interierov/'.$objects[0]['translit'].'/'.$estate[0]['translit'],$estate[0]['title']);?>
-							<p>
-								<?=$estate[0]['note'];?>
-							</p>
+				<div class="grid_14 alpha omega">
+					<div class="slider">
+						<div id="samples">
+							<?php for($i=0;$i<count($estate[0]['images']);$i++):?>
+							<div class="design-sample">
+								<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$estate[0]['images'][$i]['id'];?>" alt=""/>
+							</div>
+							<?php endfor;?>
 						</div>
+						<?=anchor('agentstvo-nedvijimosti/'.$objects[0]['translit'].'/'.$estate[0]['translit'],$estate[0]['title']);?>
+						<p>
+							<?=$estate[0]['note'];?>
+						</p>
 					</div>
 				</div>
 				<div class="grid_1">
-					<div class="slider-arrow right">След.</div>
+					<a href="#" id="next" class="slider-arrow right">След.</a>
 				</div>
 			<?php else:?>
-				<?php if(isset($objects[0])):?>
+				<?php if(isset($objects) && !count($estate)):?>
 					<?php if($loginstatus['status']):?>
 						<a class="btn btn-success" data-toggle="modal" href="#addEstate"><i class="icon-plus"></i> Добавить первую недвижимость</a>
 					<?php endif;?>
@@ -41,15 +45,24 @@
 			<?php endif;?>
 			</div>
 			<div class="grid_7 prefix_1">
+				<!--
+				<div class="aside-block green">
+					<a href="#" class="promo-action">
+						<p><strong>Заказать</strong> дизайн интерьера <strong>сейчас!</strong></p>
+					</a>
+				</div>
+				-->
 				<div class="aside-block list">
-					<h3>Смотреть объекты</h3>
+					<h3>Смотреть интерьеры</h3>
 					<ul>
-					<?php for($i=0;$i<count($objects);$i++):?>
-						<li><h4><?=$objects[$i]['title'];?></h4></li>
+				<?php for($i=0;$i<count($objects);$i++):?>
+					<?php if(!empty($objects[$i]['estate']) || $loginstatus['status']):?>
+						<li><?=$objects[$i]['title'];?></li>
 						<?php for($j=0;$j<count($objects[$i]['estate']);$j++):?>
-							<li><?=anchor('agentstvo-nedvijimosti/'.$objects[$i]['translit'].'/'.$objects[$i]['estate'][$j]['translit'],$objects[$i]['estate'][$j]['title']);?></li>
+							<li><?=anchor('agentstvo-nedvijimosti/'.$objects[$i]['translit'].'/'.$objects[$i]['estate'][$j]['translit'],$objects[$i]['estate'][$j]['rooms'].'-к квартира');?> <?= $objects[$i]['estate'][$j]['address']; ?></li>
 						<?php endfor;?>
-					<?php endfor;?>
+					<?php endif;?>
+				<?php endfor;?>
 					</ul>
 				</div>
 			</div>
@@ -80,6 +93,15 @@
 				if(err){event.preventDefault();}
 			});
 			$("#addInterior").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
+			
+			$('div#samples').cycle({
+				fx:     'scrollHorz',
+				speed:  '2000',					
+				easing: 'easeInOutExpo',
+				timeout:  7000,
+				prev:    '#prev',
+				next:    '#next'
+			});  
 		});
 	</script>
 </body>

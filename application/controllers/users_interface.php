@@ -77,10 +77,10 @@ class Users_interface extends CI_Controller{
 			$this->form_validation->set_rules('address',' ','required|trim');
 			$this->form_validation->set_rules('area',' ','required|trim');
 			$this->form_validation->set_rules('note',' ','required|trim');
-			$this->form_validation->set_rules('pranslit',' ','trim');
+			$this->form_validation->set_rules('translit',' ','trim');
 			if($this->form_validation->run()):
-				if(!empty($_POST['pranslit'])):
-					$translit = preg_replace("/\ +/","-",htmlspecialchars($_POST['pranslit']));
+				if(!empty($_POST['translit'])):
+					$translit = preg_replace("/\ +/","-",htmlspecialchars($_POST['translit']));
 				else:
 					$translit = $this->translite(htmlspecialchars($_POST['title']));
 				endif;
@@ -96,10 +96,10 @@ class Users_interface extends CI_Controller{
 		
 		if($this->input->post('submit')):
 			$this->form_validation->set_rules('title',' ','required|trim');
-			$this->form_validation->set_rules('pranslit',' ','trim');
+			$this->form_validation->set_rules('translit',' ','trim');
 			if($this->form_validation->run()):
-				if(!empty($_POST['pranslit'])):
-					$translit = preg_replace("/\ +/","-",$_POST['pranslit']);
+				if(!empty($_POST['translit'])):
+					$translit = preg_replace("/\ +/","-",$_POST['translit']);
 				else:
 					$translit = $this->translite($_POST['title']);
 				endif;
@@ -148,10 +148,10 @@ class Users_interface extends CI_Controller{
 			$this->form_validation->set_rules('address',' ','required|trim');
 			$this->form_validation->set_rules('area',' ','required|trim');
 			$this->form_validation->set_rules('note',' ','required|trim');
-			$this->form_validation->set_rules('pranslit',' ','trim');
+			$this->form_validation->set_rules('translit',' ','trim');
 			if($this->form_validation->run()):
-				if(!empty($_POST['pranslit'])):
-					$translit = preg_replace("/\ +/","-",$_POST['pranslit']);
+				if(!empty($_POST['translit'])):
+					$translit = preg_replace("/\ +/","-",$_POST['translit']);
 				else:
 					$translit = $this->translite($_POST['title']);
 				endif;
@@ -188,6 +188,9 @@ class Users_interface extends CI_Controller{
 		endfor;
 		$type = $this->objectstypemodel->read_field_translit($this->uri->segment(2),'id');
 		$pagevar['interior'] = $this->interiorsmodel->read_record($this->uri->segment(3),$type);
+		if(!$pagevar['interior']):
+			redirect('design-interierov');
+		endif;
 		$pagevar['interior']['images'] = $this->photosmodel->read_records($type,$pagevar['interior']['id'],'interiors');
 		
 		if($this->input->post('addsubmit')):
@@ -196,10 +199,10 @@ class Users_interface extends CI_Controller{
 			$this->form_validation->set_rules('address',' ','required|trim');
 			$this->form_validation->set_rules('area',' ','required|trim');
 			$this->form_validation->set_rules('note',' ','required|trim');
-			$this->form_validation->set_rules('pranslit',' ','trim');
+			$this->form_validation->set_rules('translit',' ','trim');
 			if($this->form_validation->run()):
-				if(!empty($_POST['pranslit'])):
-					$translit = preg_replace("/\ +/","-",htmlspecialchars($_POST['pranslit']));
+				if(!empty($_POST['translit'])):
+					$translit = preg_replace("/\ +/","-",htmlspecialchars($_POST['translit']));
 				else:
 					$translit = $this->translite(htmlspecialchars($_POST['title']));
 				endif;
@@ -240,10 +243,10 @@ class Users_interface extends CI_Controller{
 			$this->form_validation->set_rules('address',' ','required|trim');
 			$this->form_validation->set_rules('area',' ','required|trim');
 			$this->form_validation->set_rules('note',' ','required|trim');
-			$this->form_validation->set_rules('pranslit',' ','trim');
+			$this->form_validation->set_rules('translit',' ','trim');
 			if($this->form_validation->run()):
-				if(!empty($_POST['pranslit'])):
-					$translit = htmlspecialchars($_POST['pranslit']);
+				if(!empty($_POST['translit'])):
+					$translit = htmlspecialchars($_POST['translit']);
 				else:
 					$translit = $this->translite(htmlspecialchars($_POST['title']));
 				endif;
@@ -343,13 +346,13 @@ class Users_interface extends CI_Controller{
 			$this->form_validation->set_rules('title',' ','required|trim');
 			$this->form_validation->set_rules('address',' ','required|trim');
 			$this->form_validation->set_rules('note',' ','required|trim');
-			$this->form_validation->set_rules('pranslit',' ','trim');
+			$this->form_validation->set_rules('translit',' ','trim');
 			if($this->form_validation->run()):
 				if(!isset($_POST['over'])):
 					$_POST['over'] = 0;
 				endif;
-				if(!empty($_POST['pranslit'])):
-					$translit = preg_replace("/\ +/","-",$_POST['pranslit']);
+				if(!empty($_POST['translit'])):
+					$translit = preg_replace("/\ +/","-",$_POST['translit']);
 				else:
 					$translit = $this->translite($_POST['title']);
 				endif;
@@ -386,30 +389,43 @@ class Users_interface extends CI_Controller{
 					'loginstatus'	=> $this->loginstatus,
 					'userinfo'		=> $this->user,
 					'objects'		=> $this->objectstypemodel->read_records(),
-					'estate'		=> array()
+					'estate'		=> array(),
+					'num'			=> 0,
+					'msgs'			=> $this->session->userdata('msgs'),
+					'msgr'			=> $this->session->userdata('msgr')
 			);
-		for($i=0;$i<count($pagevar['objects']);$i++):
-			$pagevar['objects'][$i]['estate'] = $this->estatemodel->read_records($pagevar['objects'][0]['id']);
-		endfor;
-		if(count($pagevar['objects']) == 1):
-			$pagevar['estate'] = $this->estatemodel->read_limit_records($pagevar['objects'][0]['id'],1,0);
-			if(count($pagevar['estate'])):
-			   $pagevar['estate'][0]['images'] = $this->photosmodel->read_records($pagevar['objects'][0]['id'],$pagevar['estate'][0]['id'],'estate');
-			endif;
-		endif;
+		$this->session->unset_userdata('msgs');
+		$this->session->unset_userdata('msgr');
 		
+		for($i=0;$i<count($pagevar['objects']);$i++):
+			$pagevar['objects'][$i]['estate'] = $this->estatemodel->read_records($pagevar['objects'][$i]['id']);
+			if(!empty($pagevar['objects'][$i]['estate'])):
+				$pagevar['num'] = $i;
+			endif;
+		endfor;
+		$pagevar['estate'] = $this->estatemodel->read_limit_records($pagevar['objects'][$pagevar['num']]['id'],1,0);
+		if(count($pagevar['estate'])):
+			$pagevar['estate'][0]['images'] = $this->photosmodel->read_records($pagevar['objects'][$pagevar['num']]['id'],$pagevar['estate'][0]['id'],'estate');
+		endif;
 		if($this->input->post('submit')):
 			$this->form_validation->set_rules('title',' ','required|trim');
 			$this->form_validation->set_rules('rooms',' ','required|trim');
 			$this->form_validation->set_rules('address',' ','required|trim');
 			$this->form_validation->set_rules('area',' ','required|trim');
 			$this->form_validation->set_rules('note',' ','required|trim');
-			$this->form_validation->set_rules('pranslit',' ','trim');
+			$this->form_validation->set_rules('translit',' ','trim');
 			if($this->form_validation->run()):
-				if(!empty($_POST['pranslit'])):
-					$translit = preg_replace("/\ +/","-",$_POST['pranslit']);
+				if(!empty($_POST['translit'])):
+					$translit = preg_replace("/\ +/","-",$_POST['translit']);
 				else:
 					$translit = $this->translite($_POST['title']);
+				endif;
+				
+				if(!$this->estatemodel->exist_translit($translit,$_POST['type'])):
+					$this->estatemodel->insert_record($_POST,$translit,$_POST['type']);
+					$this->session->set_userdata('msgs','Объект добавлен успешно.');
+					$ttranslite = $this->objectstypemodel->read_field($_POST['type'],'translit');
+					redirect('agentstvo-nedvijimosti/'.$ttranslite.'/'.$translit);
 				endif;
 				
 				if(!$this->estatemodel->exist_translit($translit)):
@@ -438,12 +454,14 @@ class Users_interface extends CI_Controller{
 			);
 		$this->session->unset_userdata('msgs');
 		$this->session->unset_userdata('msgr');
-		
 		for($i=0;$i<count($pagevar['objects']);$i++):
-			$pagevar['objects'][$i]['estate'] = $this->estatemodel->read_records($pagevar['objects'][0]['id']);
+			$pagevar['objects'][$i]['estate'] = $this->estatemodel->read_records($pagevar['objects'][$i]['id']);
 		endfor;
 		$type = $this->objectstypemodel->read_field_translit($this->uri->segment(2),'id');
 		$pagevar['estate'] = $this->estatemodel->read_record($this->uri->segment(3),$type);
+		if(!$pagevar['estate']):
+			redirect('agentstvo-nedvijimosti');
+		endif;
 		$pagevar['estate']['images'] = $this->photosmodel->read_records($type,$pagevar['estate']['id'],'estate');
 		
 		if($this->input->post('submit')):
@@ -452,22 +470,22 @@ class Users_interface extends CI_Controller{
 			$this->form_validation->set_rules('address',' ','required|trim');
 			$this->form_validation->set_rules('area',' ','required|trim');
 			$this->form_validation->set_rules('note',' ','required|trim');
-			$this->form_validation->set_rules('pranslit',' ','trim');
+			$this->form_validation->set_rules('translit',' ','trim');
 			if($this->form_validation->run()):
-				if(!empty($_POST['pranslit'])):
-					$translit = preg_replace("/\ +/","-",htmlspecialchars($_POST['pranslit']));
+				if(!empty($_POST['translit'])):
+					$translit = preg_replace("/\ +/","-",htmlspecialchars($_POST['translit']));
 				else:
 					$translit = $this->translite(htmlspecialchars($_POST['title']));
 				endif;
 				if(!$this->estatemodel->exist_translit($translit)):
 					$this->estatemodel->insert_record($_POST,$translit,$_POST['type']);
-					$this->session->set_userdata('msgs','Интерьер добавлен успешно.');
+					$this->session->set_userdata('msgs','Объект добавлен успешно.');
+					$ttranslite = $this->objectstypemodel->read_field($_POST['type'],'translit');
+					redirect('agentstvo-nedvijimosti/'.$ttranslite.'/'.$translit);
 				endif;
-				redirect('agentstvo-nedvijimosti/'.$this->uri->segment(2).'/'.$translit);
 			endif;
 			redirect($this->uri->uri_string());
 		endif;
-		
 		if($this->input->post('imgsubmit')):
 			$this->form_validation->set_rules('title',' ','required|trim');
 			$this->form_validation->set_rules('userfile',' ','callback_userfile_check');
@@ -487,7 +505,28 @@ class Users_interface extends CI_Controller{
 			endif;
 			redirect($this->uri->uri_string());
 		endif;
-		
+		if($this->input->post('edsubmit')):
+			$this->form_validation->set_rules('estate',' ','required|trim');
+			$this->form_validation->set_rules('title',' ','required|trim');
+			$this->form_validation->set_rules('rooms',' ','required|trim');
+			$this->form_validation->set_rules('address',' ','required|trim');
+			$this->form_validation->set_rules('area',' ','required|trim');
+			$this->form_validation->set_rules('note',' ','required|trim');
+			$this->form_validation->set_rules('translit',' ','trim');
+			if($this->form_validation->run()):
+				if(!empty($_POST['translit'])):
+					$translit = htmlspecialchars($_POST['translit']);
+				else:
+					$translit = $this->translite(htmlspecialchars($_POST['title']));
+				endif;
+				if(!$this->estatemodel->exist_translit_nonid($_POST['estate'],$translit)):
+					$this->estatemodel->update_record($_POST['estate'],$translit,$_POST);
+					$this->session->set_userdata('msgs','Объект сохранен успешно.');
+				endif;
+				redirect('agentstvo-nedvijimosti/'.$this->uri->segment(2).'/'.$translit);
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
 		$this->load->view("users_interface/object-nedvijimosti",$pagevar);
 	}
 	
@@ -518,13 +557,13 @@ class Users_interface extends CI_Controller{
 			$this->form_validation->set_rules('title',' ','required|trim');
 			$this->form_validation->set_rules('address',' ','required|trim');
 			$this->form_validation->set_rules('note',' ','required|trim');
-			$this->form_validation->set_rules('pranslit',' ','trim');
+			$this->form_validation->set_rules('translit',' ','trim');
 			if($this->form_validation->run()):
 				if(!isset($_POST['over'])):
 					$_POST['over'] = 0;
 				endif;
-				if(!empty($_POST['pranslit'])):
-					$translit = preg_replace("/\ +/","-",htmlspecialchars($_POST['pranslit']));
+				if(!empty($_POST['translit'])):
+					$translit = preg_replace("/\ +/","-",htmlspecialchars($_POST['translit']));
 				else:
 					$translit = $this->translite(htmlspecialchars($_POST['title']));
 				endif;

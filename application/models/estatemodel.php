@@ -32,13 +32,13 @@ class Estatemodel extends CI_Model{
 		return $this->db->insert_id();
 	}
 	
-	function update_record($id,$data){
+	function update_record($id,$translit,$data){
 			
 		$this->db->set('title',htmlspecialchars($data['title']));
 		$this->db->set('address',htmlspecialchars($data['address']));
 		$this->db->set('rooms',$data['rooms']);
 		$this->db->set('note',strip_tags($data['note']));
-		$this->db->set('translit',$data['translit']);
+		$this->db->set('translit',$translit);
 		$this->db->set('area',$data['area']);
 		$this->db->where('id',$id);
 		
@@ -48,6 +48,16 @@ class Estatemodel extends CI_Model{
 	
 	function exist_translit($translit){
 		
+		$this->db->where('translit',$translit);
+		$query = $this->db->get('estate');
+		$data = $query->result_array();
+		if(count($data)) return TRUE;
+		return FALSE;
+	}
+	
+	function exist_translit_nonid($id,$translit){
+		
+		$this->db->where('id !=',$id);
 		$this->db->where('translit',$translit);
 		$query = $this->db->get('estate');
 		$data = $query->result_array();

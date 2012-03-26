@@ -37,7 +37,7 @@
 					<a href="#" id="next" class="slider-arrow right">След.</a>
 				</div>
 			<?php else:?>
-				<?php if(isset($objects[0])):?>
+				<?php if(isset($objects) && !count($interior)):?>
 					<?php if($loginstatus['status']):?>
 						<a class="btn btn-success" data-toggle="modal" href="#addInterior"><i class="icon-plus"></i> Добавить первый интерьер</a>
 					<?php endif;?>

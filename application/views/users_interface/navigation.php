@@ -6,7 +6,7 @@
 			<li><?=anchor('remont','Ремонт');?></li>
 			<li><?=anchor('stroitelstvo','Строительство');?></li>
 			<li><?=anchor('injenernue-seti','Инженерные сети');?></li>
-			<!--li><?=anchor('agentstvo-nedvijimosti','Агентство недвижимости');?></li-->
+			<li><?=anchor('agentstvo-nedvijimosti','Агентство недвижимости');?></li>
 			<li><?=anchor('o-kompanii','О компании');?></li>
 		<?php if($loginstatus['status']):?>
 			<li><?=anchor('logoff','Выход');?></li>

@@ -101,6 +101,18 @@ class Admin_interface extends CI_Controller{
 		redirect($this->uri->segment(2));
 	}
 	
+	public function admin_delete_estate(){
+		
+		$estate = $this->uri->segment(7);
+		if($this->estatemodel->delete_record($estate)):
+			$this->photosmodel->images_delete($estate,'estate');
+			$this->session->set_userdata('msgs','Объект удален успешно.');
+		else:
+			$this->session->set_userdata('msgr','Ошибка при удалении Объект.');
+		endif;
+		redirect($this->uri->segment(2));
+	}
+	
 	public function admin_delete_object(){
 		
 		$object = $this->uri->segment(7);
