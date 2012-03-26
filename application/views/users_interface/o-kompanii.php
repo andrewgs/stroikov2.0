@@ -37,7 +37,7 @@
 					<div class="grid_4 prefix_1 omega diplom">
 						<img src="<?=$baseurl;?>img/diploms/str_gr_6.jpg" alt=""/>
 					</div>
-					<div class="clearfix"></div>
+					<div class="clear"></div>
 				</div>
 			</div>
 			<div class="grid_7 prefix_1">
@@ -56,7 +56,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="clearfix"></div>
+			<div class="clear"></div>
 		</section>
 		<?=$this->load->view('users_interface/footer');?>
 	</div>

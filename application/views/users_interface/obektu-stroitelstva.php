@@ -63,7 +63,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="clearfix"></div>
+			<div class="clear"></div>
 		</section>
 		<?=$this->load->view('users_interface/footer');?>
 	</div>

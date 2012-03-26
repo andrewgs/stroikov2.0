@@ -59,14 +59,15 @@
 					<?php if(!empty($objects[$i]['interiors']) || $loginstatus['status']):?>
 						<li><?=$objects[$i]['title'];?></li>
 						<?php for($j=0;$j<count($objects[$i]['interiors']);$j++):?>
-							<li><?=anchor('design-interierov/'.$objects[$i]['translit'].'/'.$objects[$i]['interiors'][$j]['translit'],$objects[$i]['interiors'][$j]['rooms'].'-к квартира');?> <?= $objects[$i]['interiors'][$j]['address']; ?></li>
+							<!-- <li><?=anchor('design-interierov/'.$objects[$i]['translit'].'/'.$objects[$i]['interiors'][$j]['translit'],$objects[$i]['interiors'][$j]['rooms'].'-к квартира');?> <?= $objects[$i]['interiors'][$j]['address']; ?></li> -->
+							<li><?=anchor('design-interierov/'.$objects[$i]['translit'].'/'.$objects[$i]['interiors'][$j]['translit'],$objects[$i]['interiors'][$j]['title']);?> </li>
 						<?php endfor;?>
 					<?php endif;?>
 				<?php endfor;?>
 					</ul>
 				</div>
 			</div>
-			<div class="clearfix"></div>
+			<div class="clear"></div>
 			<?php if(isset($objects[0]) && !count($interior)):?>
 				<?php if($loginstatus['status']):?>
 					<?php $this->load->view('modal/admin-add-interior');?>
@@ -80,28 +81,37 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("#send").click(function(event){
-				var err = false;
-				$(".control-group").removeClass('error');
-				$(".help-inline").hide();
-				$(".linput").each(function(i,element){
-					if($(this).val()==''){
-						$(this).parents(".control-group").addClass('error');
-						$(this).siblings(".help-inline").html("Поле не может быть пустым").show();
-						err = true;
-					}
-				});
-				if(err){event.preventDefault();}
-			});
-			$("#addInterior").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
-			
+			var img = $('.design-sample:first img')[0]; // Get my img elem
+			var pic_real_width, pic_real_height;
+			var first = true;
+			$("<img/>") // Make in memory copy of image to avoid css issues
+			    .attr("src", $(img).attr("src"))
+			    .load(function() {
+			        pic_real_width = this.width;   // Note: $(this).width() will not
+			        pic_real_height = this.height; // work for in memory images.
+			        console.log(pic_real_height);
+			        console.log( $('div#samples').height() );
+			        $('div#samples').height(pic_real_height + 10);
+			        console.log( $('div#samples').height() ); 
+			    });
+
 			$('div#samples').cycle({
 				fx:     'scrollHorz',
-				speed:  '2000',					
+				speed:  '2000',
 				easing: 'easeInOutExpo',
-				timeout:  7000,
+				timeout:  0,
 				prev:    '#prev',
-				next:    '#next'
+				next:    '#next',
+				containerResize: 0,
+				slideResize: 1,
+				width: 550,
+				before: function(currSlideElement, nextSlideElement, options, forwardFlag) {
+					if ( !first ) {
+						$('div#samples').animate({ height: $(nextSlideElement).height() }, 2000, 'easeInOutExpo');						
+					}
+					first = false;
+				},
+				fit: 1
 			});  	
 		});
 	</script>
