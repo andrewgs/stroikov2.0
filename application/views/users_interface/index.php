@@ -45,9 +45,9 @@
 					<h2>Мы представляем вашему вниманию<br> Новые проекты жилых интерьеров.</h2>
 					<a href="#" id="prev" class="slider-arrow left">Пред.</a>
 					<div id="samples-row" class="slider">
-					<?php for($i=0;$i<count($slideshow);$i+=3):?>
+					<? for($i=0;$i<count($slideshow);$i+=3):?>
 					<div class="design-row">
-						<?php if(isset($slideshow[$i]['images']['id'])):?>
+						<? if(isset($slideshow[$i]['images']['id'])):?>
 						<div class="design-sample">
 							<div class="frame">
 								<div class="inner">
@@ -58,8 +58,8 @@
 							<div class="note"><?=$slideshow[$i]['note'];?></div>
 							<?=anchor('design-interierov/'.$slideshow[$i]['object'].'/'.$slideshow[$i]['translit'],'Подробнее &gt;');?>
 						</div>
-						<?php endif;?>
-						<?php if(isset($slideshow[$i+1]['images']['id'])):?>
+						<? endif;?>
+						<? if(isset($slideshow[$i+1]['images']['id'])):?>
 						<div class="design-sample">
 							<div class="frame">
 								<div class="inner">
@@ -70,8 +70,8 @@
 							<div class="note"><?=$slideshow[$i+1]['note'];?></div>
 							<?=anchor('design-interierov/'.$slideshow[$i+1]['object'].'/'.$slideshow[$i+1]['translit'],'Подробнее &gt;');?>
 						</div>
-						<?php endif;?>
-						<?php if(isset($slideshow[$i+2]['images']['id'])):?>
+						<? endif;?>
+						<? if(isset($slideshow[$i+2]['images']['id'])):?>
 						<div class="design-sample">
 							<div class="frame">
 								<div class="inner">
@@ -82,9 +82,9 @@
 							<div class="note"><?=$slideshow[$i+2]['note'];?></div>
 							<?=anchor('design-interierov/'.$slideshow[$i+2]['object'].'/'.$slideshow[$i+2]['translit'],'Подробнее &gt;');?>
 						</div>
-						<?php endif;?>
+						<? endif;?>
 					</div>
-					<?php endfor; ?>
+					<? endfor; ?>
 					</div>
 					<a href="#" id="next" class="slider-arrow right">След.</a>
 				</div>
@@ -97,66 +97,66 @@
 				<div class="aside-block">
 					<h3>Объекты недвидижимости</h3>
 					<ul>
-				<?php if(count($objects) > 1):?>
-					<?php for($i=0;$i<count($objects);$i++):?>
+				<? if(count($objects) > 1):?>
+					<? for($i=0;$i<count($objects);$i++):?>
 						<li><?=anchor('obektu-stroitelstva/'.$objects[$i]['translit'],$objects[$i]['title']);?></li>
-					<?php endfor;?>
-				<?php else:?>
+					<? endfor;?>
+				<? else:?>
 						<h4><?=$objects[0]['title'];?></h4>
-					<?php for($i=0;$i<count($estate);$i++):?>
+					<? for($i=0;$i<count($estate);$i++):?>
 						<li><?=anchor('agentstvo-nedvijimosti/'.$objects[0]['translit'].'/'.$estate[$i]['translit'],$estate[$i]['title']);?></li>
-					<?php endfor;?>
-				<?php endif;?>
+					<? endfor;?>
+				<? endif;?>
 					</ul>
-				<?php if($loginstatus['status']):?>
+				<? if($loginstatus['status']):?>
 					<a class="details" style="right:152px;" data-toggle="modal" href="#addObjectType"><i class="icon-plus"></i> Добавить тип</a>
-				<?php endif;?>
+				<? endif;?>
 					<?=anchor('agentstvo-nedvijimosti','Подробнее &gt;',array('class'=>'details'));?>
 				</div>
 				-->
 				<div class="aside-block">
 					<h3>Смотреть интерьеры</h3>
 					<ul>
-				<?php if(count($objects) > 1):?>
-					<?php for($i=0;$i<count($objects);$i++):?>
+				<? if(count($objects) > 1):?>
+					<? for($i=0;$i<count($objects);$i++):?>
 						<li>
-					<?php if(count($objects[$i]['interior'])):?>
+					<? if(count($objects[$i]['interior'])):?>
 							<?=anchor('design-interierov/'.$objects[$i]['translit'].'/'.$objects[$i]['interior'][0]['translit'],$objects[$i]['title']);?>
-					<?php else:?>
-						<?php if($loginstatus['status']):?>
+					<? else:?>
+						<? if($loginstatus['status']):?>
 							<a class="insInterior" data-toggle="modal" itype="<?=$objects[$i]['id'];?>" href="#addInterior"><?=$objects[$i]['title'];?></a>
 							<a class="deleteTypes" data-toggle="modal" itype="<?=$objects[$i]['id'];?>" title="Удалить" href="#deleteObjectType"><i class="icon-trash"></i></a>
-						<?php endif;?>
-					<?php endif;?>
+						<? endif;?>
+					<? endif;?>
 						</li>
-					<?php endfor;?>
-				<?php else:?>
+					<? endfor;?>
+				<? else:?>
 						<!--<?=$objects[0]['title'];?>-->
-					<?php for($i=0;$i<count($interiors);$i++):?>
+					<? for($i=0;$i<count($interiors);$i++):?>
 						<li><?=anchor('design-interierov/'.$objects[0]['translit'].'/'.$interiors[$i]['translit'],$interiors[$i]['title']);?></li>
-					<?php endfor;?>
-				<?php endif;?>
+					<? endfor;?>
+				<? endif;?>
 					</ul>
-				<?php if($loginstatus['status']):?>
+				<? if($loginstatus['status']):?>
 					<a class="details" style="right:152px;" data-toggle="modal" href="#addObjectType"><i class="icon-plus"></i> Добавить тип</a>
-				<?php endif;?>
+				<? endif;?>
 					<?=anchor('design-interierov','Подробнее &gt;',array('class'=>'details'));?>
 				</div>
 			</div>
 			<div class="clear"></div>
 		</section>
-		<?php if($loginstatus['status']):?>
-			<?php $this->load->view('modal/admin-add-interior');?>
-			<?php $this->load->view('modal/admin-add-objectstype');?>
-			<?php $this->load->view('modal/admin-delete-objectstype');?>
-		<?php endif;?>
+		<? if($loginstatus['status']):?>
+			<? $this->load->view('modal/admin-add-interior');?>
+			<? $this->load->view('modal/admin-add-objectstype');?>
+			<? $this->load->view('modal/admin-delete-objectstype');?>
+		<? endif;?>
 		<?=$this->load->view('users_interface/footer');?>
 	</div>
 	<?=$this->load->view('users_interface/scripts');?>
 	<?=$this->load->view('users_interface/google');?>
 	<script type="text/javascript">
 		$(document).ready(function(){
-		<?php if($loginstatus['status']):?>
+		<? if($loginstatus['status']):?>
 			var objType = 0;
 			$("#atsend").click(function(event){
 				var err = false;
@@ -189,7 +189,7 @@
 			$("#addObjectType").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
 			$(".deleteTypes").click(function(){objType = $(this).attr('itype');});
 			$("#DelInterior").click(function(){location.href='<?=$baseurl;?>admin-panel/delete/object-types/'+objType});
-		<?php endif;?>
+		<? endif;?>
 			$('div#samples-row').cycle({
 				fx:     'scrollHorz',
 				speed:  '1000',					

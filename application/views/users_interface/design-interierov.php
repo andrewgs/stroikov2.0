@@ -11,38 +11,145 @@
 		<?=$this->load->view('users_interface/navigation');?>
 		<section class="proposals">
 			<div class="grid_16 carousel list">
-			<?php $this->load->view('alert_messages/alert-error');?>
-			<?php $this->load->view('alert_messages/alert-success');?>
-			<?php if(count($interior)>0):?>
-				<h2><?=$interior[0]['title'].', '.$interior[0]['rooms'].'-комн.'.'<br/>'.$interior[0]['address'];?> <span class="details">Площадь <?=$interior[0]['area'];?>м<sup>2</sup></span></h2>
-				<div class="grid_1">
-					<a href="#" id="prev" class="slider-arrow left">Пред.</a>
-				</div>
-				<div class="grid_14 alpha omega">
+			<? $this->load->view('alert_messages/alert-error');?>
+			<? $this->load->view('alert_messages/alert-success');?>
+			<? if(count($interior)>0):?>
+				<h1>Дизайн интерьеров <span class="details">Новые проекты жилых и офисных интерьеров</span></h1>
+				<div class="grid_16 alpha omega">
+					<!--
 					<div class="slider">
 						<div id="samples">
-							<?php for($i=0;$i<count($interior[0]['images']);$i++):?>
+							<? for($i=0;$i<count($interior[0]['images']);$i++):?>
 							<div class="design-sample">
 								<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$interior[0]['images'][$i]['id'];?>" alt=""/>
 							</div>
-							<?php endfor;?>
+							<? endfor;?>
 						</div>
 						<?=anchor('design-interierov/'.$objects[0]['translit'].'/'.$interior[0]['translit'],$interior[0]['title']);?>
 						<p>
 							<?=$interior[0]['note'];?>
 						</p>
 					</div>
+					-->
+					<div class="slider interiors" id="samples-row">
+						<div class="design-row">
+							<div class="design-sample">
+								<div class="frame">
+									<div class="inner">
+										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/150">
+									</div>
+								</div>
+								<a class="caption" href="http://sk-stroikov.ru/design-interierov/saloni-krasoti/Beauty-Salon-in-Rostov">Салон красоты "Тулаева"</a>
+								<div class="note">
+									Салон красоты Ольги Тулаевой в стиле неоклассика.
+									Автор: архитектор-дизайнер Чернышев Руслан
+								</div>
+							</div>
+							<div class="design-sample">
+								<div class="frame">
+									<div class="inner">
+										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/135">
+									</div>
+								</div>
+								<a class="caption" href="http://sk-stroikov.ru/design-interierov/ofisy/design-interiera-ofisa-stroitelnoi-kompanii">Строительная компания</a>
+								<div class="note">
+									Офис строительной компании «Стройковъ». Стилистика лофт. Дизайнер-архитектор: Сердобинцева Ольга
+								</div>
+							</div>
+							<div class="design-sample">
+								<div class="frame">
+									<div class="inner">
+										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/140">
+									</div>
+								</div>
+								<a class="caption" href="http://sk-stroikov.ru/design-interierov/saloni-krasoti/design-interiera-SPA-salona-milo">SPA-салон «Мыло»</a>
+								<div class="note">
+									Стилистика интерьера - прованс.
+									Интерьер разработан под чутким руководством хозяйки салона. Каждый элемент напоминает посетителям о романтике старой Франции и предвкушает наслаждение от предстоящих
+								</div>
+							</div>
+						</div>
+						<div class="design-row">
+							<div class="design-sample">
+								<div class="frame">
+									<div class="inner">
+										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/90">
+									</div>
+								</div>
+								<a class="caption" href="http://sk-stroikov.ru/design-interierov/kvartiry/design-interiera-3komnatnoi-kvartiry-na-kozlova">Современная классика</a>
+								<div class="note">
+									Квартира для молодой семьи, в которой каждый уголок пространства функционально задействован для потребностей каждого члена семьи:
+									это и уютная кухня разрботанная на самый взыскательный вкус хозяйки,
+								</div>
+							</div>
+							<div class="design-sample">
+								<div class="frame">
+									<div class="inner">
+										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/97">
+									</div>
+								</div>
+								<a class="caption" href="http://sk-stroikov.ru/design-interierov/kvartiry/3-komnatnaya-2-urovnevaya-kvartira">Солнце, море и песок...</a>
+								<div class="note">
+									Общая стилистика - современная эклектика с нотами экостиля. Архитектор-дизайнер: Сердобинцева Ольга
+								</div>
+							</div>
+							<div class="design-sample">
+								<div class="frame">
+									<div class="inner">
+										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/36">
+									</div>
+								</div>
+								<a class="caption" href="http://sk-stroikov.ru/design-interierov/kvartiry/design-interiera-dom-v-bataiske">Дом в Батайске</a>
+								<div class="note">
+									Стили: хай-тек,неоклассика, поп-арт. Автор проекта Руслан Чернышев.
+								</div>
+							</div>
+						</div>
+						<div class="design-row">
+							<div class="design-sample">
+								<div class="frame">
+									<div class="inner">
+										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/44">
+									</div>
+								</div>
+								<a class="caption" href="http://sk-stroikov.ru/design-interierov/kvartiry/design-interiera-dom-za-gorodom">Дом за городом</a>
+								<div class="note">
+									Стиль: фьюжн с элементами прованса. Автор проекта Руслан Чернышев.
+								</div>
+							</div>
+							<div class="design-sample">
+								<div class="frame">
+									<div class="inner">
+										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/53">
+									</div>
+								</div>
+								<a class="caption" href="http://sk-stroikov.ru/design-interierov/kvartiry/design-interiera-2k-kvartiri">Взрослым вход воспрещен</a>
+								<div class="note">
+									Дизайн-интерьер небольшой 2-к квартиры. Автор: Руслан Чернышев.
+								</div>
+							</div>
+							<div class="design-sample">
+								<div class="frame">
+									<div class="inner">
+										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/26">
+									</div>
+								</div>
+								<a class="caption" href="http://sk-stroikov.ru/design-interierov/kvartiry/3-komnatnaya-rvartira-dlya-molodoi-semi">Квартира для молодой семьи</a>
+								<div class="note">
+									Стиль- Фьюжн, с элементами Модерна.
+									Автор проекта Руслан Чернышев.
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="grid_1">
-					<a href="#" id="next" class="slider-arrow right">След.</a>
-				</div>
-			<?php else:?>
-				<?php if(isset($objects) && !count($interior)):?>
-					<?php if($loginstatus['status']):?>
+			<? else:?>
+				<? if(isset($objects) && !count($interior)):?>
+					<? if($loginstatus['status']):?>
 						<a class="btn btn-success" data-toggle="modal" href="#addInterior"><i class="icon-plus"></i> Добавить первый интерьер</a>
-					<?php endif;?>
-				<?php endif;?>
-			<?php endif;?>
+					<? endif;?>
+				<? endif;?>
+			<? endif;?>
 			</div>
 			<div class="grid_7 prefix_1">
 				<!--
@@ -55,24 +162,24 @@
 				<div class="aside-block list">
 					<h3>Смотреть интерьеры</h3>
 					<ul>
-				<?php for($i=0;$i<count($objects);$i++):?>
-					<?php if(!empty($objects[$i]['interiors']) || $loginstatus['status']):?>
+				<? for($i=0;$i<count($objects);$i++):?>
+					<? if(!empty($objects[$i]['interiors']) || $loginstatus['status']):?>
 						<li><?=$objects[$i]['title'];?></li>
-						<?php for($j=0;$j<count($objects[$i]['interiors']);$j++):?>
+						<? for($j=0;$j<count($objects[$i]['interiors']);$j++):?>
 							<!-- <li><?=anchor('design-interierov/'.$objects[$i]['translit'].'/'.$objects[$i]['interiors'][$j]['translit'],$objects[$i]['interiors'][$j]['rooms'].'-к квартира');?> <?= $objects[$i]['interiors'][$j]['address']; ?></li> -->
 							<li><?=anchor('design-interierov/'.$objects[$i]['translit'].'/'.$objects[$i]['interiors'][$j]['translit'],$objects[$i]['interiors'][$j]['title']);?> </li>
-						<?php endfor;?>
-					<?php endif;?>
-				<?php endfor;?>
+						<? endfor;?>
+					<? endif;?>
+				<? endfor;?>
 					</ul>
 				</div>
 			</div>
 			<div class="clear"></div>
-			<?php if(isset($objects[0]) && !count($interior)):?>
-				<?php if($loginstatus['status']):?>
-					<?php $this->load->view('modal/admin-add-interior');?>
-				<?php endif;?>
-			<?php endif;?>
+			<? if(isset($objects[0]) && !count($interior)):?>
+				<? if($loginstatus['status']):?>
+					<? $this->load->view('modal/admin-add-interior');?>
+				<? endif;?>
+			<? endif;?>
 		</section>
 		<?=$this->load->view('users_interface/footer');?>
 	</div>
@@ -112,7 +219,15 @@
 					first = false;
 				},
 				fit: 1
-			});  	
+			});
+			
+			$(document).scroll(function() {
+			  	if ( $(document).scrollTop() > 114 ) {
+			  		$('.aside-block.list').addClass('fixed');
+			  	} else {
+			  		$('.aside-block.list').removeClass('fixed');
+			  	} 
+			});
 		});
 	</script>
 </body>
