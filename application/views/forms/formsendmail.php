@@ -1,9 +1,7 @@
 <div id="kontakt">
-	<p>Используйте данную контактную форму, чтобы связаться с нами. Вы также можете написать нам напрямую по электронной почте. <nobr>Для этого нажмите на ссылку: <?=safe_mailto('info@sk-stroikov.ru','info@sk-stroikov.ru');?></nobr>
-	<br/><br/>
-	</p>
 	<?=form_open($this->uri->uri_string(),array('class'=>'form-horizontal')); ?>
 		<fieldset>
+			<legend>Есть вопросы? Свяжитесь с нами!</legend>
 			<div class="control-group">
 				<label for="name" class="control-label">Ваше имя: </label>
 				<div class="controls">

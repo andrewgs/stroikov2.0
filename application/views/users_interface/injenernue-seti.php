@@ -67,5 +67,17 @@
 	</div>
 	<?=$this->load->view('users_interface/scripts');?>
 	<?=$this->load->view('users_interface/google');?>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(document).scroll(function() {
+			  	if ( $(document).scrollTop() > 114 ) {
+			  		$('.aside-block.green').addClass('fixed');
+			  	} else {
+			  		$('.aside-block.green').removeClass('fixed');
+			  	} 
+			});
+		});
+	</script>
 </body>
 </html>

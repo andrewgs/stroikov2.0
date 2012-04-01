@@ -12,31 +12,31 @@
 		
 		<section class="proposals">
 			<div class="grid_16 carousel list">
-				<?php $this->load->view('alert_messages/alert-error');?>
-				<?php $this->load->view('alert_messages/alert-success');?>
-				<h2><?=$interior['title'].', '.$interior['rooms'].'-комн.'.'<br/>'.$interior['address'];?> <span class="details">Площадь <?=$interior['area'];?>м<sup>2</sup></span></h2>
+				<? $this->load->view('alert_messages/alert-error');?>
+				<? $this->load->view('alert_messages/alert-success');?>
+				<h2><?=$interior['title'].'<br/>'.$interior['address'];?> <span class="details">Площадь <?=$interior['area'];?>м<sup>2</sup></span></h2>
 				<div class="grid_1">
 					<a id="prev" href="#" class="slider-arrow left">Пред.</a>
 				</div>
 				<div class="grid_14 alpha omega">
 					<div class="slider">
 						<div id="samples">
-						<?php for($i=0;$i<count($interior['images']);$i++):?>
+						<? for($i=0;$i<count($interior['images']);$i++):?>
 							<div class="design-sample">
 								<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$interior['images'][$i]['id'];?>" alt=""/>
 							</div>
-							<?php if($loginstatus['status']): ?>
+							<? if($loginstatus['status']): ?>
 								<button class="btn btn-success dlImage" data-img="<?=$interior['images'][$i]['id'];?>" data-toggle="modal" href="#deleteImage"> <i class="icon-trash"></i> Удалить фотографию</button>
-							<?php endif;?>							
-						<?php endfor;?>
+							<? endif;?>							
+						<? endfor;?>
 						</div>
 						<?=anchor($this->uri->uri_string(),$interior['title']);?>
 						<p><?=$interior['note'];?></p>
-					<?php if($loginstatus['status']):?>
+					<? if($loginstatus['status']):?>
 						<button class="btn btn-success" data-toggle="modal" href="#addImage"><i class="icon-download-alt"></i> Загрузить фотографию</button>
 						<button class="btn btn-success" data-toggle="modal" href="#editInterior"><i class="icon-pencil"></i> Редактировать интерьер</button>
 						<button class="btn btn-danger" data-toggle="modal" href="#deleteInterior"><i class="icon-trash"></i> Удалить интерьер</button>
-					<?php endif;?>
+					<? endif;?>
 					</div>
 				</div>
 				<div class="grid_1">
@@ -54,29 +54,29 @@
 				<div class="aside-block list">
 					<h3>Смотреть интерьеры</h3>
 					<ul>
-				<?php for($i=0;$i<count($objects);$i++):?>
-					<?php if(!empty($objects[$i]['interiors']) || $loginstatus['status']):?>
+				<? for($i=0;$i<count($objects);$i++):?>
+					<? if(!empty($objects[$i]['interiors']) || $loginstatus['status']):?>
 						<li><?=$objects[$i]['title'];?></li>
-						<?php for($j=0;$j<count($objects[$i]['interiors']);$j++):?>
+						<? for($j=0;$j<count($objects[$i]['interiors']);$j++):?>
 							<!-- <li><?=anchor('design-interierov/'.$objects[$i]['translit'].'/'.$objects[$i]['interiors'][$j]['translit'],$objects[$i]['interiors'][$j]['rooms'].'-к квартира');?> <?= $objects[$i]['interiors'][$j]['address']; ?></li> -->
 							<li><?=anchor('design-interierov/'.$objects[$i]['translit'].'/'.$objects[$i]['interiors'][$j]['translit'],$objects[$i]['interiors'][$j]['title']);?> </li>
-						<?php endfor;?>
-					<?php endif;?>
-				<?php endfor;?>
+						<? endfor;?>
+					<? endif;?>
+				<? endfor;?>
 					</ul>
-					<?php if($loginstatus['status']):?>
+					<? if($loginstatus['status']):?>
 						<a class="details" style="right:119px;" data-toggle="modal" href="#addInterior"><i class="icon-plus"></i> Добавить интерьер</a>
-					<?php endif;?>
+					<? endif;?>
 				</div>
 			</div>
 			<div class="clear"></div>
-			<?php if($loginstatus['status']):?>
-				<?php $this->load->view('modal/admin-add-interior');?>
-				<?php $this->load->view('modal/admin-edit-interior');?>
-				<?php $this->load->view('modal/admin-delete-interior');?>
-				<?php $this->load->view('modal/admin-add-image');?>
-				<?php $this->load->view('modal/admin-delete-image');?>
-			<?php endif;?>
+			<? if($loginstatus['status']):?>
+				<? $this->load->view('modal/admin-add-interior');?>
+				<? $this->load->view('modal/admin-edit-interior');?>
+				<? $this->load->view('modal/admin-delete-interior');?>
+				<? $this->load->view('modal/admin-add-image');?>
+				<? $this->load->view('modal/admin-delete-image');?>
+			<? endif;?>
 		</section>
 		<?=$this->load->view('users_interface/footer');?>
 	</div>
@@ -84,7 +84,7 @@
 	<?=$this->load->view('users_interface/google');?>
 	<script type="text/javascript">
 		$(document).ready(function(){
-		<?php if($loginstatus['status']):?>
+		<? if($loginstatus['status']):?>
 			var image = 0;
 			$("#send").click(function(event){
 				var err = false;
@@ -134,8 +134,8 @@
 			$(".dlImage").click(function(){image = $(this).attr('data-img');});
 			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/design-interierov/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
 			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
-		<?php endif;?>
-		<?php if(!$loginstatus['status']): ?>
+		<? endif;?>
+		<? if(!$loginstatus['status']): ?>
 			var img = $('.design-sample:first img')[0]; // Get my img elem
 			var pic_real_width, pic_real_height;
 			var first = true;
@@ -168,7 +168,7 @@
 				},
 				fit: 1
 			});
-		<?php endif;?>
+		<? endif;?>
 		});
 	</script>
 </body>
