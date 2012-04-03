@@ -13,7 +13,7 @@
 			<div class="grid_16 carousel list">
 			<? $this->load->view('alert_messages/alert-error');?>
 			<? $this->load->view('alert_messages/alert-success');?>
-			<? if(count($interior)>0):?>
+			<? if(count($interiors)>0):?>
 				<h1>Дизайн интерьеров <span class="details">Новые проекты жилых и офисных интерьеров</span></h1>
 				<div class="grid_16 alpha omega">
 					<!--
@@ -32,24 +32,21 @@
 					</div>
 					-->
 					<div class="slider interiors" id="samples-row">
-					<?php for($i=0;$i<3;$i++):?>
+				<?php for($i=0;$i<count($interiors);$i++):?>
 						<div class="design-row">
-						<?php for($j=0;$j<3;$j++):?>
 							<div class="design-sample">
 								<div class="frame">
 									<div class="inner">
-										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/150">
+										<img alt="<?=$interiors[$i]['phtitle'];?>" src="<?=$this->uri->uri_string();?>/viewsmallimage/<?=$interiors[$i]['phid']?>">
 									</div>
 								</div>
-								<a class="caption" href="http://sk-stroikov.ru/design-interierov/saloni-krasoti/Beauty-Salon-in-Rostov">Салон красоты "Тулаева"</a>
+								<a class="caption" href="<?=$baseurl;?>design-interierov/<?=$interiors[$i]['objtrans'];?>/<?=$interiors[$i]['translit'];?>"><?=$interiors[$i]['title'];?></a>
 								<div class="note">
-									Салон красоты Ольги Тулаевой в стиле неоклассика.
-									Автор: архитектор-дизайнер Чернышев Руслан
+									<?=$interiors[$i]['note'];?>
 								</div>
 							</div>
-						<?php endfor;?>
 						</div>
-					<?php endfor;?>
+				<?php endfor;?>
 					</div>
 				</div>
 			<? else:?>
@@ -84,7 +81,7 @@
 				</div>
 			</div>
 			<div class="clear"></div>
-			<? if(isset($objects[0]) && !count($interior)):?>
+			<? if(isset($objects[0]) && !count($interiors)):?>
 				<? if($loginstatus['status']):?>
 					<? $this->load->view('modal/admin-add-interior');?>
 				<? endif;?>
