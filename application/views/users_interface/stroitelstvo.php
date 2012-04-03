@@ -14,7 +14,7 @@
 			<? $this->load->view('alert_messages/alert-error');?>
 			<? $this->load->view('alert_messages/alert-success');?>
 			<?php if(count($allobjects)>0):?>
-				<h1>Объекты строительства</h1>
+				<h1>Строительство <span class="details">Список строительных объектов компании Стройковъ</span></h1>
 				<div class="grid_16 alpha omega">
 					<div class="slider interiors" id="samples-row">
 				<?php for($i=0;$i<count($allobjects);$i++):?>
@@ -25,12 +25,10 @@
 										<img alt="<?=$allobjects[$i]['phtitle'];?>" src="<?=$this->uri->uri_string();?>/viewsmallimage/<?=$allobjects[$i]['phid']?>">
 									</div>
 								</div>
-							<?php if($allobjects[$i]['over']):?>
-								<span class="details">Сданный объект</span>
-							<?php else:?>
-								<span class="details">Строящийся объект</span>
-							<?php endif;?>
-								<a class="caption" href="<?=$baseurl;?>stroitelstvo/object/<?=$allobjects[$i]['translit'];?>"><?=$allobjects[$i]['title'];?></a>
+								<a class="caption" href="<?=$baseurl;?>stroitelstvo/object/<?=$allobjects[$i]['translit'];?>">
+									<?=$allobjects[$i]['title'];?> 
+									<? if ( !$allobjects[$i]['over'] ): ?><span class="details">Объект в работе</span><? endif; ?>
+								</a>
 								<div class="note">
 									<?=$allobjects[$i]['note'];?>
 								</div>
