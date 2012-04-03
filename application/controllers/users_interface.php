@@ -137,11 +137,11 @@ class Users_interface extends CI_Controller{
 			endif;
 		endfor;
 		
-		$pagevar['interior'] = $this->interiorsmodel->read_limit_records($pagevar['objects'][$pagevar['num']]['id'],1,0);
+		$pagevar['interior'] = $this->interiorsmodel->read_limit_records($pagevar['objects'][$pagevar['num']]['id'],9,0);
 		if(count($pagevar['interior'])):
 			$pagevar['interior'][0]['images'] = $this->photosmodel->read_records($pagevar['objects'][$pagevar['num']]['id'],$pagevar['interior'][0]['id'],'interiors');
 		endif;
-		
+		print_r($pagevar['interior']);exit;
 		if($this->input->post('submit')):
 			$this->form_validation->set_rules('title',' ','required|trim');
 			$this->form_validation->set_rules('rooms',' ','required|trim');
