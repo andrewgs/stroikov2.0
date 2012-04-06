@@ -13,7 +13,7 @@
 			<div class="grid_16 carousel list">
 			<? $this->load->view('alert_messages/alert-error');?>
 			<? $this->load->view('alert_messages/alert-success');?>
-			<? if(count($interior)>0):?>
+			<? if(count($interiors)>0):?>
 				<h1>Дизайн интерьеров <span class="details">Новые проекты жилых и офисных интерьеров</span></h1>
 				<div class="grid_16 alpha omega">
 					<!--
@@ -32,115 +32,21 @@
 					</div>
 					-->
 					<div class="slider interiors" id="samples-row">
+				<?php for($i=0;$i<count($interiors);$i++):?>
 						<div class="design-row">
 							<div class="design-sample">
 								<div class="frame">
 									<div class="inner">
-										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/150">
+										<img alt="<?=$interiors[$i]['phtitle'];?>" src="<?=$this->uri->uri_string();?>/viewsmallimage/<?=$interiors[$i]['phid']?>">
 									</div>
 								</div>
-								<a class="caption" href="http://sk-stroikov.ru/design-interierov/saloni-krasoti/Beauty-Salon-in-Rostov">Салон красоты "Тулаева"</a>
+								<a class="caption" href="<?=$baseurl;?>design-interierov/<?=$interiors[$i]['objtrans'];?>/<?=$interiors[$i]['translit'];?>"><?=$interiors[$i]['title'];?></a>
 								<div class="note">
-									Салон красоты Ольги Тулаевой в стиле неоклассика.
-									Автор: архитектор-дизайнер Чернышев Руслан
-								</div>
-							</div>
-							<div class="design-sample">
-								<div class="frame">
-									<div class="inner">
-										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/135">
-									</div>
-								</div>
-								<a class="caption" href="http://sk-stroikov.ru/design-interierov/ofisy/design-interiera-ofisa-stroitelnoi-kompanii">Строительная компания</a>
-								<div class="note">
-									Офис строительной компании «Стройковъ». Стилистика лофт. Дизайнер-архитектор: Сердобинцева Ольга
-								</div>
-							</div>
-							<div class="design-sample">
-								<div class="frame">
-									<div class="inner">
-										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/140">
-									</div>
-								</div>
-								<a class="caption" href="http://sk-stroikov.ru/design-interierov/saloni-krasoti/design-interiera-SPA-salona-milo">SPA-салон «Мыло»</a>
-								<div class="note">
-									Стилистика интерьера - прованс.
-									Интерьер разработан под чутким руководством хозяйки салона. Каждый элемент напоминает посетителям о романтике старой Франции и предвкушает наслаждение от предстоящих
+									<?=$interiors[$i]['note'];?>
 								</div>
 							</div>
 						</div>
-						<div class="design-row">
-							<div class="design-sample">
-								<div class="frame">
-									<div class="inner">
-										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/90">
-									</div>
-								</div>
-								<a class="caption" href="http://sk-stroikov.ru/design-interierov/kvartiry/design-interiera-3komnatnoi-kvartiry-na-kozlova">Современная классика</a>
-								<div class="note">
-									Квартира для молодой семьи, в которой каждый уголок пространства функционально задействован для потребностей каждого члена семьи:
-									это и уютная кухня разрботанная на самый взыскательный вкус хозяйки,
-								</div>
-							</div>
-							<div class="design-sample">
-								<div class="frame">
-									<div class="inner">
-										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/97">
-									</div>
-								</div>
-								<a class="caption" href="http://sk-stroikov.ru/design-interierov/kvartiry/3-komnatnaya-2-urovnevaya-kvartira">Солнце, море и песок...</a>
-								<div class="note">
-									Общая стилистика - современная эклектика с нотами экостиля. Архитектор-дизайнер: Сердобинцева Ольга
-								</div>
-							</div>
-							<div class="design-sample">
-								<div class="frame">
-									<div class="inner">
-										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/36">
-									</div>
-								</div>
-								<a class="caption" href="http://sk-stroikov.ru/design-interierov/kvartiry/design-interiera-dom-v-bataiske">Дом в Батайске</a>
-								<div class="note">
-									Стили: хай-тек,неоклассика, поп-арт. Автор проекта Руслан Чернышев.
-								</div>
-							</div>
-						</div>
-						<div class="design-row">
-							<div class="design-sample">
-								<div class="frame">
-									<div class="inner">
-										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/44">
-									</div>
-								</div>
-								<a class="caption" href="http://sk-stroikov.ru/design-interierov/kvartiry/design-interiera-dom-za-gorodom">Дом за городом</a>
-								<div class="note">
-									Стиль: фьюжн с элементами прованса. Автор проекта Руслан Чернышев.
-								</div>
-							</div>
-							<div class="design-sample">
-								<div class="frame">
-									<div class="inner">
-										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/53">
-									</div>
-								</div>
-								<a class="caption" href="http://sk-stroikov.ru/design-interierov/kvartiry/design-interiera-2k-kvartiri">Взрослым вход воспрещен</a>
-								<div class="note">
-									Дизайн-интерьер небольшой 2-к квартиры. Автор: Руслан Чернышев.
-								</div>
-							</div>
-							<div class="design-sample">
-								<div class="frame">
-									<div class="inner">
-										<img alt="" src="http://sk-stroikov.ru/design-interierov/viewsmallimage/26">
-									</div>
-								</div>
-								<a class="caption" href="http://sk-stroikov.ru/design-interierov/kvartiry/3-komnatnaya-rvartira-dlya-molodoi-semi">Квартира для молодой семьи</a>
-								<div class="note">
-									Стиль- Фьюжн, с элементами Модерна.
-									Автор проекта Руслан Чернышев.
-								</div>
-							</div>
-						</div>
+				<?php endfor;?>
 					</div>
 				</div>
 			<? else:?>
@@ -175,7 +81,7 @@
 				</div>
 			</div>
 			<div class="clear"></div>
-			<? if(isset($objects[0]) && !count($interior)):?>
+			<? if(isset($objects[0]) && !count($interiors)):?>
 				<? if($loginstatus['status']):?>
 					<? $this->load->view('modal/admin-add-interior');?>
 				<? endif;?>

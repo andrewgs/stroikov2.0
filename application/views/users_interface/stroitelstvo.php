@@ -11,26 +11,31 @@
 		<?=$this->load->view('users_interface/navigation');?>
 		<section class="proposals">
 			<div class="grid_16 carousel list">
-			<?php if(count($objects['current'])>0):?>
-				<h2><?=$objects['current'][0]['title'];?><span class="details"><?=$objects['current'][0]['address'];?></span></h2>
-				<div class="grid_1">
-					<a href="#" id="prev" class="slider-arrow left">Пред.</a>
-				</div>
-				<div class="grid_14 alpha omega">
-					<div class="slider">
-						<div id="samples">
-					<?php for($i=0;$i<count($objects['current'][0]['images']);$i++):?>
-						<div class="design-sample">
-							<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$objects['current'][0]['images'][$i]['id'];?>" alt=""/>
+			<? $this->load->view('alert_messages/alert-error');?>
+			<? $this->load->view('alert_messages/alert-success');?>
+			<?php if(count($allobjects)>0):?>
+				<h1>Строительство <span class="details">Список строительных объектов компании Стройковъ</span></h1>
+				<div class="grid_16 alpha omega">
+					<div class="slider interiors" id="samples-row">
+				<?php for($i=0;$i<count($allobjects);$i++):?>
+						<div class="design-row">
+							<div class="design-sample">
+								<div class="frame">
+									<div class="inner">
+										<img alt="<?=$allobjects[$i]['phtitle'];?>" src="<?=$this->uri->uri_string();?>/viewsmallimage/<?=$allobjects[$i]['phid']?>">
+									</div>
+								</div>
+								<a class="caption" href="<?=$baseurl;?>stroitelstvo/object/<?=$allobjects[$i]['translit'];?>">
+									<?=$allobjects[$i]['title'];?> 
+									<? if ( !$allobjects[$i]['over'] ): ?><span class="details">Объект в работе</span><? endif; ?>
+								</a>
+								<div class="note">
+									<?=$allobjects[$i]['note'];?>
+								</div>
+							</div>
 						</div>
-					<?php endfor;?>
-						</div>
-						<?=anchor('stroitelstvo/object/'.$objects['current'][0]['translit'],$objects['current'][0]['title']);?>
-						<p><?=$objects['current'][0]['note'];?></p>						
+				<?php endfor;?>
 					</div>
-				</div>
-				<div class="grid_1">
-					<a href="#" id="next" class="slider-arrow right">След.</a>
 				</div>
 			<?php else:?>
 				<h1>На данный момент строящихся объектов нет! Можете ознакомится с завершенными объектами</h1>

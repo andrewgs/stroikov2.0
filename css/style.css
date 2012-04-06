@@ -63,7 +63,7 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 .info { background: #fff; height: 440px; padding: 25px 40px 40px !important; }
 	.carousel.list, .info.list { height: auto; padding-bottom: 20px; margin-bottom: 18px; }
 	.carousel h1, .carousel h2, .info h1 { color: #808A70; font-size: 16px; font-weight: normal; letter-spacing: 1px; line-height: 22px; padding: 20px 10px 0; text-transform: uppercase; margin: 0 0 30px 0; }
-	.carousel h1 .details, .carousel h2 .details { display: block; font-size: 13px; line-height: 23px; color: #523511; text-transform: none; opacity: 0.5; }
+	.carousel h1 .details, .carousel h2 .details, .caption .details { display: block; font-size: 13px; line-height: 23px; color: #523511; text-transform: none; opacity: 0.5; }
 	.info h1 { color: #523511; font-size: 18px; line-height: 27px; margin: 0 0 20px; }
 	.info h2 { color: #523511; font-size: 17px; padding: 10px 0 0; font-weight: normal; }
 
@@ -129,6 +129,9 @@ p.signature { color: #523511; font: italic 16px/21px Georgia, serif; margin: 30p
 p.spacing { letter-spacing: 0.5px; }
 p.spacing a { color: #89b838; }
 .no-padding { padding: 10px 0 0 !important; }
+.stuff-photo { float: left; height: 215px; margin: 10px 0 0; width: 180px; }
+.stuff-photo strong { color: #92B555; display: block; font-size: 15px;  letter-spacing: 0.5px;margin: 5px 0 0; width: 175px; }
+.stuff-photo em { display: block; margin: 0 0 15px; width: 175px; font-size: 13px; }
 
 /* ==|== footer ====================================================== */
 footer { height: 70px; background: #89B838; color: #fff; line-height: 70px; }

@@ -17,6 +17,61 @@
 					<p>Мы проводим предварительные  обследования территории, занимаемся разработкой технического задания  на проектирование и строительство, а также технико-экономического обоснования строительства и  инвестиций в строительство, занимаемся оформлением разрешительной, конструкторской, проектной, рабочей документацией, получаем технические условия на подключение объекта к инженерным сетям, выполняем строительные работы.</p>
 					<p>Наша дизайно-ремонтная студия занимается ландшафтным, архитектурным, художественным дизайном, декорированием.</p>
 					<p>ООО СК «Стройковъ» также предлагает Вам информационно-консультационные, помощь в сдаче объекта в эксплуатацию, определение стоимости проектных и строительных работ, консультативную поддержку.</p>
+					<h2 id="stuff">Сотрудники компании</h2>
+					<div>
+						<div class="stuff-photo">
+							<img src="<?=$baseurl;?>img/photo_1.png" alt=""/>
+							<strong>Киргинцев Виталий</strong>
+							<em>Директор</em>
+						</div>
+						<div class="clear"></div>
+						<div class="stuff-photo">
+							<img src="<?=$baseurl;?>img/photo_2.png" alt=""/>
+							<strong>Сердобинцева Ольга</strong>
+							<em>Архитектор-дизайнер</em>
+						</div>
+						<div class="stuff-photo">
+							<img src="<?=$baseurl;?>img/photo_3.png" alt=""/>
+							<strong>Волков Дмитрий</strong>
+							<em>Архитектор-дизайнер, искусствовед</em>
+						</div>
+						<div class="stuff-photo">
+							<img src="<?=$baseurl;?>img/photo_4.png" alt=""/>
+							<strong>Палабеков Кирилл</strong>
+							<em>Слаботочные сети, пожарные и охранные системы</em>
+						</div>
+						<div class="stuff-photo">
+							<img src="<?=$baseurl;?>img/photo_5.png" alt=""/>
+							<strong>Чернышов Александр</strong>
+							<em>Менеджер</em>
+						</div>
+						<div class="stuff-photo">
+							<img src="<?=$baseurl;?>img/photo_6.png" alt=""/>
+							<strong>Холостов Алексей</strong>
+							<em>Системы вентиляции и кондиционирования</em>
+						</div>
+						<div class="stuff-photo">
+							<img src="<?=$baseurl;?>img/photo_7.png" alt=""/>
+							<strong>Дарья Турова</strong>
+							<em>Помощник директора</em>
+						</div>
+						<div class="stuff-photo">
+							<img src="<?=$baseurl;?>img/photo_8.png" alt=""/>
+							<strong>Карнаухова Диана</strong>
+							<em>Архитектор-дизайнер</em>
+						</div>
+						<div class="stuff-photo">
+							<img src="<?=$baseurl;?>img/photo_9.png" alt=""/>
+							<strong>Чернышев Руслан</strong>
+							<em>Архитектор-дизайнер</em>
+						</div>
+						<div class="stuff-photo">
+							<img src="<?=$baseurl;?>img/photo_10.png" alt=""/>
+							<strong>Сергеева Елена</strong>
+							<em>Главный бухгалтер</em>
+						</div>
+						<div class="clear"></div>
+					</div>
 					<h2 id="awards">Наши награды</h2>
 					<div class="grid_4 alpha diplom">
 						<img src="<?=$baseurl;?>img/diploms/str_gr_1.jpg" alt=""/>
@@ -42,10 +97,10 @@
 			</div>
 			<div class="grid_7 prefix_1">
 				<div class="aside-block list">
-					<h3> </h3>
+					<h3></h3>
 					<ul>
 						<li><a href="#top">Информация</a></li>
-						<li><a href="#top">Сотрудники компании</a></li>
+						<li><a href="#stuff">Сотрудники компании</a></li>
 						<li><a href="#awards">Наши награды</a></li>
 					</ul>
 				</div>
