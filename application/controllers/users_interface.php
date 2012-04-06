@@ -15,6 +15,7 @@ class Users_interface extends CI_Controller{
 		$this->load->model('estatemodel');
 		$this->load->model('photosmodel');
 		$this->load->model('constructionmodel');
+		$this->load->model('unionmodel');
 		
 		$cookieuid = $this->session->userdata('logon');
 		if(isset($cookieuid) and !empty($cookieuid)):
@@ -122,7 +123,7 @@ class Users_interface extends CI_Controller{
 					'loginstatus'	=> $this->loginstatus,
 					'userinfo'		=> $this->user,
 					'objects'		=> $this->objectstypemodel->read_records(),
-					'interior'		=> array(),
+					'interiors'		=> array(),
 					'num'			=> 0,
 					'msgs'			=> $this->session->userdata('msgs'),
 					'msgr'			=> $this->session->userdata('msgr')
@@ -137,10 +138,10 @@ class Users_interface extends CI_Controller{
 			endif;
 		endfor;
 		
-		$pagevar['interior'] = $this->interiorsmodel->read_limit_records($pagevar['objects'][$pagevar['num']]['id'],1,0);
-		if(count($pagevar['interior'])):
+		$pagevar['interiors'] = $this->unionmodel->read_interiors();
+		/*if(count($pagevar['interior'])):
 			$pagevar['interior'][0]['images'] = $this->photosmodel->read_records($pagevar['objects'][$pagevar['num']]['id'],$pagevar['interior'][0]['id'],'interiors');
-		endif;
+		endif;*/
 		
 		if($this->input->post('submit')):
 			$this->form_validation->set_rules('title',' ','required|trim');
@@ -332,15 +333,18 @@ class Users_interface extends CI_Controller{
 					'baseurl' 		=> base_url(),
 					'loginstatus'	=> $this->loginstatus,
 					'userinfo'		=> $this->user,
-					'objects'		=> array()
+					'objects'		=> array(),
+					'allobjects'	=> $this->unionmodel->read_construction(),
+					'msgs'			=> $this->session->userdata('msgs'),
+					'msgr'			=> $this->session->userdata('msgr')
 			);
+		$this->session->unset_userdata('msgs');
+		$this->session->unset_userdata('msgr');
+		
+//		print_r($pagevar['allobjects']);exit;
 		
 		$pagevar['objects']['current'] = $this->constructionmodel->read_limit_records(0,5,0);
 		$pagevar['objects']['over'] = $this->constructionmodel->read_limit_records(1,5,0);
-		
-		if(count($pagevar['objects']['current'])):
-			$pagevar['objects']['current'][0]['images'] = $this->photosmodel->read_records(0,$pagevar['objects']['current'][0]['id'],'construction');
-		endif;
 		
 		if($this->input->post('submit')):
 			$this->form_validation->set_rules('title',' ','required|trim');

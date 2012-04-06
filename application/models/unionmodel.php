@@ -15,6 +15,24 @@ class Unionmodel extends CI_Model{
 		return NULL;
 	}
 	
+	function read_interiors(){
+		
+		$query = "SELECT interiors.*,objectstype.translit AS objtrans,photos.id AS phid,photos.title AS phtitle FROM interiors INNER JOIN photos ON interiors.id = photos.object INNER JOIN objectstype ON interiors.type = objectstype.id WHERE photos.table = 'interiors' GROUP BY interiors.id ORDER BY interiors.insdate DESC, interiors.id DESC";
+		$query = $this->db->query($query);
+		$data = $query->result_array();
+		if(count($data)) return $data;
+		return NULL;
+	}
+	
+	function read_construction(){
+		
+		$query = "SELECT construction.*, photos.id AS phid,photos.title AS phtitle FROM construction INNER JOIN photos ON construction.id = photos.object WHERE photos.table = 'construction' GROUP BY construction.id ORDER BY construction.insdate DESC, construction.id DESC";
+		$query = $this->db->query($query);
+		$data = $query->result_array();
+		if(count($data)) return $data;
+		return NULL;
+	}
+	
 	function read_corder_records($order){
 		
 		$query = "SELECT courseorder.*,courses.title,courses.price,courses.code FROM courseorder INNER JOIN courses ON courseorder.course=courses.id WHERE courseorder.order = $order ORDER BY courseorder.id";
