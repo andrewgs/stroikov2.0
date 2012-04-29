@@ -88,6 +88,17 @@ class Admin_interface extends CI_Controller{
 		endif;
 		redirect($this->uri->segment(2).'/'.$this->uri->segment(3).'/'.$this->uri->segment(4));
 	}
+
+	public function photo_album_delete_image(){
+		
+		$image = $this->uri->segment(5);
+		if($this->photosmodel->image_delete($image)):
+			$this->session->set_userdata('msgs','Фотогафия удалена успешно.');
+		else:
+			$this->session->set_userdata('msgr','Ошибка при удалении фотографии.');
+		endif;
+		redirect('o-kompanii/photo-album');
+	}
 	
 	public function admin_delete_interior(){
 		

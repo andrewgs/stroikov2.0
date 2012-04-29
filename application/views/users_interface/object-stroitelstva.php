@@ -61,7 +61,7 @@
 				<?php endif;?>
 					</ul>
 					<?php if($loginstatus['status']):?>
-						<a class="details addObj" style="right:132px;" over="0" data-toggle="modal" href="#addObject"><i class="icon-plus"></i> Добавить объект</a>
+						<a class="details addObj" style="right:131px;" over="0" data-toggle="modal" href="#addObject"><i class="icon-plus"></i> Добавить объект</a>
 					<?php endif;?>
 				</div>
 				<div class="aside-block list">
@@ -74,7 +74,7 @@
 				<?php endif;?>
 					</ul>
 					<?php if($loginstatus['status']):?>
-						<a class="details addObj" style="right:132px;" over="1" data-toggle="modal" href="#addObject"><i class="icon-plus"></i> Добавить объект</a>
+						<a class="details addObj" style="right:131px;" over="1" data-toggle="modal" href="#addObject"><i class="icon-plus"></i> Добавить объект</a>
 					<?php endif;?>
 				</div>
 			</div>

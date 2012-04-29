@@ -21,6 +21,7 @@ $route['stroitelstvo'] 										= "users_interface/stroitelstvo";
 $route['stroitelstvo/viewimage/:num'] 						= "users_interface/viewimage";
 $route['stroitelstvo/viewsmallimage/:num'] 					= "users_interface/viewsmallimage";
 $route['stroitelstvo/object/:any/viewimage/:num'] 			= "users_interface/viewimage";
+$route['o-kompanii/photo-album/slideshow/viewimage/:num'] 	= "users_interface/viewimage";
 $route['stroitelstvo/object/:any'] 							= "users_interface/object_stroitelstva";
 
 $route['konkurs-dlya-desainerov-architektorov-stroika1']	= "users_interface/konkurs_dlya_desainerov";
@@ -28,6 +29,8 @@ $route['konkurs-dlya-desainerov-architektorov-stroika1']	= "users_interface/konk
 $route['remont'] 					= "users_interface/remont";
 $route['injenernue-seti'] 			= "users_interface/injenernue_seti";
 $route['o-kompanii'] 				= "users_interface/o_kompanii";
+$route['o-kompanii/photo-album']	= "users_interface/photo_album";
+
 $route['kontaktnaya-informacia'] 	= "users_interface/kontaktnaya_informacia";
 
 $route['admin'] 					= "users_interface/admin_login";
@@ -45,6 +48,7 @@ $route['admin-panel/agentstvo-nedvijimosti/:any/:any/delete-estate/id/:num'] 	= 
 $route['admin-panel/stroitelstvo/object/:any/delete-object/id/:num'] 		= "admin_interface/admin_delete_object";
 $route['admin-panel/delete/object-types/:num']								= "admin_interface/admin_delete_objecttypes";
 
-$route['admin-panel/stroitelstvo/object/:any/delete/image/:num'] 		= "admin_interface/admin_delete_image";
+$route['admin-panel/stroitelstvo/object/:any/delete/image/:num'] 			= "admin_interface/admin_delete_image";
+$route['admin-panel/photo-album/delete/image/:num']							= "admin_interface/photo_album_delete_image";
 
 $route['admin-panel/agentstvo-nedvijimosti/:any/:any/delete/image/:num'] 	= "admin_interface/admin_delete_image";

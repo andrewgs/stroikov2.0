@@ -789,8 +789,47 @@ class Users_interface extends CI_Controller{
 					'loginstatus'	=> $this->loginstatus,
 					'userinfo'		=> $this->user
 			);
-		
+		if($this->input->post('imgsubmit')):
+			for($i=0;$i<count($_FILES['userfile']['name']);$i++):
+				if(!$_FILES['userfile']['error'][$i]):
+					$img['image'] = $this->resize_image($_FILES['userfile']['tmp_name'][$i],540,320,TRUE);
+					$img['title'] = '';
+					$img['small'] = '';
+					$this->photosmodel->insert_record($img,0,0,'album');
+				endif;
+			endfor;
+			redirect($this->uri->uri_string());
+		endif;
 		$this->load->view("users_interface/o-kompanii",$pagevar);
+	}
+	
+	public function photo_album(){
+		
+		$pagevar = array(
+					'description'	=> '',
+					'author'		=> '',
+					'title'			=> 'Cтроительная компания в Ростове-на-Дону :: ООО СК Стройковъ',
+					'baseurl' 		=> base_url(),
+					'loginstatus'	=> $this->loginstatus,
+					'userinfo'		=> $this->user,
+					'album'			=> $this->photosmodel->read_records(0,0,'album'),
+					'msgs'			=> $this->session->userdata('msgs'),
+					'msgr'			=> $this->session->userdata('msgr')
+			);
+		$this->session->unset_userdata('msgs');
+		$this->session->unset_userdata('msgr');
+		if($this->input->post('imgsubmit')):
+			for($i=0;$i<count($_FILES['userfile']['name']);$i++):
+				if(!$_FILES['userfile']['error'][$i]):
+					$img['image'] = $this->resize_image($_FILES['userfile']['tmp_name'][$i],540,320,TRUE);
+					$img['title'] = '';
+					$img['small'] = '';
+					$this->photosmodel->insert_record($img,0,0,'album');
+				endif;
+			endfor;
+			redirect($this->uri->uri_string());
+		endif;
+		$this->load->view("users_interface/photo-album",$pagevar);
 	}
 	
 	public function admin_login(){
