@@ -104,7 +104,9 @@
 				<div class="aside-block list">
 					<h3></h3>
 					<ul>
+						<!--
 						<li><a href="#top">Информация</a></li>
+						-->
 						<li><a href="#stuff">Сотрудники компании</a></li>
 						<li><a href="#awards">Наши награды</a></li>
 					</ul>

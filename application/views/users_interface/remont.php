@@ -14,7 +14,7 @@
 			<? $this->load->view('alert_messages/alert-error');?>
 			<? $this->load->view('alert_messages/alert-success');?>
 			<?php if(count($allobjects)>0):?>
-				<h1>Ремонт <span class="details">Список ремонтных объектов компании Стройковъ</span></h1>
+				<h1>Ремонт <span class="details">Список ремонтируемых объектов компании Стройковъ</span></h1>
 				<div class="grid_16 alpha omega">
 					<div class="slider interiors" id="samples-row">
 				<?php for($i=0;$i<count($allobjects);$i++):?>
@@ -38,15 +38,15 @@
 					</div>
 				</div>
 			<?php else:?>
-				<h1>На данный момент ремонтирующихся объектов нет! Можете ознакомится с завершенными объектами</h1>
+				<strong>На данный момент ремонтирующихся объектов нет! Можете ознакомится с завершенными объектами</strong>
 				<?php if($loginstatus['status']):?>
 					<a class="btn btn-success" data-toggle="modal" href="#addObject"><i class="icon-plus"></i> Добавить строящийся объект</a>
 				<?php endif;?>
 			<?php endif;?>
 			
-			<!--<div class="grid_16">
+			<div class="grid_16">
 				<div class="info list">
-					<h1>Ремонтно-отделочные работы <br>в Ростове-на-Дону</h1>
+					<h2>Ремонтно-отделочные работы в Ростове-на-Дону</h2>
 					<p>
 						Решая проектные задачи, специалисты дизайно-ремонтной студии Стройковъ 
 						создают неповторимый дизайн различного уровня сложности, ориентируясь на 
@@ -121,7 +121,7 @@
 						качество сделанного нами ремонта.
 					</p>
 				</div>
-			</div>-->
+			</div>
 			
 			
 			</div>
