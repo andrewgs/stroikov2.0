@@ -20,9 +20,13 @@ $route['agentstvo-nedvijimosti/:any/:any'] 					= "users_interface/object_nedvij
 $route['stroitelstvo'] 										= "users_interface/stroitelstvo";
 $route['stroitelstvo/viewimage/:num'] 						= "users_interface/viewimage";
 $route['stroitelstvo/viewsmallimage/:num'] 					= "users_interface/viewsmallimage";
+
 $route['stroitelstvo/object/:any/viewimage/:num'] 			= "users_interface/viewimage";
 $route['o-kompanii/photo-album/slideshow/viewimage/:num'] 	= "users_interface/viewimage";
 $route['stroitelstvo/object/:any'] 							= "users_interface/object_stroitelstva";
+$route['remont/object/:any/viewimage/:num'] 				= "users_interface/viewimage";
+$route['remont/viewsmallimage/:num'] 						= "users_interface/viewsmallimage";
+$route['remont/object/:any'] 								= "users_interface/object_remonta";
 
 $route['konkurs-dlya-desainerov-architektorov-stroika1']	= "users_interface/konkurs_dlya_desainerov";
 
@@ -50,5 +54,7 @@ $route['admin-panel/delete/object-types/:num']								= "admin_interface/admin_d
 
 $route['admin-panel/stroitelstvo/object/:any/delete/image/:num'] 			= "admin_interface/admin_delete_image";
 $route['admin-panel/photo-album/delete/image/:num']							= "admin_interface/photo_album_delete_image";
+
+$route['admin-panel/remont/object/:any/delete-object/id/:num'] 				= "admin_interface/admin_delete_remont";
 
 $route['admin-panel/agentstvo-nedvijimosti/:any/:any/delete/image/:num'] 	= "admin_interface/admin_delete_image";

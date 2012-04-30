@@ -16,6 +16,7 @@ class Admin_interface extends CI_Controller{
 		$this->load->model('estatemodel');
 		$this->load->model('photosmodel');
 		$this->load->model('constructionmodel');
+		$this->load->model('repairmodel');
 		
 		$cookieuid = $this->session->userdata('logon');
 		if(isset($cookieuid) and !empty($cookieuid)):
@@ -129,6 +130,18 @@ class Admin_interface extends CI_Controller{
 		$object = $this->uri->segment(7);
 		if($this->constructionmodel->delete_record($object)):
 			$this->photosmodel->images_delete($object,'construction');
+			$this->session->set_userdata('msgs','Объект удален успешно.');
+		else:
+			$this->session->set_userdata('msgr','Ошибка при удалении объекта.');
+		endif;
+		redirect($this->uri->segment(2));
+	}
+	
+	public function admin_delete_remont(){
+		
+		$object = $this->uri->segment(7);
+		if($this->repairmodel->delete_record($object)):
+			$this->photosmodel->images_delete($object,'repair');
 			$this->session->set_userdata('msgs','Объект удален успешно.');
 		else:
 			$this->session->set_userdata('msgr','Ошибка при удалении объекта.');
