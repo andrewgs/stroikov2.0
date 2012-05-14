@@ -15,6 +15,7 @@ class Users_interface extends CI_Controller{
 		$this->load->model('estatemodel');
 		$this->load->model('photosmodel');
 		$this->load->model('constructionmodel');
+		$this->load->model('repairmodel');
 		$this->load->model('unionmodel');
 		
 		$cookieuid = $this->session->userdata('logon');
@@ -319,8 +320,37 @@ class Users_interface extends CI_Controller{
 					'baseurl' 		=> base_url(),
 					'loginstatus'	=> $this->loginstatus,
 					'userinfo'		=> $this->user,
+					'objects'		=> array(),
+					'allobjects'	=> $this->unionmodel->read_repair(),
+					'msgs'			=> $this->session->userdata('msgs'),
+					'msgr'			=> $this->session->userdata('msgr')
 			);
+		$this->session->unset_userdata('msgs');
+		$this->session->unset_userdata('msgr');
 		
+		$pagevar['objects']['current'] = $this->repairmodel->read_limit_records(0,5,0);
+		$pagevar['objects']['over'] = $this->repairmodel->read_limit_records(1,5,0);
+		
+		if($this->input->post('submit')):
+			$this->form_validation->set_rules('title',' ','required|trim');
+			$this->form_validation->set_rules('address',' ','required|trim');
+			$this->form_validation->set_rules('note',' ','required|trim');
+			$this->form_validation->set_rules('translit',' ','trim');
+			if($this->form_validation->run()):
+				if(!isset($_POST['over'])):
+					$_POST['over'] = 0;
+				endif;
+				if(!empty($_POST['translit'])):
+					$translit = preg_replace("/\ +/","-",$_POST['translit']);
+				else:
+					$translit = $this->translite($_POST['title']);
+				endif;
+				if(!$this->repairmodel->exist_translit($translit)):
+					$this->repairmodel->insert_record($_POST,$translit);
+				endif;
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
 		$this->load->view("users_interface/remont",$pagevar);
 	}
 	
@@ -628,6 +658,100 @@ class Users_interface extends CI_Controller{
 		$this->load->view("users_interface/object-stroitelstva",$pagevar);
 	}
 	
+	public function object_remonta(){
+		
+		$pagevar = array(
+					'description'	=> '',
+					'author'		=> '',
+					'title'			=> 'Cтроительная компания в Ростове-на-Дону :: ООО СК Стройковъ',
+					'baseurl' 		=> base_url(),
+					'loginstatus'	=> $this->loginstatus,
+					'userinfo'		=> $this->user,
+					'objects'		=> array(),
+					'object'		=> $this->objectstypemodel->read_records(),
+					'msgs'			=> $this->session->userdata('msgs'),
+					'msgr'			=> $this->session->userdata('msgr')
+			);
+		$this->session->unset_userdata('msgs');
+		$this->session->unset_userdata('msgr');
+		
+		$pagevar['objects']['current'] = $this->repairmodel->read_limit_records(0,5,0);
+		$pagevar['objects']['over'] = $this->repairmodel->read_limit_records(1,5,0);
+		
+		$pagevar['object'] = $this->repairmodel->read_record($this->uri->segment(3));
+		$pagevar['object']['images'] = $this->photosmodel->read_records(0,$pagevar['object']['id'],'repair');
+
+		if($this->input->post('submit')):
+			$this->form_validation->set_rules('title',' ','required|trim');
+			$this->form_validation->set_rules('address',' ','required|trim');
+			$this->form_validation->set_rules('note',' ','required|trim');
+			$this->form_validation->set_rules('translit',' ','trim');
+			if($this->form_validation->run()):
+				if(!isset($_POST['over'])):
+					$_POST['over'] = 0;
+				endif;
+				if(!empty($_POST['translit'])):
+					$translit = preg_replace("/\ +/","-",htmlspecialchars($_POST['translit']));
+				else:
+					$translit = $this->translite(htmlspecialchars($_POST['title']));
+				endif;
+				if(!$this->repairmodel->exist_translit($translit)):
+					$this->repairmodel->insert_record($_POST,$translit);
+					$this->session->set_userdata('msgs','Объект добавлен успешно.');
+				else:
+					$this->session->set_userdata('msgr','Добавление не возможно. Объект с псевдонимом '.$translit.' уже существует.');
+				endif;
+				redirect('remont/object/'.$translit);
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
+		
+		if($this->input->post('imgsubmit')):
+			$this->form_validation->set_rules('title',' ','required|trim');
+			$this->form_validation->set_rules('userfile',' ','callback_userfile_check');
+			if($this->form_validation->run()):
+				if($_FILES['userfile']['error'] != 4):
+//					$_POST['image'] = $this->resize_img($_FILES['userfile']['tmp_name'],540,320,FALSE);
+					$_POST['image'] = $this->resize_image($_FILES['userfile']['tmp_name'],540,320,TRUE);
+//					$_POST['small'] = $this->resize_img($_FILES['userfile']['tmp_name'],141,104,TRUE);
+					$_POST['small'] = $this->resize_image($_FILES['userfile']['tmp_name'],141,104,TRUE);
+				endif;
+				if($this->repairmodel->exist_translit($this->uri->segment(3))):
+					$object = $this->repairmodel->read_field_translit($this->uri->segment(3),'id');
+					$this->photosmodel->insert_record($_POST,0,$object,'repair');
+					$this->session->set_userdata('msgs','Фотогафия добавлена успешно.');
+				endif;
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
+		
+		if($this->input->post('edsubmit')):
+			$this->form_validation->set_rules('object',' ','required|trim');
+			$this->form_validation->set_rules('title',' ','required|trim');
+			$this->form_validation->set_rules('address',' ','required|trim');
+			$this->form_validation->set_rules('note',' ','required|trim');
+			$this->form_validation->set_rules('translit',' ','trim');
+			if($this->form_validation->run()):
+				if(!isset($_POST['over'])):
+					$_POST['over'] = 0;
+				endif;
+				if(!empty($_POST['translit'])):
+					$translit = htmlspecialchars($_POST['translit']);
+				else:
+					$translit = $this->translite(htmlspecialchars($_POST['title']));
+				endif;
+				if(!$this->repairmodel->exist_translit_nonid($_POST['object'],$translit)):
+					$this->repairmodel->update_record($_POST['object'],$translit,$_POST);
+					$this->session->set_userdata('msgs','Объект сохранен успешно.');
+				endif;
+				redirect('remont/object/'.$translit);
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
+		
+		$this->load->view("users_interface/object-remonta",$pagevar);
+	}
+	
 	public function konkurs_dlya_desainerov(){
 		
 		$pagevar = array(
@@ -789,8 +913,47 @@ class Users_interface extends CI_Controller{
 					'loginstatus'	=> $this->loginstatus,
 					'userinfo'		=> $this->user
 			);
-		
+		if($this->input->post('imgsubmit')):
+			for($i=0;$i<count($_FILES['userfile']['name']);$i++):
+				if(!$_FILES['userfile']['error'][$i]):
+					$img['image'] = $this->resize_image($_FILES['userfile']['tmp_name'][$i],540,320,TRUE);
+					$img['title'] = '';
+					$img['small'] = '';
+					$this->photosmodel->insert_record($img,0,0,'album');
+				endif;
+			endfor;
+			redirect($this->uri->uri_string());
+		endif;
 		$this->load->view("users_interface/o-kompanii",$pagevar);
+	}
+	
+	public function photo_album(){
+		
+		$pagevar = array(
+					'description'	=> '',
+					'author'		=> '',
+					'title'			=> 'Cтроительная компания в Ростове-на-Дону :: ООО СК Стройковъ',
+					'baseurl' 		=> base_url(),
+					'loginstatus'	=> $this->loginstatus,
+					'userinfo'		=> $this->user,
+					'album'			=> $this->photosmodel->read_records(0,0,'album'),
+					'msgs'			=> $this->session->userdata('msgs'),
+					'msgr'			=> $this->session->userdata('msgr')
+			);
+		$this->session->unset_userdata('msgs');
+		$this->session->unset_userdata('msgr');
+		if($this->input->post('imgsubmit')):
+			for($i=0;$i<count($_FILES['userfile']['name']);$i++):
+				if(!$_FILES['userfile']['error'][$i]):
+					$img['image'] = $this->resize_image($_FILES['userfile']['tmp_name'][$i],540,320,TRUE);
+					$img['title'] = '';
+					$img['small'] = '';
+					$this->photosmodel->insert_record($img,0,0,'album');
+				endif;
+			endfor;
+			redirect($this->uri->uri_string());
+		endif;
+		$this->load->view("users_interface/photo-album",$pagevar);
 	}
 	
 	public function admin_login(){
@@ -831,8 +994,8 @@ class Users_interface extends CI_Controller{
 	
 	public function translite($string){
 	
-		$rus = array("ё","й","ю","ь","ч","щ","ц","у","к","е","н","г","ш","з","х","ъ","ф","ы","в","а","п","р","о","л","д","ж","э","я","с","м","и","т","б","Ё","Й","Ю","Ч","Ь","Щ","Ц","У","К","Е","Н","Г","Ш","З","Х","Ъ","Ф","Ы","В","А","П","Р","О","Л","Д","Ж","Э","Я","С","М","И","Т","Б"," ");
-		$eng = array("yo","iy","yu","","ch","sh","c","u","k","e","n","g","sh","z","h","","f","y","v","a","p","r","o","l","d","j","е","ya","s","m","i","t","b","Yo","Iy","Yu","CH","","SH","C","U","K","E","N","G","SH","Z","H","","F","Y","V","A","P","R","O","L","D","J","E","YA","S","M","I","T","B","-");
+		$rus = array("1","2","3","4","5","6","7","8","9","0","ё","й","ю","ь","ч","щ","ц","у","к","е","н","г","ш","з","х","ъ","ф","ы","в","а","п","р","о","л","д","ж","э","я","с","м","и","т","б","Ё","Й","Ю","Ч","Ь","Щ","Ц","У","К","Е","Н","Г","Ш","З","Х","Ъ","Ф","Ы","В","А","П","Р","О","Л","Д","Ж","Э","Я","С","М","И","Т","Б"," ");
+		$eng = array("1","2","3","4","5","6","7","8","9","0","yo","iy","yu","","ch","sh","c","u","k","e","n","g","sh","z","h","","f","y","v","a","p","r","o","l","d","j","е","ya","s","m","i","t","b","Yo","Iy","Yu","CH","","SH","C","U","K","E","N","G","SH","Z","H","","F","Y","V","A","P","R","O","L","D","J","E","YA","S","M","I","T","B","-");
 		$string = str_replace($rus,$eng,$string);
 		if(!empty($string)):
 			return preg_replace('/[^a-z,-]/','',strtolower($string));

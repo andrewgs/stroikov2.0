@@ -16,6 +16,7 @@ class Admin_interface extends CI_Controller{
 		$this->load->model('estatemodel');
 		$this->load->model('photosmodel');
 		$this->load->model('constructionmodel');
+		$this->load->model('repairmodel');
 		
 		$cookieuid = $this->session->userdata('logon');
 		if(isset($cookieuid) and !empty($cookieuid)):
@@ -88,6 +89,17 @@ class Admin_interface extends CI_Controller{
 		endif;
 		redirect($this->uri->segment(2).'/'.$this->uri->segment(3).'/'.$this->uri->segment(4));
 	}
+
+	public function photo_album_delete_image(){
+		
+		$image = $this->uri->segment(5);
+		if($this->photosmodel->image_delete($image)):
+			$this->session->set_userdata('msgs','Фотогафия удалена успешно.');
+		else:
+			$this->session->set_userdata('msgr','Ошибка при удалении фотографии.');
+		endif;
+		redirect('o-kompanii/photo-album');
+	}
 	
 	public function admin_delete_interior(){
 		
@@ -118,6 +130,18 @@ class Admin_interface extends CI_Controller{
 		$object = $this->uri->segment(7);
 		if($this->constructionmodel->delete_record($object)):
 			$this->photosmodel->images_delete($object,'construction');
+			$this->session->set_userdata('msgs','Объект удален успешно.');
+		else:
+			$this->session->set_userdata('msgr','Ошибка при удалении объекта.');
+		endif;
+		redirect($this->uri->segment(2));
+	}
+	
+	public function admin_delete_remont(){
+		
+		$object = $this->uri->segment(7);
+		if($this->repairmodel->delete_record($object)):
+			$this->photosmodel->images_delete($object,'repair');
 			$this->session->set_userdata('msgs','Объект удален успешно.');
 		else:
 			$this->session->set_userdata('msgr','Ошибка при удалении объекта.');

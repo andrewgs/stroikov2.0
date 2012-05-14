@@ -33,6 +33,15 @@ class Unionmodel extends CI_Model{
 		return NULL;
 	}
 	
+	function read_repair(){
+		
+		$query = "SELECT repair.*, photos.id AS phid,photos.title AS phtitle FROM repair INNER JOIN photos ON repair.id = photos.object WHERE photos.table = 'repair' GROUP BY repair.id ORDER BY repair.insdate DESC, repair.id DESC";
+		$query = $this->db->query($query);
+		$data = $query->result_array();
+		if(count($data)) return $data;
+		return NULL;
+	}
+	
 	function read_corder_records($order){
 		
 		$query = "SELECT courseorder.*,courses.title,courses.price,courses.code FROM courseorder INNER JOIN courses ON courseorder.course=courses.id WHERE courseorder.order = $order ORDER BY courseorder.id";
