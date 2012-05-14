@@ -56,7 +56,7 @@
 					<ul>
 				<?php if(isset($objects['current'])):?>
 					<?php for($i=0;$i<count($objects['current']);$i++):?>
-						<li><?=anchor('stroitelstvo/object/'.$objects['current'][$i]['translit'],$objects['current'][$i]['title']);?></li>
+						<li><?=anchor('remont/object/'.$objects['current'][$i]['translit'],$objects['current'][$i]['title']);?></li>
 					<?php endfor;?>
 				<?php endif;?>
 					</ul>
@@ -69,7 +69,7 @@
 					<ul>
 				<?php if(isset($objects['over'])):?>
 					<?php for($i=0;$i<count($objects['over']);$i++):?>
-						<li><?=anchor('stroitelstvo/object/'.$objects['over'][$i]['translit'],$objects['over'][$i]['title']);?></li>
+						<li><?=anchor('remont/object/'.$objects['over'][$i]['translit'],$objects['over'][$i]['title']);?></li>
 					<?php endfor;?>
 				<?php endif;?>
 					</ul>
@@ -80,9 +80,9 @@
 			</div>
 			<div class="clear"></div>
 			<?php if($loginstatus['status']):?>
-				<?php $this->load->view('modal/admin-add-stroiobjekt');?>
-				<?php $this->load->view('modal/admin-edit-stroiobjekt');?>
-				<?php $this->load->view('modal/admin-delete-stroiobjekt');?>
+				<?php $this->load->view('modal/admin-add-remonta');?>
+				<?php $this->load->view('modal/admin-edit-remonta');?>
+				<?php $this->load->view('modal/admin-delete-remonta');?>
 				<?php $this->load->view('modal/admin-add-image');?>
 				<?php $this->load->view('modal/admin-delete-image');?>
 			<?php endif;?>
@@ -142,7 +142,7 @@
 			});
 			$(".addObj").click(function(){var over = $(this).attr('over'); if(over == 1){$("#over").attr("checked","checked");}})
 			$(".dlImage").click(function(){image = $(this).attr('img');});
-			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/stroitelstvo/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
+			$("#DelImage").click(function(){location.href='<?=$baseurl;?>admin-panel/remont/<?=$this->uri->segment(2);?>/<?=$this->uri->segment(3);?>/delete/image/'+image});
 			$("#DelObject").click(function(){location.href='<?=$baseurl?>admin-panel/<?=$this->uri->uri_string();?>/delete-object/id/<?=$object['id'];?>'});
 			$("#addImage").on("hidden",function(){$(".control-group").removeClass('error');$(".help-inline").hide();});
 		<?php endif;?>

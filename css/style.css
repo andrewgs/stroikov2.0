@@ -35,7 +35,7 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 #main-nav li.stroika { float: right; }
 #main-nav li a { line-height: 30px; color: #523511; font-weight: bold; font-size: 14px; text-transform: uppercase; display: block; margin: 0 15px 0 0; letter-spacing: 1px; }
 #main-nav li.stroika a { float: right; color: #fff; }
-#stroika-pointer { background: url('../img/stroika.png') no-repeat; width: 126px; height: 88px; position: absolute; top: 22px; right: 20px; display: block; text-indent: -9999px;}
+#stroika-pointer { background: url('../img/stroika.png') no-repeat; width: 119px; height: 133px; position: absolute; top: 22px; right: 20px; display: block; text-indent: -9999px;}
 #stroika-agreement { background: url('../img/agreement.png') no-repeat; width: 233px; height: 220px; position: absolute; top: 30px; right: 180px; display: block; outline: 0 none; }
 
 /* ==|== main block ====================================================== */

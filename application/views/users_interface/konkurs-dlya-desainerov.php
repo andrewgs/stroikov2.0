@@ -38,7 +38,7 @@
 					</div>
 					<h2>Цель проекта:</h2>
 					<p>
-						Создать арт-объекты (велопарковки, лавочки) для г. Ростова-на-Дону<br />
+						Создать арт-объекты (велопарковки, лавочки) для г.Ростова-на-Дону<br />
 						Награждение победителей: 27 апреля 2012 г.<br />
 						Реализация проектов: май 2012 г.
 					</p>
@@ -59,6 +59,23 @@
 						т.: 8[988]544 21 23 - куратор Диана Карнаухова <br />
 						т.: 8[951]535 78 55 - координатор Руслан Чернышев
 					</p>
+					<div class="row">
+						<div class="span12">
+							<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?49"></script>
+							<script type="text/javascript">
+								VK.init({
+									apiId : 2947721,
+									onlyWidgets : true
+								});
+	
+							</script>
+							<!-- Put this div tag to the place, where the Comments block will be -->
+							<div id="vk_comments"></div>
+							<script type="text/javascript">
+								VK.Widgets.Comments("vk_comments", {limit: 10, width:"496", attach: "*"});
+							</script>
+						</div>
+					</div>
 					<div class="separator"> </div>
 					<?php $this->load->view('alert_messages/alert-error');?>
 					<?php $this->load->view('alert_messages/alert-success');?>

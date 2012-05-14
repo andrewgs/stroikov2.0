@@ -13,14 +13,21 @@
 			<div class="grid_16">
 				<div class="info list">
 					<h1 class="no-padding">Контакты</h1>
-					<p class="spacing">ООО «Стройковъ»</p>
+					<table class="table">
+						<tr>
+							<td>ООО «СК Стройковъ» </td><td><a target="_blank" href="<?=base_url();?>ooo_sk_stroikov_rekvizity.txt">Реквизиты</a></td>
+						</tr>
+						<tr>
+							<td>ООО «Стройковъ» </td><td><a target="_blank" href="<?=base_url();?>ooo_stroikov_rekvizity.txt">Реквизиты</a></td>
+						</tr>
+					</table>
 					<p class="spacing">
 						344019, г.Ростов-на-Дону, ул.16-я линия, 16Б <br />
 						Тел.: (863) 295-51-10, (863) 295-51-11 Факс: (863) 295-51-12 <br />
 						<?= safe_mailto('info@sk-stroikov.ru', 'info@sk-stroikov.ru'); ?>
 					</p>
 					<p class="spacing">
-						Режим работы: пн-чт - 9:00-18:00, пт - 9:00-16:00, сб-вс - выходные
+						Режим работы: пн-пт - 9:00-18:00, сб-вс - выходные
 					</p>
 					<p class="spacing">
 						На карте:

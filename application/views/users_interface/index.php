@@ -138,7 +138,7 @@
 				<? endif;?>
 					</ul>
 				<? if($loginstatus['status']):?>
-					<a class="details" style="right:152px;" data-toggle="modal" href="#addObjectType"><i class="icon-plus"></i> Добавить тип</a>
+					<a class="details" style="right:151px;" data-toggle="modal" href="#addObjectType"><i class="icon-plus"></i> Добавить тип</a>
 				<? endif;?>
 					<?=anchor('design-interierov','Подробнее &gt;',array('class'=>'details'));?>
 				</div>
