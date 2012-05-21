@@ -311,6 +311,95 @@ class Users_interface extends CI_Controller{
 		$this->load->view("users_interface/kontaktnaya-informacia",$pagevar);
 	}
 	
+	public function zakaz_interiera(){
+		
+		$pagevar = array(
+					'description'	=> '',
+					'author'		=> '',
+					'title'			=> 'Cтроительная компания в Ростове-на-Дону :: ООО СК Стройковъ',
+					'baseurl' 		=> base_url(),
+					'loginstatus'	=> $this->loginstatus,
+					'userinfo'		=> $this->user,
+					'msgs'			=> $this->session->userdata('msgs'),
+					'msgr'			=> $this->session->userdata('msgr')
+			);
+		$this->session->unset_userdata('msgs');
+		$this->session->unset_userdata('msgr');
+		
+		if($this->input->post('submit')):
+			$this->form_validation->set_rules('name',' ','required|trim');
+			$this->form_validation->set_rules('phone',' ','required|trim');
+			$this->form_validation->set_rules('email',' ','required|valid_email|trim');
+			$this->form_validation->set_rules('region',' ','required|trim');
+			$this->form_validation->set_rules('area',' ','required|trim');
+			$this->form_validation->set_rules('note',' ','required|trim');
+			if($this->form_validation->run()):
+				
+				ob_start();
+				?>
+				<p>Здравствуйте, <?=$_POST['name'];?></p>
+				<p>
+					Вами был произведен заказ на дизайн интерьера<br/>
+					Наши специалисты расмотрят Ваш заказ в кратчайшие сроки и свяжутся с Вами.<br/><br/>
+					
+					Дата заказа <?=date("d.m.Y");?><br/></p>
+				<p>Спасибо что воспользовались нашими услугами!</p>
+				<?php
+				$mailtext = ob_get_clean();
+				
+				$this->email->clear(TRUE);
+				$config['smtp_host'] = 'localhost';
+				$config['charset'] = 'utf-8';
+				$config['wordwrap'] = TRUE;
+				$config['mailtype'] = 'html';
+				
+				$this->email->initialize($config);
+				$this->email->to($_POST['email']);
+				$this->email->from('admin@sk-stroikov.ru','Cтроительная компания Стройковъ');
+				$this->email->bcc('');
+				$this->email->subject('Заказ на дизайн интерьера');
+				$this->email->message($mailtext);	
+				$this->email->send();
+				
+				ob_start();
+				?>
+				<p>
+					От <?=$_POST['name']; ?> поступил заказ на дизайн интерьера.<br/>
+					Информация от заказчика:<br/>
+					Адрес E-mail - <?=$_POST['email']; ?><br/>
+					Контактыный номер - <?=$_POST['phone']; ?><br/>
+					Район - <?=$_POST['region']; ?><br/>
+					Площадь квартиры - <?=$_POST['area']; ?><br/>
+					Комментарий - <?=$_POST['note']; ?><br/><br/>
+					
+					Дата заказа <?=date("d.m.Y");?><br/></p>
+				<?php
+				$mailtext = ob_get_clean();
+				
+				$this->email->clear(TRUE);
+				$config['smtp_host'] = 'localhost';
+				$config['charset'] = 'utf-8';
+				$config['wordwrap'] = TRUE;
+				$config['mailtype'] = 'html';
+				
+				$this->email->initialize($config);
+				$this->email->to('info@sk-stroikov.ru');
+				$this->email->from($_POST['email'],$_POST['name']);
+				$this->email->bcc('');
+				$this->email->subject('Заказ на дизайн интерьера');
+				$this->email->message($mailtext);	
+				$this->email->send();
+				
+				$this->session->set_userdata('msgs','Сообщение отправлено.');
+			else:
+				$this->session->set_userdata('msgr','Сообщение не отправлено.');
+			endif;
+			redirect($this->uri->uri_string());
+		endif;
+		
+		$this->load->view("users_interface/zakaz-interiera",$pagevar);
+	}
+	
 	public function remont(){
 		
 		$pagevar = array(

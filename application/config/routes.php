@@ -36,6 +36,7 @@ $route['o-kompanii'] 				= "users_interface/o_kompanii";
 $route['o-kompanii/photo-album']	= "users_interface/photo_album";
 
 $route['kontaktnaya-informacia'] 	= "users_interface/kontaktnaya_informacia";
+$route['zakaz-interiera'] 			= "users_interface/zakaz_interiera";
 
 $route['admin'] 					= "users_interface/admin_login";
 $route['logoff'] 					= "users_interface/logoff";

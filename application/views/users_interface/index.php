@@ -91,7 +91,7 @@
 			</div>
 			<div class="grid_7 prefix_1">
 				<div class="aside-block green">
-					<?=anchor('kontaktnaya-informacia','<p><strong>Заказать</strong> дизайн интерьера сейчас!</p>',array('class'=>'promo-action'));?>
+					<?=anchor('zakaz-interiera','<p><strong>Заказать</strong> дизайн интерьера сейчас!</p>',array('class'=>'promo-action'));?>
 				</div>
 				<!--
 				<div class="aside-block">
