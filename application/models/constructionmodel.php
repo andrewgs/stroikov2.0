@@ -89,6 +89,14 @@ class Constructionmodel extends CI_Model{
 		if(count($data)) return $data;
 		return NULL;
 	}
+	function read_all_records(){
+		
+		$this->db->order_by('title');
+		$query = $this->db->get('construction');
+		$data = $query->result_array();
+		if(count($data)) return $data;
+		return NULL;
+	}
 	
 	function read_limit_records($over,$count,$from){
 		

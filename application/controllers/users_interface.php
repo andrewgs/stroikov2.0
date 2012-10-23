@@ -54,21 +54,31 @@ class Users_interface extends CI_Controller{
 					'images'		=> $this->photosmodel->read_limit_records(10,0,'interiors')
 			);
 		
-		if(count($pagevar['objects']) == 1):
+		/*if(count($pagevar['objects']) == 1):
 			$pagevar['estate'] = $this->estatemodel->read_limit_records($pagevar['objects'][0]['id'],5,0);
 			$pagevar['interiors'] = $this->interiorsmodel->read_limit_records($pagevar['objects'][0]['id'],5,0);
 		else:
 			for($i=0;$i<count($pagevar['objects']);$i++):
 				$pagevar['objects'][$i]['interior'] = $this->interiorsmodel->read_limit_records($pagevar['objects'][$i]['id'],1,0);
 			endfor;
-		endif;
+		endif;*/
 		
-		$pagevar['slideshow'] = $this->interiorsmodel->limit_interiors(10,0);
+		/*$pagevar['slideshow'] = $this->interiorsmodel->limit_interiors(10,0);
 		for($i=0;$i<count($pagevar['slideshow']);$i++):
 			$pagevar['slideshow'][$i]['object']	= $this->objectstypemodel->read_field($pagevar['slideshow'][$i]['type'],'translit');
 			$pagevar['slideshow'][$i]['images'] = $this->photosmodel->get_one_record($pagevar['slideshow'][$i]['id'],'interiors');
-			if(mb_strlen($pagevar['slideshow'][$i]['note'],'UTF-8') > 200):									
-				$pagevar['slideshow'][$i]['note'] = mb_substr($pagevar['slideshow'][$i]['note'],0,200,'UTF-8');	
+			if(mb_strlen($pagevar['slideshow'][$i]['note'],'UTF-8') > 200):
+				$pagevar['slideshow'][$i]['note'] = mb_substr($pagevar['slideshow'][$i]['note'],0,200,'UTF-8');
+				$pos = mb_strrpos($pagevar['slideshow'][$i]['note'],' ',0,'UTF-8');
+				$pagevar['slideshow'][$i]['note'] = mb_substr($pagevar['slideshow'][$i]['note'],0,$pos,'UTF-8');
+			endif;
+		endfor;*/
+		
+		$pagevar['slideshow'] = $this->constructionmodel->read_all_records();
+		for($i=0;$i<count($pagevar['slideshow']);$i++):
+			$pagevar['slideshow'][$i]['images'] = $this->photosmodel->get_one_record($pagevar['slideshow'][$i]['id'],'construction');
+			if(mb_strlen($pagevar['slideshow'][$i]['note'],'UTF-8') > 200):
+				$pagevar['slideshow'][$i]['note'] = mb_substr($pagevar['slideshow'][$i]['note'],0,200,'UTF-8');
 				$pos = mb_strrpos($pagevar['slideshow'][$i]['note'],' ',0,'UTF-8');
 				$pagevar['slideshow'][$i]['note'] = mb_substr($pagevar['slideshow'][$i]['note'],0,$pos,'UTF-8');
 			endif;

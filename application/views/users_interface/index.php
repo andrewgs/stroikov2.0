@@ -109,11 +109,49 @@
 		<section class="proposals">
 			<div class="grid_16">
 				<div class="carousel index">
-					<h2>Мы представляем вашему вниманию<br> Новые проекты жилых интерьеров.</h2>
+					<h2>МЫ представляем вашему вниманию<br/>новые строительные объекты</h2>
 					<a href="#" id="prev" class="slider-arrow left">Пред.</a>
 					<div id="samples-row" class="slider">
 					<? for($i=0;$i<count($slideshow);$i+=3):?>
-					<div class="design-row">
+						<div class="design-row">
+						<? if(isset($slideshow[$i]['images']['id'])):?>
+						<div class="design-sample">
+							<div class="frame">
+								<div class="inner">
+									<img src="<?=$baseurl;?>stroitelstvo/viewsmallimage/<?=$slideshow[$i]['images']['id'];?>" alt=""/>
+								</div>
+							</div>
+							<?=anchor('stroitelstvo/object/'.$slideshow[$i]['translit'],$slideshow[$i]['title'], array('class'=>'caption'));?>
+							<div class="note"><?=$slideshow[$i]['note'];?></div>
+							<?=anchor('stroitelstvo/object/'.$slideshow[$i]['translit'],'Подробнее &gt;');?>
+						</div>
+						<? endif;?>
+						<? if(isset($slideshow[$i+1]['images']['id'])):?>
+						<div class="design-sample">
+							<div class="frame">
+								<div class="inner">
+									<img src="<?=$baseurl;?>stroitelstvo/viewsmallimage/<?=$slideshow[$i+1]['images']['id'];?>" alt=""/>
+								</div>
+							</div>
+							<?=anchor('stroitelstvo/object/'.$slideshow[$i+1]['translit'],$slideshow[$i+1]['title'], array('class'=>'caption'));?>
+							<div class="note"><?=$slideshow[$i+1]['note'];?></div>
+							<?=anchor('stroitelstvo/object/'.$slideshow[$i+1]['translit'],'Подробнее &gt;');?>
+						</div>
+						<? endif;?>
+						<? if(isset($slideshow[$i+2]['images']['id'])):?>
+						<div class="design-sample">
+							<div class="frame">
+								<div class="inner">
+									<img src="<?=$baseurl;?>stroitelstvo/viewsmallimage/<?=$slideshow[$i+2]['images']['id'];?>" alt=""/>
+								</div>
+							</div>
+							<?=anchor('stroitelstvo/object/'.$slideshow[$i+2]['translit'],$slideshow[$i+2]['title'], array('class'=>'caption'));?>
+							<div class="note"><?=$slideshow[$i+2]['note'];?></div>
+							<?=anchor('stroitelstvo/object/'.$slideshow[$i+2]['translit'],'Подробнее &gt;');?>
+						</div>
+						<? endif;?>
+					</div>
+					<!--<div class="design-row">
 						<? if(isset($slideshow[$i]['images']['id'])):?>
 						<div class="design-sample">
 							<div class="frame">
@@ -150,7 +188,7 @@
 							<?=anchor('design-interierov/'.$slideshow[$i+2]['object'].'/'.$slideshow[$i+2]['translit'],'Подробнее &gt;');?>
 						</div>
 						<? endif;?>
-					</div>
+					</div>-->
 					<? endfor; ?>
 					</div>
 					<a href="#" id="next" class="slider-arrow right">След.</a>
