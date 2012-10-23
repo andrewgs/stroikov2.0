@@ -50,6 +50,7 @@ class Users_interface extends CI_Controller{
 					'estate'		=> array(),
 					'interiors'		=> array(),
 					'slideshow'		=> array(),
+					'constructions'	=> $this->constructionmodel->read_title_records(),
 					'images'		=> $this->photosmodel->read_limit_records(10,0,'interiors')
 			);
 		
@@ -140,8 +141,8 @@ class Users_interface extends CI_Controller{
 		endfor;
 		
 		$pagevar['interiors'] = $this->unionmodel->read_interiors();
-		/*if(count($pagevar['interior'])):
-			$pagevar['interior'][0]['images'] = $this->photosmodel->read_records($pagevar['objects'][$pagevar['num']]['id'],$pagevar['interior'][0]['id'],'interiors');
+		/*if(count($pagevar['interiors'])):
+			$pagevar['interiors'][0]['images'] = $this->photosmodel->read_records($pagevar['objects'][$pagevar['num']]['id'],$pagevar['interior'][0]['id'],'interiors');
 		endif;*/
 		
 		if($this->input->post('submit')):

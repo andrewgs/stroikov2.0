@@ -19,7 +19,7 @@
 					<!--
 					<div class="slider">
 						<div id="samples">
-							<? for($i=0;$i<count($interior[0]['images']);$i++):?>
+							<? for($i=0;$i<count($interiors[0]['images']);$i++):?>
 							<div class="design-sample">
 								<img src="<?=$baseurl.$this->uri->uri_string();?>/viewimage/<?=$interior[0]['images'][$i]['id'];?>" alt=""/>
 							</div>
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 			<? else:?>
-				<? if(isset($objects) && !count($interior)):?>
+				<? if(isset($objects) && !count($interiors)):?>
 					<? if($loginstatus['status']):?>
 						<a class="btn btn-success" data-toggle="modal" href="#addInterior"><i class="icon-plus"></i> Добавить первый интерьер</a>
 					<? endif;?>

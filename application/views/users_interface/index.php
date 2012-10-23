@@ -181,7 +181,7 @@
 					<?=anchor('agentstvo-nedvijimosti','Подробнее &gt;',array('class'=>'details'));?>
 				</div>
 				-->
-				<div class="aside-block">
+				<!--<div class="aside-block">
 					<h3>Смотреть интерьеры</h3>
 					<ul>
 				<? if(count($objects) > 1):?>
@@ -198,7 +198,6 @@
 						</li>
 					<? endfor;?>
 				<? else:?>
-						<!--<?=$objects[0]['title'];?>-->
 					<? for($i=0;$i<count($interiors);$i++):?>
 						<li><?=anchor('design-interierov/'.$objects[0]['translit'].'/'.$interiors[$i]['translit'],$interiors[$i]['title']);?></li>
 					<? endfor;?>
@@ -208,6 +207,15 @@
 					<a class="details" style="right:151px;" data-toggle="modal" href="#addObjectType"><i class="icon-plus"></i> Добавить тип</a>
 				<? endif;?>
 					<?=anchor('design-interierov','Подробнее &gt;',array('class'=>'details'));?>
+				</div>-->
+				<div class="aside-block list">
+					<h3>Oбъекты строительства</h3>
+					<ul>
+					<? for($i=0;$i<count($constructions);$i++):?>
+						<li><?=anchor('stroitelstvo/object/'.$constructions[$i]['translit'],$constructions[$i]['title']);?></li>
+					<? endfor;?>
+					</ul>
+					<?=anchor('stroitelstvo','Подробнее &gt;',array('class'=>'details'));?>
 				</div>
 			</div>
 			<div class="clear"></div>
