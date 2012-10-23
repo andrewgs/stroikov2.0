@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orders_update>
+	<!-- список заказов -->
+	<orders>
+		<order>
+			<order_id>номер заказа</order_id>
+			<invoice_no>номер счет-фактуры</invoice_no>
+			<invoice_prefix>префикс для счет-фактуры</invoice_prefix>
+			<customer_id>ID покупателя</customer_id>
+			<!-- у меня хранится еще много полей с личной информацией покупателя и о доставке -->
+			<!-- эта информация может понадобится, когда покупка производится без регистрации -->
+			<comment>комментарий покупателя</comment>
+			<total>сумма заказа</total>
+			<reward>вознаграждение покупателя</reward>
+			<order_status_id>статус заказа</order_status_id>
+			<!--
+				1 Ожидание
+				2 В обработке
+				3 Доставлено
+				5 Сделка завершена
+				7 Отменено
+				8 Возврат
+				9 Отмена и аннулирование
+				10 Неудавшийся
+				11 Возмещенный
+				12 Полностью измененный
+				13 Полный возврат
+				16 Voided
+				15 Processed
+				14 Expired
+			-->
+			<!-- affiliate_id используется в партнерской программе -->
+			<affiliate_id>ID партнера</affiliate_id>
+			<commission>размер комиссии</commission>
+			<date_added>дата добавления заказа</date_added>
+			<date_modified>дата изменения заказа</date_modified>
+			<ip>IP-адресс покупателя</ip>
+		</order>
+	</orders>
+
+	<!-- список товаров в заказе -->
+	<order_products>
+		<item>
+			<order_product_id>инкрементный уникальный номер связки заказ-продукт</order_product_id>
+			<order_id>ID заказа</order_id>
+			<product_id>ID товара</product_id>
+			<name>название товара</name>
+			<model>модель</model>
+			<quantity>количество</quantity>
+			<price>цена</price>
+			<tax>налог</tax>
+		</item>
+	</order_products>
+
+	<!-- список свойств заказа -->
+	<order_total>
+		<property>
+			<order_total_id>инкрементный уникальный номер</order_total_id>
+			<order_id>ID заказа</order_id>
+			<code>название свойства</code>
+			<!-- 
+				sub_total
+				shipping
+				tax
+				total
+			-->
+			<title>текстовое описание свойства</title>
+			<text>строковое значение</text>
+			<value>численное значение</value>
+		</property>
+	</order_total>
+<orders_update>

@@ -3,7 +3,8 @@
    ========================================================================== */
 
 html, body {
-	background: url('../img/wood_background.jpg') repeat #e4e5d7;
+	/*background: url('../img/wood_background.jpg') repeat #e4e5d7;*/
+	background: url('../img/textured_stripes.png') repeat #e4e5d7;
 	color: #808a70;
 	font-family: 'PT Sans', "Times New Roman", Times, serif;
 	font-size: 14px;
@@ -40,7 +41,7 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 
 /* ==|== main block ====================================================== */
 .promo-block { margin: 0 0 30px; }
-.reviews { height: 205px; background: #92b555; color: #523511; position: relative; }
+.reviews { height: 280px; background: #92b555; color: #523511; position: relative; }
 	.reviews .text { line-height: 28px; font-size: 24px; width: 315px; position: absolute; top: 30px; left: 40px; }
 	.reviews .author { line-height: 16px; font-size: 13px; position: absolute; top: 170px; left: 40px; }
 	.reviews .author i { display: inline-block; margin-left: 5px; }
@@ -57,7 +58,9 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 .banner { background: #523511; color: #fff; font-size: 27px; font-weight: bold; height: 50px; letter-spacing: 1px; line-height: 50px; margin-top: 2px; padding: 0 15px; text-transform: uppercase; } 
 .banner b { color: #92B555; }
 .annotation { color: #89B838; font-size: 19px; font-weight: bold; line-height: 24px; padding: 10px 15px 3px; }
-.conditions { color: #523511; font-size: 12px; line-height: 15px; padding: 2px 16px 20px; }
+.conditions { color: #523511; font-size: 13px; line-height: 18px; padding: 2px 16px 20px; }
+.conditions strong { font-size: 12px; font-weight: bold; text-transform: none; }
+.conditions p { line-height: 18px;  margin: 0; padding: 0; width: auto; }
 
 .carousel { background: #fff; height: 440px; }
 .info { background: #fff; height: 440px; padding: 25px 40px 40px !important; }
@@ -86,6 +89,7 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 #samples-row.interiors .design-sample { border-bottom: 1px dashed #808A70; margin-bottom: 18px; }
 
 .aside-block { height: 205px; margin: 0 0 30px 0; background: #fff;  position: relative; }
+	.aside-block.stroika { height: 280px; }
 	.aside-block.list { height: auto; padding-bottom: 50px; }
 	.aside-block.fixed { position: fixed; top: 28px; width: 270px; }
 	.aside-block.fixed-after { position: fixed; top: 205px; width: 270px; }
@@ -97,7 +101,7 @@ nav { background: #92b555; height: 30px; margin: 0 0 30px; }
 	.aside-block.green li a { color: #fff; }
 	.aside-block a.details { background: #89B838; bottom: 0; color: #fff; font-style: italic; padding: 0 6px 4px; position: absolute; right: 0; text-decoration: underline; }
 		.aside-block a.details:hover { text-decoration: none; }
-.stroika a.details { bottom: 29px; }
+.stroika a.details { bottom: 0; }
 
 .slider-arrow { outline: 0 none !important; display: block; background: url('../img/sprites.png'); width: 25px; height: 40px; text-indent: -9999px; margin: 40px 0 0; }
 .slider-arrow.left { background-position: -118px 0; }
@@ -132,6 +136,9 @@ p.spacing a { color: #89b838; }
 .stuff-photo { float: left; height: 215px; margin: 10px 0 0; width: 180px; }
 .stuff-photo strong { color: #92B555; display: block; font-size: 15px;  letter-spacing: 0.5px;margin: 5px 0 0; width: 175px; }
 .stuff-photo em { display: block; margin: 0 0 15px; width: 175px; font-size: 13px; }
+.photos { margin: 10px 0;  }
+.photos img { margin: 2px 0;  }
+p.winner { font-weight: bold; text-transform: uppercase; font-size: 16px; }
 
 /* ==|== footer ====================================================== */
 footer { height: 70px; background: #89B838; color: #fff; line-height: 70px; }

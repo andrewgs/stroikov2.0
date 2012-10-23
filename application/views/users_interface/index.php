@@ -16,22 +16,89 @@
 		<section class="promo-block">
 			<div class="grid_16">
 				<article class="reviews">
+					<!--
 					<div class="text">Я очень доволен тем, как преобразилась моя квартира. Спасибо специалистам компании «Стройковъ»!</div>
 					<div class="author">Сергей Григорьев, <i>предприниматель</i></div>
 					<div class="quote left">«</div>
 					<div class="quote right">»</div>
 					<div class="client">
 						<img alt="Отзывы о компании Стройковъ" src="<?=$baseurl;?>img/client-1.jpg" />
-						<!--a id="read-reviews" href="#">Читать все отзывы &gt;</a-->
+						<a id="read-reviews" href="#">Читать все отзывы &gt;</a>
 					</div>
+					-->
+					<!-- Этот блок кода нужно вставить в ту часть страницы, где вы хотите разместить карту (начало) -->
+					<div id="ymaps-map-id_133910102875980238531" style="width: 630px; height: 280px;"></div>
+					<script type="text/javascript">
+					function fid_133910102875980238531(ymaps) {
+					    var map = new ymaps.Map("ymaps-map-id_133910102875980238531", {
+					        center: [39.7206403764929, 47.22660056062838],
+					        zoom: 14,
+					        type: "yandex#map"
+					    });
+					    
+					    map.controls
+					        .add("zoomControl")
+					        //.add("mapTools")
+					        //.add(new ymaps.control.TypeSelector(["yandex#map", "yandex#satellite", "yandex#hybrid", "yandex#publicMap"]));
+					    
+					    map.geoObjects
+					        .add(new ymaps.Placemark([39.706632, 47.22067], {
+					            balloonContent: '<div><img src="http://sk-stroikov.ru/img/stroika-5.jpg" /></div>'
+					        }, {
+					            preset: "twirl#greenDotIcon",
+					            //iconImageHref: 'http://sk-stroikov.ru/img/stroika-1.jpg',
+					            //iconImageSize: [76, 50]
+					            
+					        }))
+					        .add(new ymaps.Placemark([39.72804195643499, 47.228753221542064], {
+					            balloonContent: '<div><img src="http://sk-stroikov.ru/img/stroika-3.jpg" /></div>'
+					        }, {
+					            preset: "twirl#greenDotIcon"
+					        }))
+					        .add(new ymaps.Placemark([39.727763006697444, 47.22758387965026], {
+					            balloonContent: '<div><img src="http://sk-stroikov.ru/img/stroika-1.jpg" /></div>'
+					        }, {
+					            preset: "twirl#greenDotIcon"
+					        }))
+					        .add(new ymaps.Placemark([39.73462946177558, 47.22860705522512], {
+					            balloonContent: '<div><img src="http://sk-stroikov.ru/img/stroika-4.jpg" /></div>'
+					        }, {
+					            preset: "twirl#greenDotIcon"
+					        }))
+					        .add(new ymaps.Placemark([39.734200308333186, 47.22983483968213], {
+					            balloonContent: '<div><img src="http://sk-stroikov.ru/img/stroika-2.jpg" /></div>'
+					        }, {
+					            preset: "twirl#greenDotIcon"
+					        }))
+					        .add(new ymaps.Polyline([
+					            [39.7000996623163, 47.22192382050796],
+					            [39.74104090071961, 47.230752658509076]
+					        ], {
+					            balloonContent: "улица Пушкинская"
+					        }, {
+					            strokeColor: "33cc00",
+					            strokeWidth: 5,
+					            strokeOpacity: 0.8
+					        }));
+
+					};
+					</script>
+					<script type="text/javascript" src="http://api-maps.yandex.ru/2.0/?coordorder=longlat&load=package.full&wizard=constructor&lang=ru-RU&onload=fid_133910102875980238531"></script>
+					<!-- Этот блок кода нужно вставить в ту часть страницы, где вы хотите разместить карту (конец) -->					
 				</article>
 			</div>
 			<div class="grid_7 prefix_1">
 				<div class="aside-block no-margin stroika">
 					<a href="<?=base_url();?>konkurs-dlya-desainerov-architektorov-stroika1" class="promo-action">
-						<div class="annotation">Конкурс проектных идей в<br /> области архитектуры <br /> малых форм</div>
-						<div class="conditions">Сроки регистрации и подачи проектов с 20 марта по 20 апреля	</div>
-						<div class="banner">Стройка#<b>1</b></div>
+						<div class="annotation">Малые формы в среде города Ростов-на-Дону</div>
+						<div class="conditions">
+							Целью этого проекта является создание нетривиальных велопарковок, лавочек и других объектов, 
+							укарашающих город при должном уровне реализации. Конкурс стал платформой для сотрудничества 
+							творческих людей города, желающих сделать Ростов-на-Дону 
+							современным, удобным и привлекательным для жителей и гостей города.
+							<p><strong>Реализация проектов &mdash; июнь-август 2012</strong></p>
+						</div>
+						<!--<div class="banner">Стройка#<b>1</b></div>-->
 					</a>
 					<?=anchor('konkurs-dlya-desainerov-architektorov-stroika1','Подробнее &gt;',array('class'=>'details'));?>
 				</div>

@@ -13,6 +13,7 @@
 			<div class="grid_16 carousel list">
 			<? $this->load->view('alert_messages/alert-error');?>
 			<? $this->load->view('alert_messages/alert-success');?>
+			<!--
 			<?php if(count($allobjects)>0):?>
 				<h1>Ремонт <span class="details">Список ремонтируемых объектов компании Стройковъ</span></h1>
 				<div class="grid_16 alpha omega">
@@ -43,6 +44,7 @@
 					<a class="btn btn-success" data-toggle="modal" href="#addObject"><i class="icon-plus"></i> Добавить строящийся объект</a>
 				<?php endif;?>
 			<?php endif;?>
+			-->
 			
 			<div class="grid_16  alpha omega">
 				<div class="info list">
